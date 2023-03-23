@@ -24,7 +24,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     ""name"": ""ControlMap"",
     ""maps"": [
         {
-            ""name"": ""gameplay"",
+            ""name"": ""PlayerMovement"",
             ""id"": ""91029e4f-bc84-4b65-8731-b05cac3f60f3"",
             ""actions"": [
                 {
@@ -106,7 +106,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""id"": ""6c268517-9a09-4d79-a9bb-71f3feaebf36"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=8)"",
+                    ""processors"": ""StickDeadzone,ScaleVector2(x=10)"",
                     ""groups"": """",
                     ""action"": ""CameraLook"",
                     ""isComposite"": false,
@@ -161,7 +161,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""id"": ""412161e8-3e1c-48ca-9c5f-b5c877c0935e"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""PlayerMove"",
                     ""isComposite"": false,
@@ -304,16 +304,16 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // gameplay
-        m_gameplay = asset.FindActionMap("gameplay", throwIfNotFound: true);
-        m_gameplay_CameraLook = m_gameplay.FindAction("CameraLook", throwIfNotFound: true);
-        m_gameplay_CameraLookMouse = m_gameplay.FindAction("CameraLookMouse", throwIfNotFound: true);
-        m_gameplay_LockMouse = m_gameplay.FindAction("LockMouse", throwIfNotFound: true);
-        m_gameplay_PlayerMove = m_gameplay.FindAction("PlayerMove", throwIfNotFound: true);
-        m_gameplay_RunModifier = m_gameplay.FindAction("RunModifier", throwIfNotFound: true);
-        m_gameplay_RunToggle = m_gameplay.FindAction("RunToggle", throwIfNotFound: true);
-        m_gameplay_CrawlModifier = m_gameplay.FindAction("CrawlModifier", throwIfNotFound: true);
-        m_gameplay_CrawlToggle = m_gameplay.FindAction("CrawlToggle", throwIfNotFound: true);
+        // PlayerMovement
+        m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
+        m_PlayerMovement_CameraLook = m_PlayerMovement.FindAction("CameraLook", throwIfNotFound: true);
+        m_PlayerMovement_CameraLookMouse = m_PlayerMovement.FindAction("CameraLookMouse", throwIfNotFound: true);
+        m_PlayerMovement_LockMouse = m_PlayerMovement.FindAction("LockMouse", throwIfNotFound: true);
+        m_PlayerMovement_PlayerMove = m_PlayerMovement.FindAction("PlayerMove", throwIfNotFound: true);
+        m_PlayerMovement_RunModifier = m_PlayerMovement.FindAction("RunModifier", throwIfNotFound: true);
+        m_PlayerMovement_RunToggle = m_PlayerMovement.FindAction("RunToggle", throwIfNotFound: true);
+        m_PlayerMovement_CrawlModifier = m_PlayerMovement.FindAction("CrawlModifier", throwIfNotFound: true);
+        m_PlayerMovement_CrawlToggle = m_PlayerMovement.FindAction("CrawlToggle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -372,38 +372,38 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // gameplay
-    private readonly InputActionMap m_gameplay;
-    private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
-    private readonly InputAction m_gameplay_CameraLook;
-    private readonly InputAction m_gameplay_CameraLookMouse;
-    private readonly InputAction m_gameplay_LockMouse;
-    private readonly InputAction m_gameplay_PlayerMove;
-    private readonly InputAction m_gameplay_RunModifier;
-    private readonly InputAction m_gameplay_RunToggle;
-    private readonly InputAction m_gameplay_CrawlModifier;
-    private readonly InputAction m_gameplay_CrawlToggle;
-    public struct GameplayActions
+    // PlayerMovement
+    private readonly InputActionMap m_PlayerMovement;
+    private List<IPlayerMovementActions> m_PlayerMovementActionsCallbackInterfaces = new List<IPlayerMovementActions>();
+    private readonly InputAction m_PlayerMovement_CameraLook;
+    private readonly InputAction m_PlayerMovement_CameraLookMouse;
+    private readonly InputAction m_PlayerMovement_LockMouse;
+    private readonly InputAction m_PlayerMovement_PlayerMove;
+    private readonly InputAction m_PlayerMovement_RunModifier;
+    private readonly InputAction m_PlayerMovement_RunToggle;
+    private readonly InputAction m_PlayerMovement_CrawlModifier;
+    private readonly InputAction m_PlayerMovement_CrawlToggle;
+    public struct PlayerMovementActions
     {
         private @ControlMap m_Wrapper;
-        public GameplayActions(@ControlMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction @CameraLook => m_Wrapper.m_gameplay_CameraLook;
-        public InputAction @CameraLookMouse => m_Wrapper.m_gameplay_CameraLookMouse;
-        public InputAction @LockMouse => m_Wrapper.m_gameplay_LockMouse;
-        public InputAction @PlayerMove => m_Wrapper.m_gameplay_PlayerMove;
-        public InputAction @RunModifier => m_Wrapper.m_gameplay_RunModifier;
-        public InputAction @RunToggle => m_Wrapper.m_gameplay_RunToggle;
-        public InputAction @CrawlModifier => m_Wrapper.m_gameplay_CrawlModifier;
-        public InputAction @CrawlToggle => m_Wrapper.m_gameplay_CrawlToggle;
-        public InputActionMap Get() { return m_Wrapper.m_gameplay; }
+        public PlayerMovementActions(@ControlMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CameraLook => m_Wrapper.m_PlayerMovement_CameraLook;
+        public InputAction @CameraLookMouse => m_Wrapper.m_PlayerMovement_CameraLookMouse;
+        public InputAction @LockMouse => m_Wrapper.m_PlayerMovement_LockMouse;
+        public InputAction @PlayerMove => m_Wrapper.m_PlayerMovement_PlayerMove;
+        public InputAction @RunModifier => m_Wrapper.m_PlayerMovement_RunModifier;
+        public InputAction @RunToggle => m_Wrapper.m_PlayerMovement_RunToggle;
+        public InputAction @CrawlModifier => m_Wrapper.m_PlayerMovement_CrawlModifier;
+        public InputAction @CrawlToggle => m_Wrapper.m_PlayerMovement_CrawlToggle;
+        public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
-        public void AddCallbacks(IGameplayActions instance)
+        public static implicit operator InputActionMap(PlayerMovementActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerMovementActions instance)
         {
-            if (instance == null || m_Wrapper.m_GameplayActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_GameplayActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Add(instance);
             @CameraLook.started += instance.OnCameraLook;
             @CameraLook.performed += instance.OnCameraLook;
             @CameraLook.canceled += instance.OnCameraLook;
@@ -430,7 +430,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @CrawlToggle.canceled += instance.OnCrawlToggle;
         }
 
-        private void UnregisterCallbacks(IGameplayActions instance)
+        private void UnregisterCallbacks(IPlayerMovementActions instance)
         {
             @CameraLook.started -= instance.OnCameraLook;
             @CameraLook.performed -= instance.OnCameraLook;
@@ -458,22 +458,22 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @CrawlToggle.canceled -= instance.OnCrawlToggle;
         }
 
-        public void RemoveCallbacks(IGameplayActions instance)
+        public void RemoveCallbacks(IPlayerMovementActions instance)
         {
-            if (m_Wrapper.m_GameplayActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IGameplayActions instance)
+        public void SetCallbacks(IPlayerMovementActions instance)
         {
-            foreach (var item in m_Wrapper.m_GameplayActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerMovementActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_GameplayActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerMovementActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public GameplayActions @gameplay => new GameplayActions(this);
-    public interface IGameplayActions
+    public PlayerMovementActions @PlayerMovement => new PlayerMovementActions(this);
+    public interface IPlayerMovementActions
     {
         void OnCameraLook(InputAction.CallbackContext context);
         void OnCameraLookMouse(InputAction.CallbackContext context);

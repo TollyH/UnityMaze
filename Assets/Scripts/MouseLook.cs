@@ -12,22 +12,22 @@ public class MouseLook : MonoBehaviour
 
     private void OnEnable()
     {
-        inputActions.gameplay.Enable();
+        inputActions.PlayerMovement.Enable();
     }
 
     private void OnDisable()
     {
-        inputActions.gameplay.Disable();
+        inputActions.PlayerMovement.Disable();
     }
 
     private void Update()
     {
-        float turnValue = inputActions.gameplay.CameraLook.ReadValue<Vector2>().x * Sensitivity * Time.deltaTime;
+        float turnValue = inputActions.PlayerMovement.CameraLook.ReadValue<Vector2>().x * Sensitivity * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + turnValue, 0);
 
         if (Cursor.lockState == CursorLockMode.Locked)
         {
-            turnValue = inputActions.gameplay.CameraLookMouse.ReadValue<Vector2>().x * Sensitivity * Time.deltaTime;
+            turnValue = inputActions.PlayerMovement.CameraLookMouse.ReadValue<Vector2>().x * Sensitivity * Time.deltaTime;
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + turnValue, 0);
         }
     }

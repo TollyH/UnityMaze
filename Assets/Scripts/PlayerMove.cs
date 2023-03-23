@@ -22,23 +22,23 @@ public class PlayerMove : MonoBehaviour
 
     private void OnEnable()
     {
-        inputActions.gameplay.Enable();
+        inputActions.PlayerMovement.Enable();
     }
 
     private void OnDisable()
     {
-        inputActions.gameplay.Disable();
+        inputActions.PlayerMovement.Disable();
     }
 
     private void Update()
     {
-        Vector2 inputValue = inputActions.gameplay.PlayerMove.ReadValue<Vector2>();
+        Vector2 inputValue = inputActions.PlayerMovement.PlayerMove.ReadValue<Vector2>();
         float moveMultiplier = MovementSpeed;
-        if (runToggle || inputActions.gameplay.RunModifier.IsPressed())
+        if (runToggle || inputActions.PlayerMovement.RunModifier.IsPressed())
         {
             moveMultiplier *= 2;
         }
-        if (crawlToggle || inputActions.gameplay.CrawlModifier.IsPressed())
+        if (crawlToggle || inputActions.PlayerMovement.CrawlModifier.IsPressed())
         {
             moveMultiplier *= 0.5f;
         }
