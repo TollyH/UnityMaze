@@ -618,6 +618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitSize: 4
+  spritePrefab: {fileID: 3687834168950131581, guid: 8a895bd6ecec15049b3925f37f81560f, type: 3}
 --- !u!114 &1518488895
 MonoBehaviour:
   m_ObjectHideFlags: 0

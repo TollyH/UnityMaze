@@ -19,6 +19,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private float unitSize = 4f;
 
+    [SerializeField]
+    private GameObject spritePrefab;
+
     private readonly Dictionary<string, Material> loadedWallMaterials = new();
     private Material missingMaterial;
 
@@ -84,7 +87,7 @@ public class LevelManager : MonoBehaviour
         }
 
         // Initialise player position, place them in the middle of the square
-        Vector2 startPos = (level.StartPoint * unitSize) + new Vector2(0.5f, 0.5f);
+        Vector2 startPos = level.StartPoint * unitSize;
         GameObject player = GameObject.Find("Player");
         player.GetComponent<CharacterController>().MoveAbsolute(new Vector3(-startPos.x, player.transform.position.y, startPos.y));
         player.transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -240,6 +243,17 @@ public class LevelManager : MonoBehaviour
             newPlane.transform.localRotation = Quaternion.Euler(90, 90, 0);
             newPlane.GetComponent<MeshRenderer>().material = loadedWallMaterials.GetValueOrDefault(level.EdgeWallTextureName, missingMaterial);
         }
+
+        // Create sprites
+        GameObject startPointSprite = Instantiate(
+            spritePrefab, new Vector3(level.StartPoint.x * -unitSize, 0.5f, level.StartPoint.y * unitSize), Quaternion.identity);
+        startPointSprite.name = "StartPointSprite";
+        startPointSprite.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/start_point");
+
+        GameObject exitPointSprite = Instantiate(
+            spritePrefab, new Vector3(level.EndPoint.x * -unitSize, 0.5f, level.EndPoint.y * unitSize), Quaternion.identity);
+        exitPointSprite.name = "ExitPointSprite";
+        exitPointSprite.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/end_point");
     }
 
     /// <summary>
