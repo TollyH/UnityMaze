@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
 
+    private ControlMap inputActions;
+
     public int CurrentLevelIndex { get; private set; }
 
     public Level[] LoadedLevels { get; private set; }
@@ -26,6 +28,7 @@ public class LevelManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            inputActions = new ControlMap();
             missingMaterial = Resources.Load<Material>("Materials/Missing");
             DontDestroyOnLoad(gameObject);
             LoadLevelJson(Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
@@ -38,9 +41,35 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        inputActions.LevelControl.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.LevelControl.Disable();
+    }
+
     private void Start()
     {
         LoadLevel(0);
+    }
+
+    private void OnNextLevel()
+    {
+        if (CurrentLevelIndex < LoadedLevels.Length - 1)
+        {
+            LoadLevel(CurrentLevelIndex + 1);
+        }
+    }
+
+    private void OnPreviousLevel()
+    {
+        if (CurrentLevelIndex > 0)
+        {
+            LoadLevel(CurrentLevelIndex - 1);
+        }
     }
 
     public void LoadLevel(int levelIndex)
@@ -57,7 +86,8 @@ public class LevelManager : MonoBehaviour
         // Initialise player position, place them in the middle of the square
         Vector2 startPos = (level.StartPoint * unitSize) + new Vector2(0.5f, 0.5f);
         GameObject player = GameObject.Find("Player");
-        player.transform.position = new Vector3(-startPos.x, player.transform.position.y, startPos.y);
+        player.GetComponent<CharacterController>().MoveAbsolute(new Vector3(-startPos.x, player.transform.position.y, startPos.y));
+        player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         // Create walls and collision
         for (int x = 0; x < level.Dimensions.x; x++)

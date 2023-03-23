@@ -12,4 +12,11 @@ public static class Extensions
     {
         return new int[2] { (int)point.x, (int)point.y };
     }
+
+    public static void MoveAbsolute(this CharacterController character, Vector3 position)
+    {
+        character.enabled = false;
+        character.transform.position = position;
+        character.enabled = true;
+    }
 }

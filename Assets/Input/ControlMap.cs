@@ -300,6 +300,76 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""LevelControl"",
+            ""id"": ""cd54e05c-f6c1-45be-96ae-a8b6a5f47544"",
+            ""actions"": [
+                {
+                    ""name"": ""NextLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""9fd9e279-ef00-45f1-a3ae-13afd8ac8797"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a4aace4-f8c7-401f-b8a5-176a332d26c6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""26e7986e-627f-40f3-8dfa-4615fcdbf79c"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc060b20-5961-451c-9d97-2154b1c031f4"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23ba230e-5f2f-4ae5-8a3d-a18c44329b18"",
+                    ""path"": ""<Keyboard>/leftBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18230b70-b8d2-4a40-b018-c47aec6211f7"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -314,6 +384,10 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_PlayerMovement_RunToggle = m_PlayerMovement.FindAction("RunToggle", throwIfNotFound: true);
         m_PlayerMovement_CrawlModifier = m_PlayerMovement.FindAction("CrawlModifier", throwIfNotFound: true);
         m_PlayerMovement_CrawlToggle = m_PlayerMovement.FindAction("CrawlToggle", throwIfNotFound: true);
+        // LevelControl
+        m_LevelControl = asset.FindActionMap("LevelControl", throwIfNotFound: true);
+        m_LevelControl_NextLevel = m_LevelControl.FindAction("NextLevel", throwIfNotFound: true);
+        m_LevelControl_PreviousLevel = m_LevelControl.FindAction("PreviousLevel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -473,6 +547,60 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         }
     }
     public PlayerMovementActions @PlayerMovement => new PlayerMovementActions(this);
+
+    // LevelControl
+    private readonly InputActionMap m_LevelControl;
+    private List<ILevelControlActions> m_LevelControlActionsCallbackInterfaces = new List<ILevelControlActions>();
+    private readonly InputAction m_LevelControl_NextLevel;
+    private readonly InputAction m_LevelControl_PreviousLevel;
+    public struct LevelControlActions
+    {
+        private @ControlMap m_Wrapper;
+        public LevelControlActions(@ControlMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @NextLevel => m_Wrapper.m_LevelControl_NextLevel;
+        public InputAction @PreviousLevel => m_Wrapper.m_LevelControl_PreviousLevel;
+        public InputActionMap Get() { return m_Wrapper.m_LevelControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LevelControlActions set) { return set.Get(); }
+        public void AddCallbacks(ILevelControlActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LevelControlActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LevelControlActionsCallbackInterfaces.Add(instance);
+            @NextLevel.started += instance.OnNextLevel;
+            @NextLevel.performed += instance.OnNextLevel;
+            @NextLevel.canceled += instance.OnNextLevel;
+            @PreviousLevel.started += instance.OnPreviousLevel;
+            @PreviousLevel.performed += instance.OnPreviousLevel;
+            @PreviousLevel.canceled += instance.OnPreviousLevel;
+        }
+
+        private void UnregisterCallbacks(ILevelControlActions instance)
+        {
+            @NextLevel.started -= instance.OnNextLevel;
+            @NextLevel.performed -= instance.OnNextLevel;
+            @NextLevel.canceled -= instance.OnNextLevel;
+            @PreviousLevel.started -= instance.OnPreviousLevel;
+            @PreviousLevel.performed -= instance.OnPreviousLevel;
+            @PreviousLevel.canceled -= instance.OnPreviousLevel;
+        }
+
+        public void RemoveCallbacks(ILevelControlActions instance)
+        {
+            if (m_Wrapper.m_LevelControlActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ILevelControlActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LevelControlActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LevelControlActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public LevelControlActions @LevelControl => new LevelControlActions(this);
     public interface IPlayerMovementActions
     {
         void OnCameraLook(InputAction.CallbackContext context);
@@ -483,5 +611,10 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnRunToggle(InputAction.CallbackContext context);
         void OnCrawlModifier(InputAction.CallbackContext context);
         void OnCrawlToggle(InputAction.CallbackContext context);
+    }
+    public interface ILevelControlActions
+    {
+        void OnNextLevel(InputAction.CallbackContext context);
+        void OnPreviousLevel(InputAction.CallbackContext context);
     }
 }
