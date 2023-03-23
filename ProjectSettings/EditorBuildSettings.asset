@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MazeLevelScene.unity
+    guid: 5e7a4119f2583a542b1b12c6a379d39e
   m_configObjects: {}

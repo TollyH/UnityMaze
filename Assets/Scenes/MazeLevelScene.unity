@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 1518488890}
   - component: {fileID: 1518488894}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: LevelBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -428,3 +428,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545114d7e627a094ca5b5c0a98571289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitSize: 4

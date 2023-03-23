@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -13,7 +14,10 @@ public class LevelManager : MonoBehaviour
 
     public Level[] LoadedLevels { get; private set; }
 
-    private readonly float unitSize = 4f;
+    [SerializeField]
+    private float unitSize = 4f;
+
+    private readonly Dictionary<string, Material> loadedWallMaterials = new();
 
     private void Awake()
     {
@@ -23,6 +27,8 @@ public class LevelManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             LoadLevelJson(Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
+            ReloadWallTextures();
+            SetSkyTexture(Path.Join(Application.streamingAssetsPath, "textures", "sky.png"));
         }
         else
         {
@@ -55,5 +61,29 @@ public class LevelManager : MonoBehaviour
     public void SaveLevelJson(string path)
     {
         File.WriteAllText(path, JsonConvert.SerializeObject(LoadedLevels.Select(x => x.GetJsonLevel())));
+    }
+
+    public void ReloadWallTextures()
+    {
+        loadedWallMaterials.Clear();
+        foreach (string file in Directory.GetFiles(Path.Join(Application.streamingAssetsPath, "textures", "wall"), "*.png"))
+        {
+            Texture2D newTex = new(128, 128, TextureFormat.RGBA32, false);
+            _ = newTex.LoadImage(File.ReadAllBytes(file));
+            newTex.Apply();
+            loadedWallMaterials[file] = new Material(Shader.Find("Standard"))
+            {
+                mainTexture = newTex
+            };
+        }
+    }
+
+    public void SetSkyTexture(string path)
+    {
+        Texture2D newTex = new(128, 128, TextureFormat.RGBA32, false);
+        _ = newTex.LoadImage(File.ReadAllBytes(path));
+        newTex.Apply();
+        Material sky = Resources.Load<Material>("Materials/Sky");
+        sky.mainTexture = newTex;
     }
 }
