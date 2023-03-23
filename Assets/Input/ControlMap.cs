@@ -37,6 +37,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""CameraLookMouse"",
+                    ""type"": ""Value"",
+                    ""id"": ""32c739c8-cfbb-4420-8bc1-589d4143870a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""LockMouse"",
                     ""type"": ""Button"",
                     ""id"": ""f9304449-188b-40f7-b699-a2216524a565"",
@@ -92,17 +101,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""4a8f3d2f-46b9-4f65-9df4-939e02a92684"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CameraLook"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""6c268517-9a09-4d79-a9bb-71f3feaebf36"",
@@ -289,6 +287,17 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""CrawlToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d301033-f6d1-4bfe-98f0-8940b0bc5870"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraLookMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -298,6 +307,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         // gameplay
         m_gameplay = asset.FindActionMap("gameplay", throwIfNotFound: true);
         m_gameplay_CameraLook = m_gameplay.FindAction("CameraLook", throwIfNotFound: true);
+        m_gameplay_CameraLookMouse = m_gameplay.FindAction("CameraLookMouse", throwIfNotFound: true);
         m_gameplay_LockMouse = m_gameplay.FindAction("LockMouse", throwIfNotFound: true);
         m_gameplay_PlayerMove = m_gameplay.FindAction("PlayerMove", throwIfNotFound: true);
         m_gameplay_RunModifier = m_gameplay.FindAction("RunModifier", throwIfNotFound: true);
@@ -366,6 +376,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_gameplay;
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_gameplay_CameraLook;
+    private readonly InputAction m_gameplay_CameraLookMouse;
     private readonly InputAction m_gameplay_LockMouse;
     private readonly InputAction m_gameplay_PlayerMove;
     private readonly InputAction m_gameplay_RunModifier;
@@ -377,6 +388,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         private @ControlMap m_Wrapper;
         public GameplayActions(@ControlMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @CameraLook => m_Wrapper.m_gameplay_CameraLook;
+        public InputAction @CameraLookMouse => m_Wrapper.m_gameplay_CameraLookMouse;
         public InputAction @LockMouse => m_Wrapper.m_gameplay_LockMouse;
         public InputAction @PlayerMove => m_Wrapper.m_gameplay_PlayerMove;
         public InputAction @RunModifier => m_Wrapper.m_gameplay_RunModifier;
@@ -395,6 +407,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @CameraLook.started += instance.OnCameraLook;
             @CameraLook.performed += instance.OnCameraLook;
             @CameraLook.canceled += instance.OnCameraLook;
+            @CameraLookMouse.started += instance.OnCameraLookMouse;
+            @CameraLookMouse.performed += instance.OnCameraLookMouse;
+            @CameraLookMouse.canceled += instance.OnCameraLookMouse;
             @LockMouse.started += instance.OnLockMouse;
             @LockMouse.performed += instance.OnLockMouse;
             @LockMouse.canceled += instance.OnLockMouse;
@@ -420,6 +435,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @CameraLook.started -= instance.OnCameraLook;
             @CameraLook.performed -= instance.OnCameraLook;
             @CameraLook.canceled -= instance.OnCameraLook;
+            @CameraLookMouse.started -= instance.OnCameraLookMouse;
+            @CameraLookMouse.performed -= instance.OnCameraLookMouse;
+            @CameraLookMouse.canceled -= instance.OnCameraLookMouse;
             @LockMouse.started -= instance.OnLockMouse;
             @LockMouse.performed -= instance.OnLockMouse;
             @LockMouse.canceled -= instance.OnLockMouse;
@@ -458,6 +476,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnCameraLook(InputAction.CallbackContext context);
+        void OnCameraLookMouse(InputAction.CallbackContext context);
         void OnLockMouse(InputAction.CallbackContext context);
         void OnPlayerMove(InputAction.CallbackContext context);
         void OnRunModifier(InputAction.CallbackContext context);

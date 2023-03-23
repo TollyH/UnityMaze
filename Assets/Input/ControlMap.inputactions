@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "CameraLookMouse",
+                    "type": "Value",
+                    "id": "32c739c8-cfbb-4420-8bc1-589d4143870a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "LockMouse",
                     "type": "Button",
                     "id": "f9304449-188b-40f7-b699-a2216524a565",
@@ -70,17 +79,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "4a8f3d2f-46b9-4f65-9df4-939e02a92684",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraLook",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "6c268517-9a09-4d79-a9bb-71f3feaebf36",
@@ -265,6 +263,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CrawlToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d301033-f6d1-4bfe-98f0-8940b0bc5870",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLookMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
