@@ -3,7 +3,7 @@ using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
     private ControlMap inputActions;
-    private readonly float sensitivity = 0.2f;
+    public float Sensitivity = 8f;
 
     private void Awake()
     {
@@ -22,8 +22,8 @@ public class MouseLook : MonoBehaviour
 
     private void Update()
     {
-        float turnValue = inputActions.gameplay.CameraLook.ReadValue<Vector2>().x * sensitivity;
-        transform.localRotation = Quaternion.Euler(0, transform.localRotation.eulerAngles.y + turnValue, 0);
+        float turnValue = inputActions.gameplay.CameraLook.ReadValue<Vector2>().x * Sensitivity * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + turnValue, 0);
     }
 
     private void OnLockMouse()

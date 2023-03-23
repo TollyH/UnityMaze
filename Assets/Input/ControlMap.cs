@@ -44,6 +44,51 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""d4ebc9b5-2670-4b4a-827a-ca061ea1e7ca"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RunModifier"",
+                    ""type"": ""Button"",
+                    ""id"": ""729d9b62-c7f7-4a2d-a67c-1263e624216c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RunToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""73f14ec8-119f-40d3-b495-35918103faf3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CrawlModifier"",
+                    ""type"": ""Button"",
+                    ""id"": ""713eb9f2-91ac-4bbc-a4e4-64a681765dd5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CrawlToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e1be39a-6fbf-469a-9969-ed18f494b72d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -74,7 +119,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""id"": ""d3e8e0f5-d098-49ed-955d-38a05441ea83"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=8)"",
                     ""groups"": """",
                     ""action"": ""CameraLook"",
                     ""isComposite"": true,
@@ -112,6 +157,138 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""LockMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""412161e8-3e1c-48ca-9c5f-b5c877c0935e"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""7883f529-3e65-4dfa-924d-2324e75e2c1f"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerMove"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""86d0f013-c62a-4fd9-8880-63ed502690c4"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1221964a-930d-48fa-b7b5-be4907db5262"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a6e59df1-4aa0-4f7f-aa62-605ea7e7c359"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""a375c9a3-f3a0-4faf-bf91-42acc0dc3ec0"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cbc0b170-f9bc-4fab-9e43-556f6d9e8e36"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RunModifier"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ffbc605-f0c0-4d2f-a40e-dcc4e83efc03"",
+                    ""path"": ""<Keyboard>/capsLock"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RunToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""203fcef2-6971-4a1e-92d8-b87543bc0d83"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RunToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8d3e123b-1109-426c-a036-20ec1aa926e4"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CrawlModifier"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b099303-c479-4817-9c5b-df271a23ec53"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CrawlToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a01a130b-faa5-466d-bda0-3257b48fab9e"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CrawlToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -122,6 +299,11 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_gameplay = asset.FindActionMap("gameplay", throwIfNotFound: true);
         m_gameplay_CameraLook = m_gameplay.FindAction("CameraLook", throwIfNotFound: true);
         m_gameplay_LockMouse = m_gameplay.FindAction("LockMouse", throwIfNotFound: true);
+        m_gameplay_PlayerMove = m_gameplay.FindAction("PlayerMove", throwIfNotFound: true);
+        m_gameplay_RunModifier = m_gameplay.FindAction("RunModifier", throwIfNotFound: true);
+        m_gameplay_RunToggle = m_gameplay.FindAction("RunToggle", throwIfNotFound: true);
+        m_gameplay_CrawlModifier = m_gameplay.FindAction("CrawlModifier", throwIfNotFound: true);
+        m_gameplay_CrawlToggle = m_gameplay.FindAction("CrawlToggle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -185,12 +367,22 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_gameplay_CameraLook;
     private readonly InputAction m_gameplay_LockMouse;
+    private readonly InputAction m_gameplay_PlayerMove;
+    private readonly InputAction m_gameplay_RunModifier;
+    private readonly InputAction m_gameplay_RunToggle;
+    private readonly InputAction m_gameplay_CrawlModifier;
+    private readonly InputAction m_gameplay_CrawlToggle;
     public struct GameplayActions
     {
         private @ControlMap m_Wrapper;
         public GameplayActions(@ControlMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @CameraLook => m_Wrapper.m_gameplay_CameraLook;
         public InputAction @LockMouse => m_Wrapper.m_gameplay_LockMouse;
+        public InputAction @PlayerMove => m_Wrapper.m_gameplay_PlayerMove;
+        public InputAction @RunModifier => m_Wrapper.m_gameplay_RunModifier;
+        public InputAction @RunToggle => m_Wrapper.m_gameplay_RunToggle;
+        public InputAction @CrawlModifier => m_Wrapper.m_gameplay_CrawlModifier;
+        public InputAction @CrawlToggle => m_Wrapper.m_gameplay_CrawlToggle;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -206,6 +398,21 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @LockMouse.started += instance.OnLockMouse;
             @LockMouse.performed += instance.OnLockMouse;
             @LockMouse.canceled += instance.OnLockMouse;
+            @PlayerMove.started += instance.OnPlayerMove;
+            @PlayerMove.performed += instance.OnPlayerMove;
+            @PlayerMove.canceled += instance.OnPlayerMove;
+            @RunModifier.started += instance.OnRunModifier;
+            @RunModifier.performed += instance.OnRunModifier;
+            @RunModifier.canceled += instance.OnRunModifier;
+            @RunToggle.started += instance.OnRunToggle;
+            @RunToggle.performed += instance.OnRunToggle;
+            @RunToggle.canceled += instance.OnRunToggle;
+            @CrawlModifier.started += instance.OnCrawlModifier;
+            @CrawlModifier.performed += instance.OnCrawlModifier;
+            @CrawlModifier.canceled += instance.OnCrawlModifier;
+            @CrawlToggle.started += instance.OnCrawlToggle;
+            @CrawlToggle.performed += instance.OnCrawlToggle;
+            @CrawlToggle.canceled += instance.OnCrawlToggle;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -216,6 +423,21 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @LockMouse.started -= instance.OnLockMouse;
             @LockMouse.performed -= instance.OnLockMouse;
             @LockMouse.canceled -= instance.OnLockMouse;
+            @PlayerMove.started -= instance.OnPlayerMove;
+            @PlayerMove.performed -= instance.OnPlayerMove;
+            @PlayerMove.canceled -= instance.OnPlayerMove;
+            @RunModifier.started -= instance.OnRunModifier;
+            @RunModifier.performed -= instance.OnRunModifier;
+            @RunModifier.canceled -= instance.OnRunModifier;
+            @RunToggle.started -= instance.OnRunToggle;
+            @RunToggle.performed -= instance.OnRunToggle;
+            @RunToggle.canceled -= instance.OnRunToggle;
+            @CrawlModifier.started -= instance.OnCrawlModifier;
+            @CrawlModifier.performed -= instance.OnCrawlModifier;
+            @CrawlModifier.canceled -= instance.OnCrawlModifier;
+            @CrawlToggle.started -= instance.OnCrawlToggle;
+            @CrawlToggle.performed -= instance.OnCrawlToggle;
+            @CrawlToggle.canceled -= instance.OnCrawlToggle;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -237,5 +459,10 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     {
         void OnCameraLook(InputAction.CallbackContext context);
         void OnLockMouse(InputAction.CallbackContext context);
+        void OnPlayerMove(InputAction.CallbackContext context);
+        void OnRunModifier(InputAction.CallbackContext context);
+        void OnRunToggle(InputAction.CallbackContext context);
+        void OnCrawlModifier(InputAction.CallbackContext context);
+        void OnCrawlToggle(InputAction.CallbackContext context);
     }
 }

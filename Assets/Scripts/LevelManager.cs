@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
 
     public Level[] LoadedLevels { get; private set; }
 
-    private readonly float unitSize = 1.8f;
+    private readonly float unitSize = 4f;
 
     private void Awake()
     {
