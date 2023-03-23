@@ -236,6 +236,7 @@ public class LevelManager : MonoBehaviour
         {
             Texture2D newTex = new(128, 128, TextureFormat.RGBA32, false);
             _ = newTex.LoadImage(File.ReadAllBytes(file));
+            newTex.filterMode = FilterMode.Point;
             newTex.Apply();
             loadedWallMaterials[Path.GetFileNameWithoutExtension(file)] = new Material(Shader.Find("Standard"))
             {
