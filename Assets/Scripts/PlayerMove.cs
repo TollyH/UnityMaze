@@ -5,7 +5,7 @@ public class PlayerMove : MonoBehaviour
     private CharacterController character;
 
     private ControlMap inputActions;
-    public float MovementSpeed = 8f;
+    public float MovementSpeed;
 
     private bool runToggle = false;
     private bool crawlToggle = false;

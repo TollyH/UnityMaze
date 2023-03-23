@@ -3,7 +3,7 @@ using UnityEngine;
 public class MouseLook : MonoBehaviour
 {
     private ControlMap inputActions;
-    public float Sensitivity = 10f;
+    public float Sensitivity;
 
     private void Awake()
     {
