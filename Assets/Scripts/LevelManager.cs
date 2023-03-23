@@ -281,6 +281,7 @@ public class LevelManager : MonoBehaviour
     {
         Texture2D newTex = new(128, 128, TextureFormat.RGBA32, false);
         _ = newTex.LoadImage(File.ReadAllBytes(path));
+        newTex.filterMode = FilterMode.Point;
         newTex.Apply();
         Material sky = Resources.Load<Material>("Materials/Sky");
         sky.mainTexture = newTex;
