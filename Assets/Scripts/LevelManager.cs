@@ -268,9 +268,11 @@ public class LevelManager : MonoBehaviour
             _ = newTex.LoadImage(File.ReadAllBytes(file));
             newTex.filterMode = FilterMode.Point;
             newTex.Apply();
-            loadedWallMaterials[Path.GetFileNameWithoutExtension(file)] = new Material(Shader.Find("Standard"))
+            string fileName = Path.GetFileNameWithoutExtension(file);
+            loadedWallMaterials[fileName] = new Material(Shader.Find("Standard"))
             {
-                mainTexture = newTex
+                mainTexture = newTex,
+                shaderKeywords = new string[1] { "_SPECULARHIGHLIGHTS_OFF" }
             };
         }
     }
