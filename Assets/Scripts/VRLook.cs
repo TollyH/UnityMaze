@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.XR;
-using UnityEngine.XR.Management;
 
 public class VRLook : MonoBehaviour
 {
