@@ -116,6 +116,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ResetVR"",
+                    ""type"": ""Button"",
+                    ""id"": ""8b3c2d1a-b4d9-49c5-8978-17c1cc80db81"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -382,6 +391,17 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""CameraMoveVR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69f4dc5b-45e5-4b1c-9d77-690fb3ec09fc"",
+                    ""path"": ""<XRController>{RightHand}/secondaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetVR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -492,6 +512,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_PlayerMovement_CrawlToggle = m_PlayerMovement.FindAction("CrawlToggle", throwIfNotFound: true);
         m_PlayerMovement_CameraLookVR = m_PlayerMovement.FindAction("CameraLookVR", throwIfNotFound: true);
         m_PlayerMovement_CameraMoveVR = m_PlayerMovement.FindAction("CameraMoveVR", throwIfNotFound: true);
+        m_PlayerMovement_ResetVR = m_PlayerMovement.FindAction("ResetVR", throwIfNotFound: true);
         // LevelControl
         m_LevelControl = asset.FindActionMap("LevelControl", throwIfNotFound: true);
         m_LevelControl_NextLevel = m_LevelControl.FindAction("NextLevel", throwIfNotFound: true);
@@ -567,6 +588,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_CrawlToggle;
     private readonly InputAction m_PlayerMovement_CameraLookVR;
     private readonly InputAction m_PlayerMovement_CameraMoveVR;
+    private readonly InputAction m_PlayerMovement_ResetVR;
     public struct PlayerMovementActions
     {
         private @ControlMap m_Wrapper;
@@ -581,6 +603,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @CrawlToggle => m_Wrapper.m_PlayerMovement_CrawlToggle;
         public InputAction @CameraLookVR => m_Wrapper.m_PlayerMovement_CameraLookVR;
         public InputAction @CameraMoveVR => m_Wrapper.m_PlayerMovement_CameraMoveVR;
+        public InputAction @ResetVR => m_Wrapper.m_PlayerMovement_ResetVR;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -620,6 +643,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @CameraMoveVR.started += instance.OnCameraMoveVR;
             @CameraMoveVR.performed += instance.OnCameraMoveVR;
             @CameraMoveVR.canceled += instance.OnCameraMoveVR;
+            @ResetVR.started += instance.OnResetVR;
+            @ResetVR.performed += instance.OnResetVR;
+            @ResetVR.canceled += instance.OnResetVR;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -654,6 +680,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @CameraMoveVR.started -= instance.OnCameraMoveVR;
             @CameraMoveVR.performed -= instance.OnCameraMoveVR;
             @CameraMoveVR.canceled -= instance.OnCameraMoveVR;
+            @ResetVR.started -= instance.OnResetVR;
+            @ResetVR.performed -= instance.OnResetVR;
+            @ResetVR.canceled -= instance.OnResetVR;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -737,6 +766,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnCrawlToggle(InputAction.CallbackContext context);
         void OnCameraLookVR(InputAction.CallbackContext context);
         void OnCameraMoveVR(InputAction.CallbackContext context);
+        void OnResetVR(InputAction.CallbackContext context);
     }
     public interface ILevelControlActions
     {

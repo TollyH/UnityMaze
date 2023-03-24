@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ResetVR",
+                    "type": "Button",
+                    "id": "8b3c2d1a-b4d9-49c5-8978-17c1cc80db81",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -358,6 +367,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CameraMoveVR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69f4dc5b-45e5-4b1c-9d77-690fb3ec09fc",
+                    "path": "<XRController>{RightHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetVR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
