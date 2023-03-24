@@ -98,6 +98,24 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraLookVR"",
+                    ""type"": ""Value"",
+                    ""id"": ""9078b690-8235-4119-abf6-f9d9266136bf"",
+                    ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CameraMoveVR"",
+                    ""type"": ""Value"",
+                    ""id"": ""2ddba0fd-bfab-4ec7-aa24-e17e12184cd2"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -144,6 +162,17 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""CameraLook"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""558fb414-8d18-43be-b797-ae9d8e7d4c45"",
+                    ""path"": ""<XRController>{RightHand}/thumbstick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone,ScaleVector2(x=10)"",
+                    ""groups"": """",
+                    ""action"": ""CameraLook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -224,6 +253,17 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9e3d263d-0dfa-405d-ba8d-689f024ff881"",
+                    ""path"": ""<XRController>{LeftHand}/thumbstick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""cbc0b170-f9bc-4fab-9e43-556f6d9e8e36"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
@@ -298,6 +338,50 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""CameraLookMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77d55c0c-338f-4484-afa0-ec9d82bbc7e7"",
+                    ""path"": ""<XRInputV1::OpenXR::HeadTrackingOpenXR>/devicerotation"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraLookVR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f91be0d0-5b69-49ea-bdfb-aac1784b4854"",
+                    ""path"": ""<XRController>{RightHand}/gripPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CrawlModifier"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d651e030-dd91-4358-a139-1e17f6e22665"",
+                    ""path"": ""<XRController>{LeftHand}/gripPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RunModifier"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a970b2f-e7ea-4cf4-ad01-ddd93bcbd982"",
+                    ""path"": ""<XRHMD>/devicePosition"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMoveVR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -349,6 +433,17 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ebccb5a7-24eb-46be-b8f1-133d4d202ec1"",
+                    ""path"": ""<XRController>{RightHand}/primaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""23ba230e-5f2f-4ae5-8a3d-a18c44329b18"",
                     ""path"": ""<Keyboard>/leftBracket"",
                     ""interactions"": """",
@@ -362,6 +457,17 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""18230b70-b8d2-4a40-b018-c47aec6211f7"",
                     ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10196660-7428-4c3b-813f-f6f679118c44"",
+                    ""path"": ""<XRController>{LeftHand}/primaryButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -384,6 +490,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_PlayerMovement_RunToggle = m_PlayerMovement.FindAction("RunToggle", throwIfNotFound: true);
         m_PlayerMovement_CrawlModifier = m_PlayerMovement.FindAction("CrawlModifier", throwIfNotFound: true);
         m_PlayerMovement_CrawlToggle = m_PlayerMovement.FindAction("CrawlToggle", throwIfNotFound: true);
+        m_PlayerMovement_CameraLookVR = m_PlayerMovement.FindAction("CameraLookVR", throwIfNotFound: true);
+        m_PlayerMovement_CameraMoveVR = m_PlayerMovement.FindAction("CameraMoveVR", throwIfNotFound: true);
         // LevelControl
         m_LevelControl = asset.FindActionMap("LevelControl", throwIfNotFound: true);
         m_LevelControl_NextLevel = m_LevelControl.FindAction("NextLevel", throwIfNotFound: true);
@@ -457,6 +565,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_RunToggle;
     private readonly InputAction m_PlayerMovement_CrawlModifier;
     private readonly InputAction m_PlayerMovement_CrawlToggle;
+    private readonly InputAction m_PlayerMovement_CameraLookVR;
+    private readonly InputAction m_PlayerMovement_CameraMoveVR;
     public struct PlayerMovementActions
     {
         private @ControlMap m_Wrapper;
@@ -469,6 +579,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @RunToggle => m_Wrapper.m_PlayerMovement_RunToggle;
         public InputAction @CrawlModifier => m_Wrapper.m_PlayerMovement_CrawlModifier;
         public InputAction @CrawlToggle => m_Wrapper.m_PlayerMovement_CrawlToggle;
+        public InputAction @CameraLookVR => m_Wrapper.m_PlayerMovement_CameraLookVR;
+        public InputAction @CameraMoveVR => m_Wrapper.m_PlayerMovement_CameraMoveVR;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -502,6 +614,12 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @CrawlToggle.started += instance.OnCrawlToggle;
             @CrawlToggle.performed += instance.OnCrawlToggle;
             @CrawlToggle.canceled += instance.OnCrawlToggle;
+            @CameraLookVR.started += instance.OnCameraLookVR;
+            @CameraLookVR.performed += instance.OnCameraLookVR;
+            @CameraLookVR.canceled += instance.OnCameraLookVR;
+            @CameraMoveVR.started += instance.OnCameraMoveVR;
+            @CameraMoveVR.performed += instance.OnCameraMoveVR;
+            @CameraMoveVR.canceled += instance.OnCameraMoveVR;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -530,6 +648,12 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @CrawlToggle.started -= instance.OnCrawlToggle;
             @CrawlToggle.performed -= instance.OnCrawlToggle;
             @CrawlToggle.canceled -= instance.OnCrawlToggle;
+            @CameraLookVR.started -= instance.OnCameraLookVR;
+            @CameraLookVR.performed -= instance.OnCameraLookVR;
+            @CameraLookVR.canceled -= instance.OnCameraLookVR;
+            @CameraMoveVR.started -= instance.OnCameraMoveVR;
+            @CameraMoveVR.performed -= instance.OnCameraMoveVR;
+            @CameraMoveVR.canceled -= instance.OnCameraMoveVR;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -611,6 +735,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnRunToggle(InputAction.CallbackContext context);
         void OnCrawlModifier(InputAction.CallbackContext context);
         void OnCrawlToggle(InputAction.CallbackContext context);
+        void OnCameraLookVR(InputAction.CallbackContext context);
+        void OnCameraMoveVR(InputAction.CallbackContext context);
     }
     public interface ILevelControlActions
     {

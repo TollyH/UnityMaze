@@ -76,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CameraLookVR",
+                    "type": "Value",
+                    "id": "9078b690-8235-4119-abf6-f9d9266136bf",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "CameraMoveVR",
+                    "type": "Value",
+                    "id": "2ddba0fd-bfab-4ec7-aa24-e17e12184cd2",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -122,6 +140,17 @@
                     "action": "CameraLook",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "558fb414-8d18-43be-b797-ae9d8e7d4c45",
+                    "path": "<XRController>{RightHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "StickDeadzone,ScaleVector2(x=10)",
+                    "groups": "",
+                    "action": "CameraLook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -202,6 +231,17 @@
                 },
                 {
                     "name": "",
+                    "id": "9e3d263d-0dfa-405d-ba8d-689f024ff881",
+                    "path": "<XRController>{LeftHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "cbc0b170-f9bc-4fab-9e43-556f6d9e8e36",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -276,6 +316,50 @@
                     "action": "CameraLookMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77d55c0c-338f-4484-afa0-ec9d82bbc7e7",
+                    "path": "<XRInputV1::OpenXR::HeadTrackingOpenXR>/devicerotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLookVR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f91be0d0-5b69-49ea-bdfb-aac1784b4854",
+                    "path": "<XRController>{RightHand}/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CrawlModifier",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d651e030-dd91-4358-a139-1e17f6e22665",
+                    "path": "<XRController>{LeftHand}/gripPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RunModifier",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a970b2f-e7ea-4cf4-ad01-ddd93bcbd982",
+                    "path": "<XRHMD>/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraMoveVR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -327,6 +411,17 @@
                 },
                 {
                     "name": "",
+                    "id": "ebccb5a7-24eb-46be-b8f1-133d4d202ec1",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "23ba230e-5f2f-4ae5-8a3d-a18c44329b18",
                     "path": "<Keyboard>/leftBracket",
                     "interactions": "",
@@ -340,6 +435,17 @@
                     "name": "",
                     "id": "18230b70-b8d2-4a40-b018-c47aec6211f7",
                     "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousLevel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "10196660-7428-4c3b-813f-f6f679118c44",
+                    "path": "<XRController>{LeftHand}/primaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

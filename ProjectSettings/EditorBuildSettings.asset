@@ -8,4 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MazeLevelScene.unity
     guid: 5e7a4119f2583a542b1b12c6a379d39e
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: d5988890cdee5114bb43158a04420045, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 997698ffd3bc19e418bdeef24ad5ad90, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 1e60781ef123db14d8b7c3bbc0fb10ec, type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: e87fd0d76dca5694c9da95b378961fba, type: 2}
