@@ -22,6 +22,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject spritePrefab;
 
+    [SerializeField]
+    private GameObject spriteContainer;
+
     private readonly Dictionary<string, Material> loadedWallMaterials = new();
     private Material missingMaterial;
 
@@ -84,6 +87,11 @@ public class LevelManager : MonoBehaviour
         while (wallsContainer.transform.childCount > 0)
         {
             DestroyImmediate(wallsContainer.transform.GetChild(0).gameObject);
+        }
+        // Delete all previous sprites
+        while (spriteContainer.transform.childCount > 0)
+        {
+            DestroyImmediate(spriteContainer.transform.GetChild(0).gameObject);
         }
 
         // Initialise player position, place them in the middle of the square
@@ -248,11 +256,13 @@ public class LevelManager : MonoBehaviour
         GameObject startPointSprite = Instantiate(
             spritePrefab, new Vector3(level.StartPoint.x * -unitSize, 0.5f, level.StartPoint.y * unitSize), Quaternion.identity);
         startPointSprite.name = "StartPointSprite";
+        startPointSprite.transform.parent = spriteContainer.transform;
         startPointSprite.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/start_point");
 
         GameObject exitPointSprite = Instantiate(
             spritePrefab, new Vector3(level.EndPoint.x * -unitSize, 0.5f, level.EndPoint.y * unitSize), Quaternion.identity);
         exitPointSprite.name = "ExitPointSprite";
+        exitPointSprite.transform.parent = spriteContainer.transform;
         exitPointSprite.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/end_point");
     }
 
