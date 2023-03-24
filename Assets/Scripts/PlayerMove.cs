@@ -42,8 +42,10 @@ public class PlayerMove : MonoBehaviour
         {
             moveMultiplier *= 0.5f;
         }
-        Vector3 movementVector = Time.deltaTime * moveMultiplier * new Vector3(inputValue.x, 0, inputValue.y);
-        _ = character.Move(transform.TransformDirection(movementVector));
+        Vector3 movementVector = Camera.main.transform.TransformDirection(Time.deltaTime * moveMultiplier * new Vector3(inputValue.x, 0, inputValue.y));
+        // If camera is pointing upwards (like in VR), distribute any upwards (y) movement between the x and z axis instead
+        movementVector = new Vector3(movementVector.x + (movementVector.y / 2), 0, movementVector.z + (movementVector.y / 2));
+        _ = character.Move(movementVector);
     }
 
     private void OnRunToggle()
