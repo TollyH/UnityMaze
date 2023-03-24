@@ -21,9 +21,13 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField]
     private GameObject spritePrefab;
+    [SerializeField]
+    private GameObject collectibleSpritePrefab;
 
     [SerializeField]
     private GameObject spriteContainer;
+    [SerializeField]
+    private GameObject keysContainer;
 
     private readonly Dictionary<string, Material> loadedWallMaterials = new();
     private Material missingMaterial;
@@ -92,6 +96,10 @@ public class LevelManager : MonoBehaviour
         while (spriteContainer.transform.childCount > 0)
         {
             DestroyImmediate(spriteContainer.transform.GetChild(0).gameObject);
+        }
+        while (keysContainer.transform.childCount > 0)
+        {
+            DestroyImmediate(keysContainer.transform.GetChild(0).gameObject);
         }
 
         // Initialise player position, place them in the middle of the square
@@ -254,16 +262,28 @@ public class LevelManager : MonoBehaviour
 
         // Create sprites
         GameObject startPointSprite = Instantiate(
-            spritePrefab, new Vector3(level.StartPoint.x * -unitSize, 0.5f, level.StartPoint.y * unitSize), Quaternion.identity);
+            spritePrefab, new Vector3(level.StartPoint.x * -unitSize, 0, level.StartPoint.y * unitSize), Quaternion.identity);
         startPointSprite.name = "StartPointSprite";
         startPointSprite.transform.parent = spriteContainer.transform;
-        startPointSprite.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/start_point");
+        startPointSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/start_point");
 
         GameObject exitPointSprite = Instantiate(
-            spritePrefab, new Vector3(level.EndPoint.x * -unitSize, 0.5f, level.EndPoint.y * unitSize), Quaternion.identity);
+            spritePrefab, new Vector3(level.EndPoint.x * -unitSize, 0, level.EndPoint.y * unitSize), Quaternion.identity);
         exitPointSprite.name = "ExitPointSprite";
         exitPointSprite.transform.parent = spriteContainer.transform;
-        exitPointSprite.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/end_point");
+        exitPointSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/end_point");
+
+        foreach (Vector2 coord in level.ExitKeys)
+        {
+            GameObject keySprite = Instantiate(
+                collectibleSpritePrefab, new Vector3(coord.x * -unitSize, 0, coord.y * unitSize), Quaternion.identity);
+            keySprite.name = "KeySprite";
+            keySprite.transform.parent = keysContainer.transform;
+            BoxCollider spriteCollider = keySprite.GetComponentInChildren<BoxCollider>();
+            spriteCollider.size = new Vector3(unitSize, unitSize, unitSize);
+            spriteCollider.center = new Vector3(0, unitSize / 2, 0);
+            keySprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/key");
+        }
     }
 
     /// <summary>

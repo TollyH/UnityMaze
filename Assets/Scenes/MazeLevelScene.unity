@@ -248,6 +248,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &717386421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 717386422}
+  m_Layer: 0
+  m_Name: KeysContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &717386422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717386421}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &776998436
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +694,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitSize: 4
   spritePrefab: {fileID: 3687834168950131581, guid: 8a895bd6ecec15049b3925f37f81560f, type: 3}
+  collectibleSpritePrefab: {fileID: 7850154813624118141, guid: 72ebfcf79cc687347b2c16bf66434994, type: 3}
   spriteContainer: {fileID: 660790186}
+  keysContainer: {fileID: 717386421}
 --- !u!114 &1518488895
 MonoBehaviour:
   m_ObjectHideFlags: 0
