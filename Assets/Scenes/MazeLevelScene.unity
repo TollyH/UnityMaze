@@ -227,7 +227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 660790187}
   m_Layer: 0
-  m_Name: SpriteContainer
+  m_Name: PointSpriteContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
