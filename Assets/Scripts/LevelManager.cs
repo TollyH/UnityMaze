@@ -25,6 +25,10 @@ public class LevelManager : MonoBehaviour
     private GameObject collectibleSpritePrefab;
 
     [SerializeField]
+    private GameObject player;
+    [SerializeField]
+    private GameObject wallsContainer;
+    [SerializeField]
     private GameObject spriteContainer;
     [SerializeField]
     private GameObject keysContainer;
@@ -86,7 +90,6 @@ public class LevelManager : MonoBehaviour
     {
         CurrentLevelIndex = levelIndex;
         Level level = LoadedLevels[levelIndex];
-        GameObject wallsContainer = GameObject.Find("MazeWalls");
         // Delete all previous walls
         while (wallsContainer.transform.childCount > 0)
         {
@@ -104,7 +107,6 @@ public class LevelManager : MonoBehaviour
 
         // Initialise player position, place them in the middle of the square
         Vector2 startPos = level.StartPoint * unitSize;
-        GameObject player = GameObject.Find("Player");
         player.GetComponent<CharacterController>().MoveAbsolute(new Vector3(-startPos.x, player.transform.position.y, startPos.y));
         player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
