@@ -33,9 +33,6 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject keysContainer;
 
-    private readonly Dictionary<string, Material> loadedWallMaterials = new();
-    private Material missingMaterial;
-
     private void Awake()
     {
         // LevelManager is a singleton
@@ -43,11 +40,8 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
             inputActions = new ControlMap();
-            missingMaterial = Resources.Load<Material>("Materials/Missing");
             DontDestroyOnLoad(gameObject);
             LoadLevelJson(Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
-            ReloadWallTextures();
-            SetSkyTexture(Path.Join(Application.streamingAssetsPath, "textures", "sky.png"));
         }
         else
         {
@@ -130,7 +124,7 @@ public class LevelManager : MonoBehaviour
                     newPlane.transform.localPosition = new Vector3(0, 0, unitSize / 2);
                     newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
                     newPlane.transform.localRotation = Quaternion.Euler(90, 0, 0);
-                    newPlane.GetComponent<MeshRenderer>().material = loadedWallMaterials.GetValueOrDefault(contents.Wall.Value.Item3, missingMaterial);
+                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{contents.Wall.Value.Item3}");
 
                     newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
                     newPlane.name = "EastPlane";
@@ -140,7 +134,7 @@ public class LevelManager : MonoBehaviour
                     newPlane.transform.localPosition = new Vector3(unitSize / 2, 0, 0);
                     newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
                     newPlane.transform.localRotation = Quaternion.Euler(90, 90, 0);
-                    newPlane.GetComponent<MeshRenderer>().material = loadedWallMaterials.GetValueOrDefault(contents.Wall.Value.Item4, missingMaterial);
+                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{contents.Wall.Value.Item4}");
 
                     newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
                     newPlane.name = "SouthPlane";
@@ -150,7 +144,7 @@ public class LevelManager : MonoBehaviour
                     newPlane.transform.localPosition = new Vector3(0, 0, -unitSize / 2);
                     newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
                     newPlane.transform.localRotation = Quaternion.Euler(90, 180, 0);
-                    newPlane.GetComponent<MeshRenderer>().material = loadedWallMaterials.GetValueOrDefault(contents.Wall.Value.Item1, missingMaterial);
+                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{contents.Wall.Value.Item1}");
 
                     newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
                     newPlane.name = "WestPlane";
@@ -160,7 +154,7 @@ public class LevelManager : MonoBehaviour
                     newPlane.transform.localPosition = new Vector3(-unitSize / 2, 0, 0);
                     newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
                     newPlane.transform.localRotation = Quaternion.Euler(90, -90, 0);
-                    newPlane.GetComponent<MeshRenderer>().material = loadedWallMaterials.GetValueOrDefault(contents.Wall.Value.Item2, missingMaterial);
+                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{contents.Wall.Value.Item2}");
                 }
 
                 if (contents.PlayerCollide)
@@ -221,7 +215,7 @@ public class LevelManager : MonoBehaviour
             newPlane.transform.localPosition = new Vector3(0, 0, -unitSize / 2);
             newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
             newPlane.transform.localRotation = Quaternion.Euler(90, 180, 0);
-            newPlane.GetComponent<MeshRenderer>().material = loadedWallMaterials.GetValueOrDefault(level.EdgeWallTextureName, missingMaterial);
+            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{level.EdgeWallTextureName}");
 
             newWall = new($"MazeWallSouthEdge{x}");
             newWall.transform.parent = wallsContainer.transform;
@@ -233,7 +227,7 @@ public class LevelManager : MonoBehaviour
             newPlane.transform.localPosition = new Vector3(0, 0, unitSize / 2);
             newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
             newPlane.transform.localRotation = Quaternion.Euler(90, 0, 0);
-            newPlane.GetComponent<MeshRenderer>().material = loadedWallMaterials.GetValueOrDefault(level.EdgeWallTextureName, missingMaterial);
+            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{level.EdgeWallTextureName}");
         }
         for (int y = 0; y < level.Dimensions.y; y++)
         {
@@ -247,7 +241,7 @@ public class LevelManager : MonoBehaviour
             newPlane.transform.localPosition = new Vector3(-unitSize / 2, 0, 0);
             newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
             newPlane.transform.localRotation = Quaternion.Euler(90, -90, 0);
-            newPlane.GetComponent<MeshRenderer>().material = loadedWallMaterials.GetValueOrDefault(level.EdgeWallTextureName, missingMaterial);
+            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{level.EdgeWallTextureName}");
 
             newWall = new($"MazeWallWestEdge{y}");
             newWall.transform.parent = wallsContainer.transform;
@@ -259,7 +253,7 @@ public class LevelManager : MonoBehaviour
             newPlane.transform.localPosition = new Vector3(unitSize / 2, 0, 0);
             newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
             newPlane.transform.localRotation = Quaternion.Euler(90, 90, 0);
-            newPlane.GetComponent<MeshRenderer>().material = loadedWallMaterials.GetValueOrDefault(level.EdgeWallTextureName, missingMaterial);
+            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{level.EdgeWallTextureName}");
         }
 
         // Create sprites
@@ -303,33 +297,5 @@ public class LevelManager : MonoBehaviour
     public void SaveLevelJson(string path)
     {
         File.WriteAllText(path, JsonConvert.SerializeObject(LoadedLevels.Select(x => x.GetJsonLevel())));
-    }
-
-    public void ReloadWallTextures()
-    {
-        loadedWallMaterials.Clear();
-        foreach (string file in Directory.GetFiles(Path.Join(Application.streamingAssetsPath, "textures", "wall"), "*.png"))
-        {
-            Texture2D newTex = new(128, 128, TextureFormat.RGBA32, false);
-            _ = newTex.LoadImage(File.ReadAllBytes(file));
-            newTex.filterMode = FilterMode.Point;
-            newTex.Apply();
-            string fileName = Path.GetFileNameWithoutExtension(file);
-            loadedWallMaterials[fileName] = new Material(Shader.Find("Standard"))
-            {
-                mainTexture = newTex,
-                shaderKeywords = new string[1] { "_SPECULARHIGHLIGHTS_OFF" }
-            };
-        }
-    }
-
-    public void SetSkyTexture(string path)
-    {
-        Texture2D newTex = new(128, 128, TextureFormat.RGBA32, false);
-        _ = newTex.LoadImage(File.ReadAllBytes(path));
-        newTex.filterMode = FilterMode.Point;
-        newTex.Apply();
-        Material sky = Resources.Load<Material>("Materials/Sky");
-        sky.mainTexture = newTex;
     }
 }
