@@ -269,6 +269,24 @@ public class LevelManager : MonoBehaviour
         exitPointSprite.transform.parent = spriteContainer.transform;
         exitPointSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/end_point");
 
+        if (level.MonsterStart != null)
+        {
+            GameObject monsterStartSprite = Instantiate(
+                spritePrefab, new Vector3(level.MonsterStart.Value.x * -unitSize, 0, level.MonsterStart.Value.y * unitSize), Quaternion.identity);
+            monsterStartSprite.name = "MonsterStartSprite";
+            monsterStartSprite.transform.parent = spriteContainer.transform;
+            monsterStartSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/monster_spawn");
+        }
+
+        foreach ((Vector2 coords, string texture) in level.Decorations)
+        {
+            GameObject monsterStartSprite = Instantiate(
+                spritePrefab, new Vector3(coords.x * -unitSize, 0, coords.y * unitSize), Quaternion.identity);
+            monsterStartSprite.name = $"Decoration{coords.x}-{coords.y}Sprite";
+            monsterStartSprite.transform.parent = spriteContainer.transform;
+            monsterStartSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>($"Textures/sprite/decoration/{texture}");
+        }
+
         foreach (Vector2 coord in level.ExitKeys)
         {
             GameObject keySprite = Instantiate(
