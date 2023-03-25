@@ -125,6 +125,42 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightHandPosVR"",
+                    ""type"": ""Value"",
+                    ""id"": ""f3ec05e0-0839-48fe-b82f-a52ef6fb2641"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightHandRotVR"",
+                    ""type"": ""Value"",
+                    ""id"": ""b74b41be-2444-40ae-b4fb-42062fb62fdc"",
+                    ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftHandPosVR"",
+                    ""type"": ""Value"",
+                    ""id"": ""8b629ac0-618e-41e6-b6ff-7b03a1f319f9"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LeftHandRotVR"",
+                    ""type"": ""Value"",
+                    ""id"": ""4c4c1589-9405-4ea7-9849-d03a48c34b1f"",
+                    ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -402,6 +438,50 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""ResetVR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ba6cdd8-f21e-4462-b605-786f0d3d313d"",
+                    ""path"": ""<XRController>{RightHand}/devicePosition"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightHandPosVR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9cd72573-a1c5-4a34-bece-3d3cf3639e39"",
+                    ""path"": ""<XRController>{RightHand}/deviceRotation"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightHandRotVR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c06d6c28-5649-4039-9974-6da7a2c7dce1"",
+                    ""path"": ""<XRController>{LeftHand}/devicePosition"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftHandPosVR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e3d146f-62f3-4a60-b51b-bd85c18c59a6"",
+                    ""path"": ""<XRController>{LeftHand}/deviceRotation"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftHandRotVR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -513,6 +593,10 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_PlayerMovement_CameraLookVR = m_PlayerMovement.FindAction("CameraLookVR", throwIfNotFound: true);
         m_PlayerMovement_CameraMoveVR = m_PlayerMovement.FindAction("CameraMoveVR", throwIfNotFound: true);
         m_PlayerMovement_ResetVR = m_PlayerMovement.FindAction("ResetVR", throwIfNotFound: true);
+        m_PlayerMovement_RightHandPosVR = m_PlayerMovement.FindAction("RightHandPosVR", throwIfNotFound: true);
+        m_PlayerMovement_RightHandRotVR = m_PlayerMovement.FindAction("RightHandRotVR", throwIfNotFound: true);
+        m_PlayerMovement_LeftHandPosVR = m_PlayerMovement.FindAction("LeftHandPosVR", throwIfNotFound: true);
+        m_PlayerMovement_LeftHandRotVR = m_PlayerMovement.FindAction("LeftHandRotVR", throwIfNotFound: true);
         // LevelControl
         m_LevelControl = asset.FindActionMap("LevelControl", throwIfNotFound: true);
         m_LevelControl_NextLevel = m_LevelControl.FindAction("NextLevel", throwIfNotFound: true);
@@ -589,6 +673,10 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_CameraLookVR;
     private readonly InputAction m_PlayerMovement_CameraMoveVR;
     private readonly InputAction m_PlayerMovement_ResetVR;
+    private readonly InputAction m_PlayerMovement_RightHandPosVR;
+    private readonly InputAction m_PlayerMovement_RightHandRotVR;
+    private readonly InputAction m_PlayerMovement_LeftHandPosVR;
+    private readonly InputAction m_PlayerMovement_LeftHandRotVR;
     public struct PlayerMovementActions
     {
         private @ControlMap m_Wrapper;
@@ -604,6 +692,10 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @CameraLookVR => m_Wrapper.m_PlayerMovement_CameraLookVR;
         public InputAction @CameraMoveVR => m_Wrapper.m_PlayerMovement_CameraMoveVR;
         public InputAction @ResetVR => m_Wrapper.m_PlayerMovement_ResetVR;
+        public InputAction @RightHandPosVR => m_Wrapper.m_PlayerMovement_RightHandPosVR;
+        public InputAction @RightHandRotVR => m_Wrapper.m_PlayerMovement_RightHandRotVR;
+        public InputAction @LeftHandPosVR => m_Wrapper.m_PlayerMovement_LeftHandPosVR;
+        public InputAction @LeftHandRotVR => m_Wrapper.m_PlayerMovement_LeftHandRotVR;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -646,6 +738,18 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @ResetVR.started += instance.OnResetVR;
             @ResetVR.performed += instance.OnResetVR;
             @ResetVR.canceled += instance.OnResetVR;
+            @RightHandPosVR.started += instance.OnRightHandPosVR;
+            @RightHandPosVR.performed += instance.OnRightHandPosVR;
+            @RightHandPosVR.canceled += instance.OnRightHandPosVR;
+            @RightHandRotVR.started += instance.OnRightHandRotVR;
+            @RightHandRotVR.performed += instance.OnRightHandRotVR;
+            @RightHandRotVR.canceled += instance.OnRightHandRotVR;
+            @LeftHandPosVR.started += instance.OnLeftHandPosVR;
+            @LeftHandPosVR.performed += instance.OnLeftHandPosVR;
+            @LeftHandPosVR.canceled += instance.OnLeftHandPosVR;
+            @LeftHandRotVR.started += instance.OnLeftHandRotVR;
+            @LeftHandRotVR.performed += instance.OnLeftHandRotVR;
+            @LeftHandRotVR.canceled += instance.OnLeftHandRotVR;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -683,6 +787,18 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @ResetVR.started -= instance.OnResetVR;
             @ResetVR.performed -= instance.OnResetVR;
             @ResetVR.canceled -= instance.OnResetVR;
+            @RightHandPosVR.started -= instance.OnRightHandPosVR;
+            @RightHandPosVR.performed -= instance.OnRightHandPosVR;
+            @RightHandPosVR.canceled -= instance.OnRightHandPosVR;
+            @RightHandRotVR.started -= instance.OnRightHandRotVR;
+            @RightHandRotVR.performed -= instance.OnRightHandRotVR;
+            @RightHandRotVR.canceled -= instance.OnRightHandRotVR;
+            @LeftHandPosVR.started -= instance.OnLeftHandPosVR;
+            @LeftHandPosVR.performed -= instance.OnLeftHandPosVR;
+            @LeftHandPosVR.canceled -= instance.OnLeftHandPosVR;
+            @LeftHandRotVR.started -= instance.OnLeftHandRotVR;
+            @LeftHandRotVR.performed -= instance.OnLeftHandRotVR;
+            @LeftHandRotVR.canceled -= instance.OnLeftHandRotVR;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -767,6 +883,10 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnCameraLookVR(InputAction.CallbackContext context);
         void OnCameraMoveVR(InputAction.CallbackContext context);
         void OnResetVR(InputAction.CallbackContext context);
+        void OnRightHandPosVR(InputAction.CallbackContext context);
+        void OnRightHandRotVR(InputAction.CallbackContext context);
+        void OnLeftHandPosVR(InputAction.CallbackContext context);
+        void OnLeftHandRotVR(InputAction.CallbackContext context);
     }
     public interface ILevelControlActions
     {

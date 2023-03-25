@@ -1,11 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
 public class VRLook : MonoBehaviour
 {
     private ControlMap inputActions;
-    private Vector3 posOffset = new();
-    private float rotOffset = 0;
+    public Vector3 PosOffset { get; private set; } = new();
+    public float YawOffset { get; private set; } = 0;
+    public List<GameObject> Hands = new();
 
     private void Awake()
     {
@@ -28,24 +30,23 @@ public class VRLook : MonoBehaviour
         {
             return;
         }
-        Vector3 hmdPos = inputActions.PlayerMovement.CameraMoveVR.ReadValue<Vector3>() - posOffset;
-        Vector3 hmdRot = inputActions.PlayerMovement.CameraLookVR.ReadValue<Quaternion>().eulerAngles;
-        hmdRot = new Vector3(hmdRot.x, hmdRot.y - rotOffset, hmdRot.z);
+        Vector3 hmdPos = Quaternion.AngleAxis(-YawOffset, Vector3.up) * (inputActions.PlayerMovement.CameraMoveVR.ReadValue<Vector3>() - PosOffset);
+        Quaternion hmdRot = Quaternion.AngleAxis(-YawOffset, Vector3.up) * inputActions.PlayerMovement.CameraLookVR.ReadValue<Quaternion>();
 
-        // Rotate position offset by rotation offset (keeps direction consistent with real-world position from HMD)
-        float radians = rotOffset * Mathf.Deg2Rad;
-        float sinAngle = Mathf.Sin(radians);
-        float cosAngle = Mathf.Cos(radians);
-        float newX = (hmdPos.x * cosAngle) - (hmdPos.z * sinAngle);
-        float newZ = (hmdPos.x * sinAngle) + (hmdPos.z * cosAngle);
-
-        Camera.main.transform.SetLocalPositionAndRotation(new Vector3(newX, hmdPos.y, newZ), Quaternion.Euler(hmdRot));
+        Camera.main.transform.SetLocalPositionAndRotation(hmdPos, hmdRot);
 
         if (inputActions.PlayerMovement.ResetVR.IsPressed())
         {
-            posOffset = inputActions.PlayerMovement.CameraMoveVR.ReadValue<Vector3>();
-            posOffset.y = 0;
-            rotOffset = inputActions.PlayerMovement.CameraLookVR.ReadValue<Quaternion>().eulerAngles.y;
+            Vector3 rawHmdPos = inputActions.PlayerMovement.CameraMoveVR.ReadValue<Vector3>();
+            PosOffset = new Vector3(rawHmdPos.x, 0, rawHmdPos.z);
+            YawOffset = inputActions.PlayerMovement.CameraLookVR.ReadValue<Quaternion>().eulerAngles.y;
+
+            foreach (GameObject hand in Hands)
+            {
+                VRHand handComponent = hand.GetComponent<VRHand>();
+                handComponent.PosOffset = PosOffset;
+                handComponent.YawOffset = YawOffset;
+            }
         }
     }
 }

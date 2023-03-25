@@ -103,6 +103,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RightHandPosVR",
+                    "type": "Value",
+                    "id": "f3ec05e0-0839-48fe-b82f-a52ef6fb2641",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightHandRotVR",
+                    "type": "Value",
+                    "id": "b74b41be-2444-40ae-b4fb-42062fb62fdc",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LeftHandPosVR",
+                    "type": "Value",
+                    "id": "8b629ac0-618e-41e6-b6ff-7b03a1f319f9",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LeftHandRotVR",
+                    "type": "Value",
+                    "id": "4c4c1589-9405-4ea7-9849-d03a48c34b1f",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -378,6 +414,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "ResetVR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ba6cdd8-f21e-4462-b605-786f0d3d313d",
+                    "path": "<XRController>{RightHand}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightHandPosVR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9cd72573-a1c5-4a34-bece-3d3cf3639e39",
+                    "path": "<XRController>{RightHand}/deviceRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightHandRotVR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c06d6c28-5649-4039-9974-6da7a2c7dce1",
+                    "path": "<XRController>{LeftHand}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftHandPosVR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0e3d146f-62f3-4a60-b51b-bd85c18c59a6",
+                    "path": "<XRController>{LeftHand}/deviceRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftHandRotVR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
