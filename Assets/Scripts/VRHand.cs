@@ -45,6 +45,7 @@ public class VRHand : MonoBehaviour
         Quaternion handRot = IsRightHand
             ? inputActions.PlayerMovement.RightHandRotVR.ReadValue<Quaternion>()
             : inputActions.PlayerMovement.LeftHandRotVR.ReadValue<Quaternion>();
+        handRot = Quaternion.AngleAxis(-YawOffset, Vector3.up) * handRot;
         transform.SetLocalPositionAndRotation(handPos, handRot);
     }
 }
