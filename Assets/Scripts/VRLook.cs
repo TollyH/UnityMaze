@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR;
 
 public class VRLook : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class VRLook : MonoBehaviour
 
     private void Update()
     {
+        if (!XRSettings.enabled)
+        {
+            return;
+        }
         Vector3 hmdPos = inputActions.PlayerMovement.CameraMoveVR.ReadValue<Vector3>() - posOffset;
         Vector3 hmdRot = inputActions.PlayerMovement.CameraLookVR.ReadValue<Quaternion>().eulerAngles;
         hmdRot = new Vector3(hmdRot.x, hmdRot.y - rotOffset, hmdRot.z);
@@ -34,8 +39,7 @@ public class VRLook : MonoBehaviour
         float newX = (hmdPos.x * cosAngle) - (hmdPos.z * sinAngle);
         float newZ = (hmdPos.x * sinAngle) + (hmdPos.z * cosAngle);
 
-        Camera.main.transform.SetLocalPositionAndRotation(
-            hmdPos == default ? new Vector3(0, 2, 0) : new Vector3(newX, hmdPos.y, newZ), Quaternion.Euler(hmdRot));
+        Camera.main.transform.SetLocalPositionAndRotation(new Vector3(newX, hmdPos.y, newZ), Quaternion.Euler(hmdRot));
 
         if (inputActions.PlayerMovement.ResetVR.IsPressed())
         {
