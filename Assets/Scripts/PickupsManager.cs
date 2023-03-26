@@ -16,9 +16,7 @@ public class PickupsManager : LevelContentManager
                 collectibleSpritePrefab, new Vector3(coord.x * -unitSize, 0, coord.y * unitSize), Quaternion.identity);
             keySensorSprite.name = $"KeySensor{coord.x}-{coord.y}Sprite";
             keySensorSprite.transform.parent = transform;
-            BoxCollider spriteCollider = keySensorSprite.GetComponentInChildren<BoxCollider>();
-            spriteCollider.size = new Vector3(unitSize, unitSize, unitSize);
-            spriteCollider.center = new Vector3(0, unitSize / 2, 0);
+            keySensorSprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
             keySensorSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/key_sensor");
         }
 
@@ -28,9 +26,7 @@ public class PickupsManager : LevelContentManager
                 collectibleSpritePrefab, new Vector3(coord.x * -unitSize, 0, coord.y * unitSize), Quaternion.identity);
             gunSprite.name = $"Gun{coord.x}-{coord.y}Sprite";
             gunSprite.transform.parent = transform;
-            BoxCollider spriteCollider = gunSprite.GetComponentInChildren<BoxCollider>();
-            spriteCollider.size = new Vector3(unitSize, unitSize, unitSize);
-            spriteCollider.center = new Vector3(0, unitSize / 2, 0);
+            gunSprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
             gunSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/gun");
         }
     }

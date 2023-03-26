@@ -18,9 +18,7 @@ public class KeysManager : LevelContentManager
                 collectibleSpritePrefab, new Vector3(coord.x * -unitSize, 0, coord.y * unitSize), Quaternion.identity);
             keySprite.name = $"Key{coord.x}-{coord.y}Sprite";
             keySprite.transform.parent = transform;
-            BoxCollider spriteCollider = keySprite.GetComponentInChildren<BoxCollider>();
-            spriteCollider.size = new Vector3(unitSize, unitSize, unitSize);
-            spriteCollider.center = new Vector3(0, unitSize / 2, 0);
+            keySprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
             keySprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/key");
         }
     }
