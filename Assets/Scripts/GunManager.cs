@@ -8,11 +8,7 @@ public class GunManager : LevelContentManager
     public void ReloadGuns(Level level)
     {
         float unitSize = LevelManager.Instance.UnitSize;
-
-        while (transform.childCount > 0)
-        {
-            DestroyImmediate(transform.GetChild(0).gameObject);
-        }
+        gameObject.DestroyAllChildren();
 
         foreach (Vector2 coord in level.Guns)
         {

@@ -8,11 +8,7 @@ public class KeySensorsManager : LevelContentManager
     public void ReloadKeySensors(Level level)
     {
         float unitSize = LevelManager.Instance.UnitSize;
-
-        while (transform.childCount > 0)
-        {
-            DestroyImmediate(transform.GetChild(0).gameObject);
-        }
+        gameObject.DestroyAllChildren();
 
         foreach (Vector2 coord in level.KeySensors)
         {

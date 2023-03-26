@@ -8,12 +8,7 @@ public class PointSpriteManager : LevelContentManager
     public void ReloadPointSprites(Level level)
     {
         float unitSize = LevelManager.Instance.UnitSize;
-
-        // Delete all previous sprites
-        while (transform.childCount > 0)
-        {
-            DestroyImmediate(transform.GetChild(0).gameObject);
-        }
+        gameObject.DestroyAllChildren();
 
         GameObject startPointSprite = Instantiate(
             spritePrefab, new Vector3(level.StartPoint.x * -unitSize, 0, level.StartPoint.y * unitSize), Quaternion.identity);

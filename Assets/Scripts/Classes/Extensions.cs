@@ -19,4 +19,12 @@ public static class Extensions
         character.transform.position = position;
         character.enabled = true;
     }
+
+    public static void DestroyAllChildren(this GameObject gameObject)
+    {
+        while (gameObject.transform.childCount > 0)
+        {
+            UnityEngine.Object.DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
+        }
+    }
 }

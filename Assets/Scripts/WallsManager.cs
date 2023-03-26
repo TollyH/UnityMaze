@@ -5,12 +5,7 @@ public class WallsManager : LevelContentManager
     public void ReloadWalls(Level level)
     {
         float unitSize = LevelManager.Instance.UnitSize;
-
-        // Delete all previous walls
-        while (transform.childCount > 0)
-        {
-            DestroyImmediate(transform.GetChild(0).gameObject);
-        }
+        gameObject.DestroyAllChildren();
 
         // Create walls and collision
         for (int x = 0; x < level.Dimensions.x; x++)

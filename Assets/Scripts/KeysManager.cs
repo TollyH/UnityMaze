@@ -10,11 +10,7 @@ public class KeysManager : LevelContentManager
     public void ReloadKeys(Level level)
     {
         float unitSize = LevelManager.Instance.UnitSize;
-
-        while (transform.childCount > 0)
-        {
-            DestroyImmediate(transform.GetChild(0).gameObject);
-        }
+        gameObject.DestroyAllChildren();
 
         foreach (Vector2 coord in level.ExitKeys)
         {
