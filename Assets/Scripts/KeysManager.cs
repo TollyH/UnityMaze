@@ -20,7 +20,7 @@ public class KeysManager : LevelContentManager
         {
             GameObject keySprite = Instantiate(
                 collectibleSpritePrefab, new Vector3(coord.x * -unitSize, 0, coord.y * unitSize), Quaternion.identity);
-            keySprite.name = "KeySprite";
+            keySprite.name = $"Key{coord.x}-{coord.y}Sprite";
             keySprite.transform.parent = transform;
             BoxCollider spriteCollider = keySprite.GetComponentInChildren<BoxCollider>();
             spriteCollider.size = new Vector3(unitSize, unitSize, unitSize);
