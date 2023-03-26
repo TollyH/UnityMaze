@@ -7,6 +7,7 @@ public class CollectibleSprite : MonoBehaviour
         if (other.name == "Player")
         {
             Destroy(gameObject);
+            SendMessageUpwards("OnCollect", SendMessageOptions.DontRequireReceiver);
         }
     }
 }
