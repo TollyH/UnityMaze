@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class LevelManager : MonoBehaviour
 {
@@ -92,8 +93,15 @@ public class LevelManager : MonoBehaviour
 
         // Initialise player position, place them in the middle of the square
         Vector2 startPos = level.StartPoint * UnitSize;
-        player.GetComponent<CharacterController>().MoveAbsolute(new Vector3(-startPos.x, player.transform.position.y, startPos.y));
-        player.transform.rotation = Quaternion.Euler(0, 0, 0);
+        CharacterController characterController = player.GetComponent<CharacterController>();
+        characterController.MoveAbsolute(new Vector3(-startPos.x, player.transform.position.y, startPos.y));
+        if (!XRSettings.enabled)
+        {
+            characterController.height = UnitSize / 2;
+            player.transform.rotation = Quaternion.Euler(0, 0, 0);
+            Camera.main.transform.SetPositionAndRotation(new Vector3(Camera.main.transform.position.x,UnitSize / 2, Camera.main.transform.position.z),
+                Quaternion.Euler(0, 0, 0));
+        }
 
         foreach (LevelContentManager manager in contentManagers)
         {
