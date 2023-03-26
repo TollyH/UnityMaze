@@ -18,10 +18,19 @@ public class LevelManager : MonoBehaviour
 
     public float UnitSize = 4f;
 
+    [field: SerializeField]
+    public KeysManager KeysManager { get; private set; }
+    [field: SerializeField]
+    public PointSpriteManager PointSpriteManager { get; private set; }
+    [field: SerializeField]
+    public WallsManager WallsManager { get; private set; }
+    [field: SerializeField]
+    public PickupsManager PickupsManager { get; private set; }
+
     [SerializeField]
     private GameObject player;
-    [SerializeField]
-    private List<LevelContentManager> contentManagers;
+    
+    private LevelContentManager[] contentManagers;
 
     private void Awake()
     {
@@ -30,6 +39,10 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
             inputActions = new ControlMap();
+            contentManagers = new LevelContentManager[4]
+            {
+                KeysManager, PointSpriteManager, WallsManager, PickupsManager
+            };
             DontDestroyOnLoad(gameObject);
             LoadLevelJson(Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
         }

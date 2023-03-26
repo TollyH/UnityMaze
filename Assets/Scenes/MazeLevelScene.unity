@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 377469771}
   - component: {fileID: 377469772}
   m_Layer: 0
-  m_Name: KeySensorsContainer
+  m_Name: PickupsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,51 +373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectibleSpritePrefab: {fileID: 7850154813624118141, guid: 72ebfcf79cc687347b2c16bf66434994, type: 3}
---- !u!1 &498241595
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 498241597}
-  - component: {fileID: 498241596}
-  m_Layer: 0
-  m_Name: GunContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &498241596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498241595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 153005cdc7955b347825d32115a38dd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectibleSpritePrefab: {fileID: 7850154813624118141, guid: 72ebfcf79cc687347b2c16bf66434994, type: 3}
---- !u!4 &498241597
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498241595}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &660790186
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,13 +882,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitSize: 4
+  <KeysManager>k__BackingField: {fileID: 717386423}
+  <PointSpriteManager>k__BackingField: {fileID: 660790188}
+  <WallsManager>k__BackingField: {fileID: 1867482601}
+  <PickupsManager>k__BackingField: {fileID: 377469772}
   player: {fileID: 1206789339}
-  contentManagers:
-  - {fileID: 717386423}
-  - {fileID: 1867482601}
-  - {fileID: 660790188}
-  - {fileID: 377469772}
-  - {fileID: 498241596}
 --- !u!114 &1518488895
 MonoBehaviour:
   m_ObjectHideFlags: 0
