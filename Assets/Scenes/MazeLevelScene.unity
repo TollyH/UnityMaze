@@ -418,6 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spritePrefab: {fileID: 3687834168950131581, guid: 8a895bd6ecec15049b3925f37f81560f, type: 3}
+  triggerSpritePrefab: {fileID: 7850154813624118141, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
 --- !u!1 &717386421
 GameObject:
   m_ObjectHideFlags: 0
