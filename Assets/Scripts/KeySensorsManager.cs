@@ -16,14 +16,14 @@ public class KeySensorsManager : LevelContentManager
 
         foreach (Vector2 coord in level.KeySensors)
         {
-            GameObject keySprite = Instantiate(
+            GameObject keySensorSprite = Instantiate(
                 collectibleSpritePrefab, new Vector3(coord.x * -unitSize, 0, coord.y * unitSize), Quaternion.identity);
-            keySprite.name = $"KeySensor{coord.x}-{coord.y}Sprite";
-            keySprite.transform.parent = transform;
-            BoxCollider spriteCollider = keySprite.GetComponentInChildren<BoxCollider>();
+            keySensorSprite.name = $"KeySensor{coord.x}-{coord.y}Sprite";
+            keySensorSprite.transform.parent = transform;
+            BoxCollider spriteCollider = keySensorSprite.GetComponentInChildren<BoxCollider>();
             spriteCollider.size = new Vector3(unitSize, unitSize, unitSize);
             spriteCollider.center = new Vector3(0, unitSize / 2, 0);
-            keySprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/key_sensor");
+            keySensorSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/key_sensor");
         }
     }
 
