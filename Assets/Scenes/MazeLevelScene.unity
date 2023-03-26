@@ -337,6 +337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 660790187}
+  - component: {fileID: 660790188}
   m_Layer: 0
   m_Name: PointSpriteContainer
   m_TagString: Untagged
@@ -359,6 +360,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &660790188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660790186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d447aa43ba39f14daa7edb1115d4b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spritePrefab: {fileID: 3687834168950131581, guid: 8a895bd6ecec15049b3925f37f81560f, type: 3}
 --- !u!1 &717386421
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 717386422}
+  - component: {fileID: 717386423}
   m_Layer: 0
   m_Name: KeysContainer
   m_TagString: Untagged
@@ -390,6 +405,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &717386423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717386421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c59442ef12a1834899fe8cf350b0683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collectibleSpritePrefab: {fileID: 7850154813624118141, guid: 72ebfcf79cc687347b2c16bf66434994, type: 3}
 --- !u!1 &776998436
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,13 +836,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545114d7e627a094ca5b5c0a98571289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitSize: 4
-  spritePrefab: {fileID: 3687834168950131581, guid: 8a895bd6ecec15049b3925f37f81560f, type: 3}
-  collectibleSpritePrefab: {fileID: 7850154813624118141, guid: 72ebfcf79cc687347b2c16bf66434994, type: 3}
+  UnitSize: 4
   player: {fileID: 1206789339}
-  wallsContainer: {fileID: 1867482599}
-  spriteContainer: {fileID: 660790186}
-  keysContainer: {fileID: 717386421}
+  contentManagers:
+  - {fileID: 717386423}
+  - {fileID: 1867482601}
+  - {fileID: 660790188}
 --- !u!114 &1518488895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,6 +881,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867482600}
+  - component: {fileID: 1867482601}
   m_Layer: 0
   m_Name: MazeWalls
   m_TagString: Untagged
@@ -876,6 +904,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1867482601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867482599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3e033966f5cf94998aa4acef567388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1936967794
 GameObject:
   m_ObjectHideFlags: 0

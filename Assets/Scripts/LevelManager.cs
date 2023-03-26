@@ -16,22 +16,12 @@ public class LevelManager : MonoBehaviour
 
     public Level[] LoadedLevels { get; private set; }
 
-    [SerializeField]
-    private float unitSize = 4f;
-
-    [SerializeField]
-    private GameObject spritePrefab;
-    [SerializeField]
-    private GameObject collectibleSpritePrefab;
+    public float UnitSize = 4f;
 
     [SerializeField]
     private GameObject player;
     [SerializeField]
-    private GameObject wallsContainer;
-    [SerializeField]
-    private GameObject spriteContainer;
-    [SerializeField]
-    private GameObject keysContainer;
+    private List<LevelContentManager> contentManagers;
 
     private void Awake()
     {
@@ -84,219 +74,15 @@ public class LevelManager : MonoBehaviour
     {
         CurrentLevelIndex = levelIndex;
         Level level = LoadedLevels[levelIndex];
-        // Delete all previous walls
-        while (wallsContainer.transform.childCount > 0)
-        {
-            DestroyImmediate(wallsContainer.transform.GetChild(0).gameObject);
-        }
-        // Delete all previous sprites
-        while (spriteContainer.transform.childCount > 0)
-        {
-            DestroyImmediate(spriteContainer.transform.GetChild(0).gameObject);
-        }
-        while (keysContainer.transform.childCount > 0)
-        {
-            DestroyImmediate(keysContainer.transform.GetChild(0).gameObject);
-        }
 
         // Initialise player position, place them in the middle of the square
-        Vector2 startPos = level.StartPoint * unitSize;
+        Vector2 startPos = level.StartPoint * UnitSize;
         player.GetComponent<CharacterController>().MoveAbsolute(new Vector3(-startPos.x, player.transform.position.y, startPos.y));
         player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        // Create walls and collision
-        for (int x = 0; x < level.Dimensions.x; x++)
+        foreach (LevelContentManager manager in contentManagers)
         {
-            for (int y = 0; y < level.Dimensions.y; y++)
-            {
-                Level.GridSquareContents contents = level[x, y];
-                if (contents.Wall != null)
-                {
-                    GameObject newWall = new($"MazeWall{x}-{y}");
-                    newWall.transform.parent = wallsContainer.transform;
-                    newWall.transform.position = new Vector3(unitSize * -x, unitSize / 2, unitSize * y);
-
-                    GameObject newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "NorthPlane";
-                    // Walls may or may not have colliders, they'll be created later
-                    Destroy(newPlane.GetComponent<Collider>());
-                    newPlane.transform.parent = newWall.transform;
-                    newPlane.transform.localPosition = new Vector3(0, 0, unitSize / 2);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, 0, 0);
-                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{contents.Wall.Value.Item3}");
-
-                    newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "EastPlane";
-                    // Walls may or may not have colliders, they'll be created later
-                    Destroy(newPlane.GetComponent<Collider>());
-                    newPlane.transform.parent = newWall.transform;
-                    newPlane.transform.localPosition = new Vector3(unitSize / 2, 0, 0);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, 90, 0);
-                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{contents.Wall.Value.Item4}");
-
-                    newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "SouthPlane";
-                    // Walls may or may not have colliders, they'll be created later
-                    Destroy(newPlane.GetComponent<Collider>());
-                    newPlane.transform.parent = newWall.transform;
-                    newPlane.transform.localPosition = new Vector3(0, 0, -unitSize / 2);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, 180, 0);
-                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{contents.Wall.Value.Item1}");
-
-                    newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "WestPlane";
-                    // Walls may or may not have colliders, they'll be created later
-                    Destroy(newPlane.GetComponent<Collider>());
-                    newPlane.transform.parent = newWall.transform;
-                    newPlane.transform.localPosition = new Vector3(-unitSize / 2, 0, 0);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, -90, 0);
-                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{contents.Wall.Value.Item2}");
-                }
-
-                if (contents.PlayerCollide)
-                {
-                    GameObject newWallCollision = new($"MazeWallCollide{x}-{y}");
-                    newWallCollision.transform.parent = wallsContainer.transform;
-                    newWallCollision.transform.position = new Vector3(unitSize * -x, unitSize / 2, unitSize * y);
-
-                    GameObject newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "NorthPlane";
-                    // Colliders may or may not be visible
-                    Destroy(newPlane.GetComponent<Renderer>());
-                    newPlane.transform.parent = newWallCollision.transform;
-                    newPlane.transform.localPosition = new Vector3(0, 0, unitSize / 2);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, 0, 0);
-
-                    newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "EastPlane";
-                    // Colliders may or may not be visible
-                    Destroy(newPlane.GetComponent<Renderer>());
-                    newPlane.transform.parent = newWallCollision.transform;
-                    newPlane.transform.localPosition = new Vector3(unitSize / 2, 0, 0);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, 90, 0);
-
-                    newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "SouthPlane";
-                    // Colliders may or may not be visible
-                    Destroy(newPlane.GetComponent<Renderer>());
-                    newPlane.transform.parent = newWallCollision.transform;
-                    newPlane.transform.localPosition = new Vector3(0, 0, -unitSize / 2);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, 180, 0);
-
-                    newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "WestPlane";
-                    // Colliders may or may not be visible
-                    Destroy(newPlane.GetComponent<Renderer>());
-                    newPlane.transform.parent = newWallCollision.transform;
-                    newPlane.transform.localPosition = new Vector3(-unitSize / 2, 0, 0);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, -90, 0);
-                }
-            }
-        }
-
-        // Create maze edge
-        for (int x = 0; x < level.Dimensions.x; x++)
-        {
-            GameObject newWall = new($"MazeWallNorthEdge{x}");
-            newWall.transform.parent = wallsContainer.transform;
-            newWall.transform.position = new Vector3(unitSize * -x, unitSize / 2, unitSize * level.Dimensions.y);
-
-            GameObject newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            newPlane.name = "SouthPlane";
-            newPlane.transform.parent = newWall.transform;
-            newPlane.transform.localPosition = new Vector3(0, 0, -unitSize / 2);
-            newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-            newPlane.transform.localRotation = Quaternion.Euler(90, 180, 0);
-            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{level.EdgeWallTextureName}");
-
-            newWall = new($"MazeWallSouthEdge{x}");
-            newWall.transform.parent = wallsContainer.transform;
-            newWall.transform.position = new Vector3(unitSize * -x, unitSize / 2, -1 * unitSize);
-
-            newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            newPlane.name = "NorthPlane";
-            newPlane.transform.parent = newWall.transform;
-            newPlane.transform.localPosition = new Vector3(0, 0, unitSize / 2);
-            newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-            newPlane.transform.localRotation = Quaternion.Euler(90, 0, 0);
-            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{level.EdgeWallTextureName}");
-        }
-        for (int y = 0; y < level.Dimensions.y; y++)
-        {
-            GameObject newWall = new($"MazeWallEastEdge{y}");
-            newWall.transform.parent = wallsContainer.transform;
-            newWall.transform.position = new Vector3(unitSize, unitSize / 2, unitSize * y);
-
-            GameObject newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            newPlane.name = "WestPlane";
-            newPlane.transform.parent = newWall.transform;
-            newPlane.transform.localPosition = new Vector3(-unitSize / 2, 0, 0);
-            newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-            newPlane.transform.localRotation = Quaternion.Euler(90, -90, 0);
-            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{level.EdgeWallTextureName}");
-
-            newWall = new($"MazeWallWestEdge{y}");
-            newWall.transform.parent = wallsContainer.transform;
-            newWall.transform.position = new Vector3(-level.Dimensions.x * unitSize, unitSize / 2, unitSize * y);
-
-            newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            newPlane.name = "EastPlane";
-            newPlane.transform.parent = newWall.transform;
-            newPlane.transform.localPosition = new Vector3(unitSize / 2, 0, 0);
-            newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-            newPlane.transform.localRotation = Quaternion.Euler(90, 90, 0);
-            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{level.EdgeWallTextureName}");
-        }
-
-        // Create sprites
-        GameObject startPointSprite = Instantiate(
-            spritePrefab, new Vector3(level.StartPoint.x * -unitSize, 0, level.StartPoint.y * unitSize), Quaternion.identity);
-        startPointSprite.name = "StartPointSprite";
-        startPointSprite.transform.parent = spriteContainer.transform;
-        startPointSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/start_point");
-
-        GameObject exitPointSprite = Instantiate(
-            spritePrefab, new Vector3(level.EndPoint.x * -unitSize, 0, level.EndPoint.y * unitSize), Quaternion.identity);
-        exitPointSprite.name = "ExitPointSprite";
-        exitPointSprite.transform.parent = spriteContainer.transform;
-        exitPointSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/end_point");
-
-        if (level.MonsterStart != null)
-        {
-            GameObject monsterStartSprite = Instantiate(
-                spritePrefab, new Vector3(level.MonsterStart.Value.x * -unitSize, 0, level.MonsterStart.Value.y * unitSize), Quaternion.identity);
-            monsterStartSprite.name = "MonsterStartSprite";
-            monsterStartSprite.transform.parent = spriteContainer.transform;
-            monsterStartSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/monster_spawn");
-        }
-
-        foreach ((Vector2 coords, string texture) in level.Decorations)
-        {
-            GameObject monsterStartSprite = Instantiate(
-                spritePrefab, new Vector3(coords.x * -unitSize, 0, coords.y * unitSize), Quaternion.identity);
-            monsterStartSprite.name = $"Decoration{coords.x}-{coords.y}Sprite";
-            monsterStartSprite.transform.parent = spriteContainer.transform;
-            monsterStartSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>($"Textures/sprite/decoration/{texture}");
-        }
-
-        foreach (Vector2 coord in level.ExitKeys)
-        {
-            GameObject keySprite = Instantiate(
-                collectibleSpritePrefab, new Vector3(coord.x * -unitSize, 0, coord.y * unitSize), Quaternion.identity);
-            keySprite.name = "KeySprite";
-            keySprite.transform.parent = keysContainer.transform;
-            BoxCollider spriteCollider = keySprite.GetComponentInChildren<BoxCollider>();
-            spriteCollider.size = new Vector3(unitSize, unitSize, unitSize);
-            spriteCollider.center = new Vector3(0, unitSize / 2, 0);
-            keySprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/key");
+            manager.OnLevelLoad(level);
         }
     }
 
