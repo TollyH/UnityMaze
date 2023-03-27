@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 361205736}
     m_Modifications:
+    - target: {fileID: 1194356112358311790, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042805175649526406, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3512460941354539796, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -153,6 +161,10 @@ PrefabInstance:
     - target: {fileID: 7850154813624118141, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
       propertyPath: m_Name
       value: ExitPointSprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850154813624118141, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
@@ -314,7 +326,6 @@ GameObject:
   - component: {fileID: 351024520}
   - component: {fileID: 351024523}
   - component: {fileID: 351024522}
-  - component: {fileID: 351024521}
   - component: {fileID: 351024524}
   m_Layer: 0
   m_Name: RightHand
@@ -338,19 +349,6 @@ Transform:
   m_Father: {fileID: 1206789345}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &351024521
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 351024519}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &351024522
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -747,6 +745,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1206789345}
   - component: {fileID: 1206789346}
+  - component: {fileID: 1206789349}
   - component: {fileID: 1206789342}
   - component: {fileID: 1206789341}
   - component: {fileID: 1206789340}
@@ -878,6 +877,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68d90c8068a89748b1388d3940cb235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &1206789349
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206789339}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1382394073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,7 +1231,6 @@ GameObject:
   - component: {fileID: 1936967795}
   - component: {fileID: 1936967798}
   - component: {fileID: 1936967797}
-  - component: {fileID: 1936967796}
   - component: {fileID: 1936967799}
   m_Layer: 0
   m_Name: LeftHand
@@ -1242,19 +1254,6 @@ Transform:
   m_Father: {fileID: 1206789345}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1936967796
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936967794}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1936967797
 MeshRenderer:
   m_ObjectHideFlags: 0
