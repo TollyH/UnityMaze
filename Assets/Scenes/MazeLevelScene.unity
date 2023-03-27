@@ -751,6 +751,7 @@ GameObject:
   - component: {fileID: 1206789341}
   - component: {fileID: 1206789340}
   - component: {fileID: 1206789347}
+  - component: {fileID: 1206789348}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -865,6 +866,18 @@ MonoBehaviour:
   Hands:
   - {fileID: 351024519}
   - {fileID: 1936967794}
+--- !u!114 &1206789348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206789339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68d90c8068a89748b1388d3940cb235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1382394073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1081,7 @@ MonoBehaviour:
   <PickupsManager>k__BackingField: {fileID: 377469772}
   <PointMarkerManager>k__BackingField: {fileID: 361205735}
   <MonsterManager>k__BackingField: {fileID: 1565518713}
+  <PlayerManager>k__BackingField: {fileID: 1206789348}
   player: {fileID: 1206789339}
 --- !u!114 &1518488895
 MonoBehaviour:
@@ -1149,6 +1163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c227d3aa5c2bd0b43adc2cc271c7ae82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TimeBetweenMoves: 0.5
 --- !u!1 &1867482599
 GameObject:
   m_ObjectHideFlags: 0

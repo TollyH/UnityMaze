@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class LevelManager : MonoBehaviour
 {
@@ -32,9 +31,8 @@ public class LevelManager : MonoBehaviour
     public PointMarkerManager PointMarkerManager { get; private set; }
     [field: SerializeField]
     public MonsterManager MonsterManager { get; private set; }
-
-    [SerializeField]
-    private GameObject player;
+    [field: SerializeField]
+    public PlayerManager PlayerManager { get; private set; }
     
     private LevelContentManager[] contentManagers;
 
@@ -45,10 +43,10 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
             inputActions = new ControlMap();
-            contentManagers = new LevelContentManager[6]
+            contentManagers = new LevelContentManager[7]
             {
                 KeysManager, DecorationsManager, WallsManager, PickupsManager, PointMarkerManager,
-                MonsterManager
+                MonsterManager, PlayerManager
             };
             DontDestroyOnLoad(gameObject);
             LoadLevelJson(Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
@@ -94,18 +92,6 @@ public class LevelManager : MonoBehaviour
     {
         CurrentLevelIndex = levelIndex;
         Level level = LoadedLevels[levelIndex];
-
-        // Initialise player position, place them in the middle of the square
-        Vector2 startPos = level.StartPoint * UnitSize;
-        CharacterController characterController = player.GetComponent<CharacterController>();
-        characterController.MoveAbsolute(new Vector3(-startPos.x, player.transform.position.y, startPos.y));
-        if (!XRSettings.enabled)
-        {
-            characterController.height = UnitSize / 2;
-            player.transform.rotation = Quaternion.Euler(0, 0, 0);
-            Camera.main.transform.SetPositionAndRotation(new Vector3(Camera.main.transform.position.x,UnitSize / 2, Camera.main.transform.position.z),
-                Quaternion.Euler(0, 0, 0));
-        }
 
         foreach (LevelContentManager manager in contentManagers)
         {

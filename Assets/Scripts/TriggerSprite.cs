@@ -4,7 +4,7 @@ public class TriggerSprite : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.transform == LevelManager.Instance.PlayerManager.transform)
         {
             SendMessageUpwards("OnSpriteTrigger", gameObject, SendMessageOptions.DontRequireReceiver);
         }
