@@ -3,6 +3,8 @@ using UnityEngine.XR;
 
 public class PlayerManager : LevelContentManager
 {
+    public bool HasMovedThisLevel { get; private set; }
+
     private CharacterController characterController;
     private CapsuleCollider capsuleCollider;
 
@@ -16,6 +18,7 @@ public class PlayerManager : LevelContentManager
     {
         float unitSize = LevelManager.Instance.UnitSize;
 
+        HasMovedThisLevel = false;
         // Initialise player position, place them in the middle of the square
         Vector2 startPos = level.StartPoint * unitSize;
         characterController.MoveAbsolute(new Vector3(-startPos.x, transform.position.y, startPos.y));
@@ -29,5 +32,10 @@ public class PlayerManager : LevelContentManager
         }
         characterController.center = new Vector3(0, characterController.height / 2, 0);
         capsuleCollider.center = new Vector3(0, capsuleCollider.height / 2, 0);
+    }
+
+    private void OnMove()
+    {
+        HasMovedThisLevel = true;
     }
 }

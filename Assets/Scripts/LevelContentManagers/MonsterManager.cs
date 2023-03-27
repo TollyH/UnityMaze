@@ -25,13 +25,23 @@ public class MonsterManager : LevelContentManager
         }
         if (TimeToSpawn > 0)
         {
-            TimeToSpawn -= Time.deltaTime;
-            if (TimeToSpawn <= 0)
+            if (LevelManager.Instance.PlayerManager.HasMovedThisLevel)
             {
-                thisRenderer.enabled = true;
-                TimeToMove = TimeBetweenMoves;
+                TimeToSpawn -= Time.deltaTime;
+                if (TimeToSpawn <= 0)
+                {
+                    thisRenderer.enabled = true;
+                    TimeToMove = TimeBetweenMoves;
+                }
+                else
+                {
+                    return;
+                }
             }
-            return;
+            else
+            {
+                return;
+            }
         }
 
         TimeToMove -= Time.deltaTime;
