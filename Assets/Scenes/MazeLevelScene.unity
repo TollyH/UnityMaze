@@ -1067,6 +1067,7 @@ MonoBehaviour:
   <WallsManager>k__BackingField: {fileID: 1867482601}
   <PickupsManager>k__BackingField: {fileID: 377469772}
   <PointMarkerManager>k__BackingField: {fileID: 361205735}
+  <MonsterManager>k__BackingField: {fileID: 1565518713}
   player: {fileID: 1206789339}
 --- !u!114 &1518488895
 MonoBehaviour:
@@ -1098,6 +1099,56 @@ MonoBehaviour:
   m_DefaultActionMap: LevelControl
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1001 &1565518711
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3512460941354539796, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a51931d23c6d70b4eb6645f9f8026ea1, type: 3}
+    - target: {fileID: 5898485420944703298, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898485420944703298, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898485420944703298, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898485420944703298, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850154813624118141, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_Name
+      value: Monster
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+--- !u!1 &1565518712 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7850154813624118141, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+  m_PrefabInstance: {fileID: 1565518711}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1565518713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565518712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c227d3aa5c2bd0b43adc2cc271c7ae82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1867482599
 GameObject:
   m_ObjectHideFlags: 0
