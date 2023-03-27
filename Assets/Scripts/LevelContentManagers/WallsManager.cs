@@ -63,44 +63,23 @@ public class WallsManager : LevelContentManager
                 if (contents.PlayerCollide)
                 {
                     GameObject newWallCollision = new($"MazeWallCollide{x}-{y}");
+                    _ = newWallCollision.AddComponent<BoxCollider>();
                     newWallCollision.transform.parent = transform;
                     newWallCollision.transform.position = new Vector3(unitSize * -x, unitSize / 2, unitSize * y);
+                    // "Ignore Raycast" - prevents monster from using player collides during line-of-sight checks
+                    newWallCollision.layer = 2;
+                    newWallCollision.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
+                }
 
-                    GameObject newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "NorthPlane";
-                    // Colliders may or may not be visible
-                    Destroy(newPlane.GetComponent<Renderer>());
-                    newPlane.transform.parent = newWallCollision.transform;
-                    newPlane.transform.localPosition = new Vector3(0, 0, unitSize / 2);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, 0, 0);
-
-                    newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "EastPlane";
-                    // Colliders may or may not be visible
-                    Destroy(newPlane.GetComponent<Renderer>());
-                    newPlane.transform.parent = newWallCollision.transform;
-                    newPlane.transform.localPosition = new Vector3(unitSize / 2, 0, 0);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, 90, 0);
-
-                    newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "SouthPlane";
-                    // Colliders may or may not be visible
-                    Destroy(newPlane.GetComponent<Renderer>());
-                    newPlane.transform.parent = newWallCollision.transform;
-                    newPlane.transform.localPosition = new Vector3(0, 0, -unitSize / 2);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, 180, 0);
-
-                    newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                    newPlane.name = "WestPlane";
-                    // Colliders may or may not be visible
-                    Destroy(newPlane.GetComponent<Renderer>());
-                    newPlane.transform.parent = newWallCollision.transform;
-                    newPlane.transform.localPosition = new Vector3(-unitSize / 2, 0, 0);
-                    newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
-                    newPlane.transform.localRotation = Quaternion.Euler(90, -90, 0);
+                if (contents.MonsterCollide)
+                {
+                    GameObject newWallCollision = new($"MonsterCollide{x}-{y}");
+                    BoxCollider collider = newWallCollision.AddComponent<BoxCollider>();
+                    // Setting as a trigger will prevent player colliding, but will still block monster line-of-sight raycasts
+                    collider.isTrigger = true;
+                    newWallCollision.transform.parent = transform;
+                    newWallCollision.transform.position = new Vector3(unitSize * -x, unitSize / 2, unitSize * y);
+                    newWallCollision.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
                 }
             }
         }
