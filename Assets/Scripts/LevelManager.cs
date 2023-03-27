@@ -16,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public int CurrentLevelIndex { get; private set; }
 
     public Level[] LoadedLevels { get; private set; }
+    public Level CurrentLevel => LoadedLevels[CurrentLevelIndex];
 
     public float UnitSize = 4f;
 
