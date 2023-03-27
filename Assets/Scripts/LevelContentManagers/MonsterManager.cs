@@ -23,12 +23,16 @@ public class MonsterManager : LevelContentManager
         {
             return;
         }
-        if (TimeToSpawn > 0)
+
+        float unitSize = LevelManager.Instance.UnitSize;
+        PlayerManager player = LevelManager.Instance.PlayerManager;
+        Vector3 gamePos = new(GridPosition.Value.x * -unitSize, 0, GridPosition.Value.y * unitSize);
+        if (!thisRenderer.enabled)
         {
-            if (LevelManager.Instance.PlayerManager.HasMovedThisLevel)
+            if (player.HasMovedThisLevel)
             {
                 TimeToSpawn -= Time.deltaTime;
-                if (TimeToSpawn <= 0)
+                if (TimeToSpawn <= 0 && Vector3.Distance(player.transform.position, gamePos) > 2 * unitSize)
                 {
                     thisRenderer.enabled = true;
                     TimeToMove = TimeBetweenMoves;
@@ -51,9 +55,8 @@ public class MonsterManager : LevelContentManager
             ProcessMonsterMove();
         }
 
-        float unitSize = LevelManager.Instance.UnitSize;
         transform.localScale = new Vector3(unitSize, unitSize, unitSize);
-        transform.position = new Vector3(GridPosition.Value.x * -unitSize, 0, GridPosition.Value.y * unitSize);
+        transform.position = gamePos;
     }
 
     public void ProcessMonsterMove()
