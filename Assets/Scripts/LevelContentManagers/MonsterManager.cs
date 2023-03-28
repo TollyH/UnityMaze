@@ -7,6 +7,8 @@ public class MonsterManager : LevelContentManager
     public float? TimeToSpawn { get; private set; }
     public float TimeToMove { get; private set; }
 
+    public bool IsMonsterSpawned => thisRenderer.enabled;
+
     public float TimeBetweenMoves;
 
     private Renderer thisRenderer;

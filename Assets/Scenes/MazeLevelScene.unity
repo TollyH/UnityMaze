@@ -1818,6 +1818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbeb238f426face48bb4dd6c65b291dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statsPanel: {fileID: 584435706}
   keysLabel: {fileID: 1747552944}
   movesLabel: {fileID: 367686884}
   timeLabel: {fileID: 979122709}
