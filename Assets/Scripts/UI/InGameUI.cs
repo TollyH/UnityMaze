@@ -11,6 +11,8 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private Image statsPanel;
     [SerializeField]
+    private Image controlsPanel;
+    [SerializeField]
     private TextMeshProUGUI keysLabel;
     [SerializeField]
     private TextMeshProUGUI movesLabel;
@@ -39,5 +41,6 @@ public class InGameUI : MonoBehaviour
         Color bgColor = monster.IsMonsterSpawned ? Color.red : Color.black;
         bgColor.a = 0.5f;
         statsPanel.color = bgColor;
+        controlsPanel.color = bgColor;
     }
 }
