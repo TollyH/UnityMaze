@@ -3409,9 +3409,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statsPanel: {fileID: 584435706}
   controlsPanel: {fileID: 753291657}
+  gunControlPanel: {fileID: 1459446336}
   keysLabel: {fileID: 1747552944}
   movesLabel: {fileID: 367686884}
   timeLabel: {fileID: 979122709}
+  compassNeedle: {fileID: 1840088298}
 --- !u!1 &1936967794
 GameObject:
   m_ObjectHideFlags: 0

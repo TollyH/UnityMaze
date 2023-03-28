@@ -13,11 +13,16 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private Image controlsPanel;
     [SerializeField]
+    private Image gunControlPanel;
+    [SerializeField]
     private TextMeshProUGUI keysLabel;
     [SerializeField]
     private TextMeshProUGUI movesLabel;
     [SerializeField]
     private TextMeshProUGUI timeLabel;
+
+    [SerializeField]
+    private RectTransform compassNeedle;
 
     private void Awake()
     {
@@ -42,5 +47,18 @@ public class InGameUI : MonoBehaviour
         bgColor.a = 0.5f;
         statsPanel.color = bgColor;
         controlsPanel.color = bgColor;
+        gunControlPanel.color = bgColor;
+
+        if (monster.IsMonsterSpawned)
+        {
+            compassNeedle.gameObject.SetActive(true);
+            Vector3 monsterDirection = player.transform.position - monster.transform.position;
+            float yawOffset = Mathf.Atan2(monsterDirection.x, monsterDirection.z) * Mathf.Rad2Deg;
+            compassNeedle.rotation = Quaternion.Euler(0f, 0f, 180 - (yawOffset - Camera.main.transform.rotation.eulerAngles.y));
+        }
+        else
+        {
+            compassNeedle.gameObject.SetActive(false);
+        }
     }
 }
