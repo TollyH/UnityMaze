@@ -3,6 +3,8 @@ using UnityEngine;
 public class KeysManager : LevelContentManager
 {
     public bool AllKeysCollected => transform.childCount == 0;
+    public int KeysRemaining => transform.childCount;
+    public int TotalLevelKeys { get; private set; }
 
     [SerializeField]
     private GameObject collectibleSpritePrefab;
@@ -21,6 +23,7 @@ public class KeysManager : LevelContentManager
             keySprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
             keySprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/key");
         }
+        TotalLevelKeys = transform.childCount;
     }
 
     public override void OnLevelLoad(Level level)

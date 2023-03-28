@@ -47,8 +47,9 @@ public class PlayerMove : MonoBehaviour
         movementVector = new Vector3(movementVector.x + (movementVector.y / 2), 0, movementVector.z + (movementVector.y / 2));
         if (movementVector != Vector3.zero)
         {
+            Vector3 oldPos = transform.position;
             _ = character.Move(movementVector);
-            SendMessageUpwards("OnMove");
+            SendMessageUpwards("OnMove", (oldPos - transform.position).magnitude);
         }
     }
 
