@@ -99,6 +99,8 @@ public class InGameUI : MonoBehaviour
         {
             compassNeedle.gameObject.SetActive(false);
             compassBurnIndicator.gameObject.SetActive(false);
+            remainingCompassTime = CompassTime;
+            isCompassBurnedOut = false;
         }
 
         if (outerCompass.gameObject.activeSelf && monster.IsMonsterSpawned && !isCompassBurnedOut)
