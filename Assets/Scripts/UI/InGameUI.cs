@@ -5,6 +5,15 @@ using UnityEngine.XR;
 
 public class InGameUI : MonoBehaviour
 {
+    public float CompassTime = 10;
+    public float CompassChargeNormMultiplier = 0.5f;
+    public float CompassChargeBurnMultiplier = 1.0f;
+    public float CompassChargeDelay = 1.5f;
+
+    private float remainingCompassTime;
+    private float timeToCompassCharge;
+    private bool isCompassBurnedOut;
+
     private Canvas thisCanvas;
     private CanvasScaler thisScaler;
 
@@ -27,12 +36,15 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField]
     private RectTransform compassNeedle;
+    [SerializeField]
+    private RectTransform compassBurnIndicator;
 
     private void Awake()
     {
         thisCanvas = GetComponent<Canvas>();
         thisScaler = GetComponent<CanvasScaler>();
         inputActions = new ControlMap();
+        remainingCompassTime = CompassTime;
     }
 
     private void OnEnable()
@@ -66,14 +78,55 @@ public class InGameUI : MonoBehaviour
 
         if (monster.IsMonsterSpawned)
         {
-            compassNeedle.gameObject.SetActive(true);
-            Vector3 monsterDirection = player.transform.position - monster.transform.position;
-            float yawOffset = Mathf.Atan2(monsterDirection.x, monsterDirection.z) * Mathf.Rad2Deg;
-            compassNeedle.rotation = Quaternion.Euler(0f, 0f, 180 - (yawOffset - Camera.main.transform.rotation.eulerAngles.y));
+            if (isCompassBurnedOut)
+            {
+                compassNeedle.gameObject.SetActive(false);
+                compassBurnIndicator.gameObject.SetActive(true);
+                float compassBurnSize = 155f * ((CompassTime - remainingCompassTime) / CompassTime);
+                compassBurnIndicator.sizeDelta = new Vector2(compassBurnSize, compassBurnSize);
+            }
+            else
+            {
+                compassNeedle.gameObject.SetActive(true);
+                compassBurnIndicator.gameObject.SetActive(false);
+                Vector3 monsterDirection = player.transform.position - monster.transform.position;
+                float yawOffset = Mathf.Atan2(monsterDirection.x, monsterDirection.z) * Mathf.Rad2Deg;
+                compassNeedle.rotation = Quaternion.Euler(0f, 0f, 180 - (yawOffset - Camera.main.transform.rotation.eulerAngles.y));
+                compassNeedle.sizeDelta = new Vector2(5, 77.5f * (remainingCompassTime / CompassTime));
+            }
         }
         else
         {
             compassNeedle.gameObject.SetActive(false);
+            compassBurnIndicator.gameObject.SetActive(false);
+        }
+
+        if (outerCompass.gameObject.activeSelf && monster.IsMonsterSpawned && !isCompassBurnedOut)
+        {
+            remainingCompassTime -= Time.deltaTime;
+            timeToCompassCharge = CompassChargeDelay;
+            if (remainingCompassTime <= 0)
+            {
+                isCompassBurnedOut = true;
+            }
+        }
+        else if (remainingCompassTime < CompassTime)
+        {
+            if (timeToCompassCharge <= 0 || isCompassBurnedOut)
+            {
+                float multiplier = 1 / (isCompassBurnedOut ? CompassChargeBurnMultiplier : CompassChargeNormMultiplier);
+                remainingCompassTime += Time.deltaTime * multiplier;
+                if (remainingCompassTime >= CompassTime)
+                {
+                    remainingCompassTime = CompassTime;
+                    isCompassBurnedOut = false;
+                }
+            }
+            else if (timeToCompassCharge > 0)
+            {
+                timeToCompassCharge -= Time.deltaTime;
+            }
+            
         }
     }
 
