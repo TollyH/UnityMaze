@@ -28,6 +28,8 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private Image outerCompass;
     [SerializeField]
+    private GameObject mapContainer;
+    [SerializeField]
     private TextMeshProUGUI keysLabel;
     [SerializeField]
     private TextMeshProUGUI movesLabel;
@@ -38,6 +40,9 @@ public class InGameUI : MonoBehaviour
     private RectTransform compassNeedle;
     [SerializeField]
     private RectTransform compassBurnIndicator;
+
+    [SerializeField]
+    private GameObject mapSquarePrefab;
 
     private void Awake()
     {
@@ -64,6 +69,7 @@ public class InGameUI : MonoBehaviour
 
         UpdateStats();
         UpdateCompass();
+        UpdateMap();
     }
 
     private void UpdateStats()
@@ -144,6 +150,74 @@ public class InGameUI : MonoBehaviour
         }
     }
 
+    private void UpdateMap()
+    {
+        mapContainer.DestroyAllChildren();
+        if (!mapContainer.activeSelf)
+        {
+            return;
+        }
+        float unitSize = LevelManager.Instance.UnitSize;
+        float playerGridOffset = unitSize / 2;
+        Level currentLevel = LevelManager.Instance.CurrentLevel;
+        PlayerManager player = LevelManager.Instance.PlayerManager;
+        MonsterManager monster = LevelManager.Instance.MonsterManager;
+        Vector2 tileSize = new(Screen.width / currentLevel.Dimensions.x, Screen.height / currentLevel.Dimensions.y);
+
+        for (int x = 0; x < currentLevel.Dimensions.x; x++)
+        {
+            for (int y = 0; y < currentLevel.Dimensions.y; y++)
+            {
+                Vector2 pnt = new(x, y);
+                Color colour;
+                if ((int)((-player.transform.position.x + playerGridOffset) / unitSize) == (int)pnt.x
+                    && (int)((player.transform.position.z + playerGridOffset) / unitSize) == (int)pnt.y)
+                {
+                    colour = Colors.Blue;
+                }
+                else if (monster.IsMonsterSpawned && (int)monster.GridPosition.Value.x == (int)pnt.x && (int)monster.GridPosition.Value.y == (int)pnt.y)
+                {
+                    colour = Colors.DarkRed;
+                }
+                // TODO: Player walls
+                // else if (false)
+                // {
+                //     colour = Colors.Purple;
+                // }
+                // TODO: Keys, only if key sensor is held
+                // else if (false)
+                // {
+                //     colour = Colors.Gold;
+                // }
+                else if (currentLevel.MonsterStart == pnt)
+                {
+                    colour = Colors.DarkGreen;
+                }
+                // TODO: Player flags
+                // else if (false)
+                // {
+                //     colour = Colors.LightBlue;
+                // }
+                else if (currentLevel.StartPoint == pnt)
+                {
+                    colour = Colors.Red;
+                }
+                else
+                {
+                    colour = currentLevel[pnt].Wall is null ? Colors.White : Colors.Black;
+                }
+
+                GameObject newMapSquare = Instantiate(mapSquarePrefab, mapContainer.transform, false);
+                newMapSquare.name = $"MapSquare{x}-{y}";
+                RectTransform rect = newMapSquare.GetComponent<RectTransform>();
+                rect.sizeDelta = tileSize;
+                rect.position = new Vector3(x * tileSize.x, Screen.height - (y * tileSize.y), 0);
+                Image image = newMapSquare.GetComponent<Image>();
+                image.color = colour;
+            }
+        }
+    }
+
     private void OnToggleCompass()
     {
         outerCompass.gameObject.SetActive(!outerCompass.gameObject.activeSelf);
@@ -156,5 +230,10 @@ public class InGameUI : MonoBehaviour
         controlsPanel.gameObject.SetActive(newState);
         // TODO: Toggle with player's possession of a gun
         gunControlPanel.gameObject.SetActive(newState);
+    }
+
+    private void OnToggleMap()
+    {
+        mapContainer.SetActive(!mapContainer.activeSelf);
     }
 }

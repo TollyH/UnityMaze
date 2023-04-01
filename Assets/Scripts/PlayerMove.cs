@@ -7,6 +7,9 @@ public class PlayerMove : MonoBehaviour
     private ControlMap inputActions;
     public float MovementSpeed;
 
+    [SerializeField]
+    private GameObject mapContainer;
+
     private bool runToggle = false;
     private bool crawlToggle = false;
 
@@ -32,6 +35,10 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
+        if (mapContainer.activeSelf)
+        {
+            return;
+        }
         Vector2 inputValue = inputActions.PlayerMovement.PlayerMove.ReadValue<Vector2>();
         float moveMultiplier = MovementSpeed;
         if (runToggle || inputActions.PlayerMovement.RunModifier.IsPressed())
