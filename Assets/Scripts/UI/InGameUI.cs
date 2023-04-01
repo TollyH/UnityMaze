@@ -62,6 +62,12 @@ public class InGameUI : MonoBehaviour
         thisCanvas.renderMode = XRSettings.enabled ? RenderMode.ScreenSpaceCamera : RenderMode.ScreenSpaceOverlay;
         thisScaler.uiScaleMode = XRSettings.enabled ? CanvasScaler.ScaleMode.ScaleWithScreenSize : CanvasScaler.ScaleMode.ConstantPixelSize;
 
+        UpdateStats();
+        UpdateCompass();
+    }
+
+    private void UpdateStats()
+    {
         KeysManager keys = LevelManager.Instance.KeysManager;
         PlayerManager player = LevelManager.Instance.PlayerManager;
         MonsterManager monster = LevelManager.Instance.MonsterManager;
@@ -75,6 +81,12 @@ public class InGameUI : MonoBehaviour
         statsPanel.color = bgColor;
         controlsPanel.color = bgColor;
         gunControlPanel.color = bgColor;
+    }
+
+    private void UpdateCompass()
+    {
+        PlayerManager player = LevelManager.Instance.PlayerManager;
+        MonsterManager monster = LevelManager.Instance.MonsterManager;
 
         if (monster.IsMonsterSpawned)
         {
@@ -128,7 +140,7 @@ public class InGameUI : MonoBehaviour
             {
                 timeToCompassCharge -= Time.deltaTime;
             }
-            
+
         }
     }
 
