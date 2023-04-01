@@ -8,12 +8,16 @@ public class InGameUI : MonoBehaviour
     private Canvas thisCanvas;
     private CanvasScaler thisScaler;
 
+    private ControlMap inputActions;
+
     [SerializeField]
     private Image statsPanel;
     [SerializeField]
     private Image controlsPanel;
     [SerializeField]
     private Image gunControlPanel;
+    [SerializeField]
+    private Image outerCompass;
     [SerializeField]
     private TextMeshProUGUI keysLabel;
     [SerializeField]
@@ -28,6 +32,17 @@ public class InGameUI : MonoBehaviour
     {
         thisCanvas = GetComponent<Canvas>();
         thisScaler = GetComponent<CanvasScaler>();
+        inputActions = new ControlMap();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.UIControl.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.UIControl.Disable();
     }
 
     private void Update()
@@ -60,5 +75,19 @@ public class InGameUI : MonoBehaviour
         {
             compassNeedle.gameObject.SetActive(false);
         }
+    }
+
+    private void OnToggleCompass()
+    {
+        outerCompass.gameObject.SetActive(!outerCompass.gameObject.activeSelf);
+    }
+
+    private void OnToggleStats()
+    {
+        bool newState = !statsPanel.gameObject.activeSelf;
+        statsPanel.gameObject.SetActive(newState);
+        controlsPanel.gameObject.SetActive(newState);
+        // TODO: Toggle with player's possession of a gun
+        gunControlPanel.gameObject.SetActive(newState);
     }
 }
