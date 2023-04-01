@@ -431,7 +431,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""69f4dc5b-45e5-4b1c-9d77-690fb3ec09fc"",
-                    ""path"": ""<XRController>{RightHand}/secondaryButton"",
+                    ""path"": ""<XRController>{LeftHand}/secondaryButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -506,6 +506,42 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FireGun"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca730db5-e9c8-4f92-9f29-cadb2b63349e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceWall"",
+                    ""type"": ""Button"",
+                    ""id"": ""9331cb7c-c8b6-4b0c-8991-2006c13fc789"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""7128655e-b057-4bf6-82ea-915cff2c2d86"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceFlag"",
+                    ""type"": ""Button"",
+                    ""id"": ""bfc8ee73-60bc-481b-be3d-0ab3ba8e2a3c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -574,6 +610,283 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""PreviousLevel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e19d0a9-7a9a-4519-bde0-790ad0ffb386"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2283dc03-b9da-48bf-962e-1a7db39f872b"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b0a939ac-15a8-4cfb-81ee-4f91e1f43184"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90b00ecb-92db-4b5b-9550-e4feafde8ddc"",
+                    ""path"": ""<XRController>{RightHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b40158f-fb7b-446b-87a2-f4ecd05e88b2"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceWall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4f478945-bf7e-4f5e-a868-339cb64a52e0"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceWall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d719f633-aeef-4d45-86f3-e208bfcac9f6"",
+                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceWall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""861ff81e-bbb0-4dea-a8bd-532069062b8d"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97898dd4-1af6-4677-907b-cb54bd295e81"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9dfcdbc9-457c-4a5f-baea-df18a8885887"",
+                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6a73f23-ce75-4a69-b2ef-c47361a2eba5"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceFlag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10747be0-6299-4669-88bc-7b03fc934e01"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceFlag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b989bced-13aa-410c-a1d5-9c4ec9dd4294"",
+                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceFlag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UIControl"",
+            ""id"": ""1aa381c5-33f4-4a70-a323-413874329fb4"",
+            ""actions"": [
+                {
+                    ""name"": ""ToggleCompass"",
+                    ""type"": ""Button"",
+                    ""id"": ""3dbe4266-213e-42cd-aaec-f4315450d900"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleStats"",
+                    ""type"": ""Button"",
+                    ""id"": ""986cc776-10d9-4e9f-8b44-3d6cd57dd651"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleMap"",
+                    ""type"": ""Button"",
+                    ""id"": ""1fd8f07f-662d-45e9-a9ff-d9be67fb66ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8b327de3-c997-4dcb-b1b4-edc29d1a28c2"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleCompass"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e22219d5-3d9e-468d-9f2f-f1bd95f64f0c"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleCompass"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dac387e9-a368-4073-809f-e75856bdc622"",
+                    ""path"": ""<XRController>{RightHand}/thumbstickClicked"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleCompass"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8f4e427-0ab2-48e9-8088-7f00fd48c128"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleStats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f597da76-e846-4160-addb-9851d63a40c8"",
+                    ""path"": ""<XRController>{RightHand}/secondaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleStats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8263b441-744b-4e8f-9f86-73f589f5aaad"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleStats"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aabb72ec-1a33-49e4-a94f-f0b801ab394b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92179eff-20c9-433b-a800-688fb02554ed"",
+                    ""path"": ""<XRController>{LeftHand}/thumbstickClicked"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7452bf0-a030-43e0-9a18-3fa7aca0966d"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -601,6 +914,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_LevelControl = asset.FindActionMap("LevelControl", throwIfNotFound: true);
         m_LevelControl_NextLevel = m_LevelControl.FindAction("NextLevel", throwIfNotFound: true);
         m_LevelControl_PreviousLevel = m_LevelControl.FindAction("PreviousLevel", throwIfNotFound: true);
+        m_LevelControl_FireGun = m_LevelControl.FindAction("FireGun", throwIfNotFound: true);
+        m_LevelControl_PlaceWall = m_LevelControl.FindAction("PlaceWall", throwIfNotFound: true);
+        m_LevelControl_Pause = m_LevelControl.FindAction("Pause", throwIfNotFound: true);
+        m_LevelControl_PlaceFlag = m_LevelControl.FindAction("PlaceFlag", throwIfNotFound: true);
+        // UIControl
+        m_UIControl = asset.FindActionMap("UIControl", throwIfNotFound: true);
+        m_UIControl_ToggleCompass = m_UIControl.FindAction("ToggleCompass", throwIfNotFound: true);
+        m_UIControl_ToggleStats = m_UIControl.FindAction("ToggleStats", throwIfNotFound: true);
+        m_UIControl_ToggleMap = m_UIControl.FindAction("ToggleMap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -822,12 +1144,20 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private List<ILevelControlActions> m_LevelControlActionsCallbackInterfaces = new List<ILevelControlActions>();
     private readonly InputAction m_LevelControl_NextLevel;
     private readonly InputAction m_LevelControl_PreviousLevel;
+    private readonly InputAction m_LevelControl_FireGun;
+    private readonly InputAction m_LevelControl_PlaceWall;
+    private readonly InputAction m_LevelControl_Pause;
+    private readonly InputAction m_LevelControl_PlaceFlag;
     public struct LevelControlActions
     {
         private @ControlMap m_Wrapper;
         public LevelControlActions(@ControlMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @NextLevel => m_Wrapper.m_LevelControl_NextLevel;
         public InputAction @PreviousLevel => m_Wrapper.m_LevelControl_PreviousLevel;
+        public InputAction @FireGun => m_Wrapper.m_LevelControl_FireGun;
+        public InputAction @PlaceWall => m_Wrapper.m_LevelControl_PlaceWall;
+        public InputAction @Pause => m_Wrapper.m_LevelControl_Pause;
+        public InputAction @PlaceFlag => m_Wrapper.m_LevelControl_PlaceFlag;
         public InputActionMap Get() { return m_Wrapper.m_LevelControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -843,6 +1173,18 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @PreviousLevel.started += instance.OnPreviousLevel;
             @PreviousLevel.performed += instance.OnPreviousLevel;
             @PreviousLevel.canceled += instance.OnPreviousLevel;
+            @FireGun.started += instance.OnFireGun;
+            @FireGun.performed += instance.OnFireGun;
+            @FireGun.canceled += instance.OnFireGun;
+            @PlaceWall.started += instance.OnPlaceWall;
+            @PlaceWall.performed += instance.OnPlaceWall;
+            @PlaceWall.canceled += instance.OnPlaceWall;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @PlaceFlag.started += instance.OnPlaceFlag;
+            @PlaceFlag.performed += instance.OnPlaceFlag;
+            @PlaceFlag.canceled += instance.OnPlaceFlag;
         }
 
         private void UnregisterCallbacks(ILevelControlActions instance)
@@ -853,6 +1195,18 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @PreviousLevel.started -= instance.OnPreviousLevel;
             @PreviousLevel.performed -= instance.OnPreviousLevel;
             @PreviousLevel.canceled -= instance.OnPreviousLevel;
+            @FireGun.started -= instance.OnFireGun;
+            @FireGun.performed -= instance.OnFireGun;
+            @FireGun.canceled -= instance.OnFireGun;
+            @PlaceWall.started -= instance.OnPlaceWall;
+            @PlaceWall.performed -= instance.OnPlaceWall;
+            @PlaceWall.canceled -= instance.OnPlaceWall;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @PlaceFlag.started -= instance.OnPlaceFlag;
+            @PlaceFlag.performed -= instance.OnPlaceFlag;
+            @PlaceFlag.canceled -= instance.OnPlaceFlag;
         }
 
         public void RemoveCallbacks(ILevelControlActions instance)
@@ -870,6 +1224,68 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         }
     }
     public LevelControlActions @LevelControl => new LevelControlActions(this);
+
+    // UIControl
+    private readonly InputActionMap m_UIControl;
+    private List<IUIControlActions> m_UIControlActionsCallbackInterfaces = new List<IUIControlActions>();
+    private readonly InputAction m_UIControl_ToggleCompass;
+    private readonly InputAction m_UIControl_ToggleStats;
+    private readonly InputAction m_UIControl_ToggleMap;
+    public struct UIControlActions
+    {
+        private @ControlMap m_Wrapper;
+        public UIControlActions(@ControlMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ToggleCompass => m_Wrapper.m_UIControl_ToggleCompass;
+        public InputAction @ToggleStats => m_Wrapper.m_UIControl_ToggleStats;
+        public InputAction @ToggleMap => m_Wrapper.m_UIControl_ToggleMap;
+        public InputActionMap Get() { return m_Wrapper.m_UIControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIControlActions set) { return set.Get(); }
+        public void AddCallbacks(IUIControlActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIControlActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIControlActionsCallbackInterfaces.Add(instance);
+            @ToggleCompass.started += instance.OnToggleCompass;
+            @ToggleCompass.performed += instance.OnToggleCompass;
+            @ToggleCompass.canceled += instance.OnToggleCompass;
+            @ToggleStats.started += instance.OnToggleStats;
+            @ToggleStats.performed += instance.OnToggleStats;
+            @ToggleStats.canceled += instance.OnToggleStats;
+            @ToggleMap.started += instance.OnToggleMap;
+            @ToggleMap.performed += instance.OnToggleMap;
+            @ToggleMap.canceled += instance.OnToggleMap;
+        }
+
+        private void UnregisterCallbacks(IUIControlActions instance)
+        {
+            @ToggleCompass.started -= instance.OnToggleCompass;
+            @ToggleCompass.performed -= instance.OnToggleCompass;
+            @ToggleCompass.canceled -= instance.OnToggleCompass;
+            @ToggleStats.started -= instance.OnToggleStats;
+            @ToggleStats.performed -= instance.OnToggleStats;
+            @ToggleStats.canceled -= instance.OnToggleStats;
+            @ToggleMap.started -= instance.OnToggleMap;
+            @ToggleMap.performed -= instance.OnToggleMap;
+            @ToggleMap.canceled -= instance.OnToggleMap;
+        }
+
+        public void RemoveCallbacks(IUIControlActions instance)
+        {
+            if (m_Wrapper.m_UIControlActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIControlActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIControlActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIControlActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIControlActions @UIControl => new UIControlActions(this);
     public interface IPlayerMovementActions
     {
         void OnCameraLook(InputAction.CallbackContext context);
@@ -892,5 +1308,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     {
         void OnNextLevel(InputAction.CallbackContext context);
         void OnPreviousLevel(InputAction.CallbackContext context);
+        void OnFireGun(InputAction.CallbackContext context);
+        void OnPlaceWall(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnPlaceFlag(InputAction.CallbackContext context);
+    }
+    public interface IUIControlActions
+    {
+        void OnToggleCompass(InputAction.CallbackContext context);
+        void OnToggleStats(InputAction.CallbackContext context);
+        void OnToggleMap(InputAction.CallbackContext context);
     }
 }
