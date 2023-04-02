@@ -30,6 +30,8 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private GameObject mapContainer;
     [SerializeField]
+    private GameObject mapSquaresContainer;
+    [SerializeField]
     private TextMeshProUGUI keysLabel;
     [SerializeField]
     private TextMeshProUGUI movesLabel;
@@ -40,6 +42,8 @@ public class InGameUI : MonoBehaviour
     private RectTransform compassNeedle;
     [SerializeField]
     private RectTransform compassBurnIndicator;
+    [SerializeField]
+    private RectTransform playerDirectionIndicator;
 
     [SerializeField]
     private GameObject mapSquarePrefab;
@@ -152,7 +156,7 @@ public class InGameUI : MonoBehaviour
 
     private void UpdateMap()
     {
-        mapContainer.DestroyAllChildren();
+        mapSquaresContainer.DestroyAllChildren();
         if (!mapContainer.activeSelf)
         {
             return;
@@ -163,6 +167,8 @@ public class InGameUI : MonoBehaviour
         PlayerManager player = LevelManager.Instance.PlayerManager;
         MonsterManager monster = LevelManager.Instance.MonsterManager;
         Vector2 tileSize = new(Screen.width / currentLevel.Dimensions.x, Screen.height / currentLevel.Dimensions.y);
+        Vector2 playerGridPosition = new((-player.transform.position.x + playerGridOffset) / unitSize,
+            (player.transform.position.z + playerGridOffset) / unitSize);
 
         for (int x = 0; x < currentLevel.Dimensions.x; x++)
         {
@@ -170,8 +176,7 @@ public class InGameUI : MonoBehaviour
             {
                 Vector2 pnt = new(x, y);
                 Color colour;
-                if ((int)((-player.transform.position.x + playerGridOffset) / unitSize) == (int)pnt.x
-                    && (int)((player.transform.position.z + playerGridOffset) / unitSize) == (int)pnt.y)
+                if ((int)playerGridPosition.x == (int)pnt.x && (int)playerGridPosition.y == (int)pnt.y)
                 {
                     colour = Colors.Blue;
                 }
@@ -207,7 +212,7 @@ public class InGameUI : MonoBehaviour
                     colour = currentLevel[pnt].Wall is null ? Colors.White : Colors.Black;
                 }
 
-                GameObject newMapSquare = Instantiate(mapSquarePrefab, mapContainer.transform, false);
+                GameObject newMapSquare = Instantiate(mapSquarePrefab, mapSquaresContainer.transform, false);
                 newMapSquare.name = $"MapSquare{x}-{y}";
                 RectTransform rect = newMapSquare.GetComponent<RectTransform>();
                 rect.sizeDelta = tileSize;
@@ -216,6 +221,9 @@ public class InGameUI : MonoBehaviour
                 image.color = colour;
             }
         }
+
+        playerDirectionIndicator.position = new Vector3(playerGridPosition.x * tileSize.x, Screen.height - (playerGridPosition.y * tileSize.y), 0);
+        playerDirectionIndicator.rotation = Quaternion.Euler(0, 0, 180 - player.transform.rotation.eulerAngles.y);
     }
 
     private void OnToggleCompass()
