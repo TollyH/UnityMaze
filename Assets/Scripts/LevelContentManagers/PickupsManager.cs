@@ -4,6 +4,8 @@ public class PickupsManager : LevelContentManager
 {
     [SerializeField]
     private GameObject collectibleSpritePrefab;
+    [SerializeField]
+    private GameObject triggerSpritePrefab;
 
     public void ReloadPickups(Level level)
     {
@@ -23,7 +25,7 @@ public class PickupsManager : LevelContentManager
         foreach (Vector2 coord in level.Guns)
         {
             GameObject gunSprite = Instantiate(
-                collectibleSpritePrefab, new Vector3(coord.x * -unitSize, 0, coord.y * unitSize), Quaternion.identity);
+                triggerSpritePrefab, new Vector3(coord.x * -unitSize, 0, coord.y * unitSize), Quaternion.identity);
             gunSprite.name = $"Gun{coord.x}-{coord.y}Sprite";
             gunSprite.transform.parent = transform;
             gunSprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
@@ -33,9 +35,25 @@ public class PickupsManager : LevelContentManager
 
     public void OnCollect(GameObject collectedObject)
     {
+        PlayerManager player = LevelManager.Instance.PlayerManager;
         if (collectedObject.name.StartsWith("KeySensor"))
         {
-            LevelManager.Instance.PlayerManager.RemainingKeySensorTime = LevelManager.Instance.PlayerManager.KeySensorTime;
+            player.RemainingKeySensorTime = player.KeySensorTime;
+        }
+    }
+
+    public void OnSpriteTrigger(GameObject collectedObject)
+    {
+        PlayerManager player = LevelManager.Instance.PlayerManager;
+        if (collectedObject.name.StartsWith("Gun"))
+        {
+            // Player already has a gun, it shouldn't be collected
+            if (player.HasGun)
+            {
+                return;
+            }
+            player.HasGun = true;
+            Destroy(collectedObject);
         }
     }
 

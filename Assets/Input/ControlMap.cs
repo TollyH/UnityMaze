@@ -161,6 +161,42 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UnlockMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bb5a40b-abef-49fc-be16-2de8b794522c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FireGun"",
+                    ""type"": ""Button"",
+                    ""id"": ""c67b5671-577c-4d0a-9756-2031684f3abe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceFlag"",
+                    ""type"": ""Button"",
+                    ""id"": ""18071498-615c-4aab-83ef-ef5d7f54b216"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlaceWall"",
+                    ""type"": ""Button"",
+                    ""id"": ""1684d6dc-10a4-4454-bbb3-e9bddc273c74"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -482,6 +518,127 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""LeftHandRotVR"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39c5ae16-1d4a-41a6-be44-e916d958e627"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UnlockMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e2d31b3-c4c6-49b6-89b0-e6219dffaf63"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d61030ce-62b4-4ac4-b13d-dc70e4242791"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e78c7c32-c7e1-466a-8c11-9222882617c4"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""19b23fc2-c21e-40b9-9d6a-b186430025a7"",
+                    ""path"": ""<XRController>{RightHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FireGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7342c64d-69c9-420e-9c46-73118393e16b"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceFlag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d899153-5405-481c-a719-a118fbbd83cc"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceFlag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70a6d13c-3c9e-4cb8-ab7b-c4de66599a50"",
+                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceFlag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cabf8f82-79dc-4083-b296-c763ecb2ff51"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceWall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d5cc149-ea5f-423b-9958-2c632da6ebb8"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceWall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5332a207-b266-4fea-8752-f0b6caa7550b"",
+                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlaceWall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -508,36 +665,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""FireGun"",
-                    ""type"": ""Button"",
-                    ""id"": ""ca730db5-e9c8-4f92-9f29-cadb2b63349e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""PlaceWall"",
-                    ""type"": ""Button"",
-                    ""id"": ""9331cb7c-c8b6-4b0c-8991-2006c13fc789"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""7128655e-b057-4bf6-82ea-915cff2c2d86"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""PlaceFlag"",
-                    ""type"": ""Button"",
-                    ""id"": ""bfc8ee73-60bc-481b-be3d-0ab3ba8e2a3c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -613,83 +743,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7e19d0a9-7a9a-4519-bde0-790ad0ffb386"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""FireGun"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""2283dc03-b9da-48bf-962e-1a7db39f872b"",
-                    ""path"": ""<Keyboard>/t"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""FireGun"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b0a939ac-15a8-4cfb-81ee-4f91e1f43184"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""FireGun"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""90b00ecb-92db-4b5b-9550-e4feafde8ddc"",
-                    ""path"": ""<XRController>{RightHand}/triggerPressed"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""FireGun"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9b40158f-fb7b-446b-87a2-f4ecd05e88b2"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlaceWall"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""4f478945-bf7e-4f5e-a868-339cb64a52e0"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlaceWall"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d719f633-aeef-4d45-86f3-e208bfcac9f6"",
-                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlaceWall"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""861ff81e-bbb0-4dea-a8bd-532069062b8d"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
@@ -718,39 +771,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a6a73f23-ce75-4a69-b2ef-c47361a2eba5"",
-                    ""path"": ""<Keyboard>/f"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlaceFlag"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""10747be0-6299-4669-88bc-7b03fc934e01"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlaceFlag"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b989bced-13aa-410c-a1d5-9c4ec9dd4294"",
-                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PlaceFlag"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -910,14 +930,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_PlayerMovement_RightHandRotVR = m_PlayerMovement.FindAction("RightHandRotVR", throwIfNotFound: true);
         m_PlayerMovement_LeftHandPosVR = m_PlayerMovement.FindAction("LeftHandPosVR", throwIfNotFound: true);
         m_PlayerMovement_LeftHandRotVR = m_PlayerMovement.FindAction("LeftHandRotVR", throwIfNotFound: true);
+        m_PlayerMovement_UnlockMouse = m_PlayerMovement.FindAction("UnlockMouse", throwIfNotFound: true);
+        m_PlayerMovement_FireGun = m_PlayerMovement.FindAction("FireGun", throwIfNotFound: true);
+        m_PlayerMovement_PlaceFlag = m_PlayerMovement.FindAction("PlaceFlag", throwIfNotFound: true);
+        m_PlayerMovement_PlaceWall = m_PlayerMovement.FindAction("PlaceWall", throwIfNotFound: true);
         // LevelControl
         m_LevelControl = asset.FindActionMap("LevelControl", throwIfNotFound: true);
         m_LevelControl_NextLevel = m_LevelControl.FindAction("NextLevel", throwIfNotFound: true);
         m_LevelControl_PreviousLevel = m_LevelControl.FindAction("PreviousLevel", throwIfNotFound: true);
-        m_LevelControl_FireGun = m_LevelControl.FindAction("FireGun", throwIfNotFound: true);
-        m_LevelControl_PlaceWall = m_LevelControl.FindAction("PlaceWall", throwIfNotFound: true);
         m_LevelControl_Pause = m_LevelControl.FindAction("Pause", throwIfNotFound: true);
-        m_LevelControl_PlaceFlag = m_LevelControl.FindAction("PlaceFlag", throwIfNotFound: true);
         // UIControl
         m_UIControl = asset.FindActionMap("UIControl", throwIfNotFound: true);
         m_UIControl_ToggleCompass = m_UIControl.FindAction("ToggleCompass", throwIfNotFound: true);
@@ -999,6 +1020,10 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_RightHandRotVR;
     private readonly InputAction m_PlayerMovement_LeftHandPosVR;
     private readonly InputAction m_PlayerMovement_LeftHandRotVR;
+    private readonly InputAction m_PlayerMovement_UnlockMouse;
+    private readonly InputAction m_PlayerMovement_FireGun;
+    private readonly InputAction m_PlayerMovement_PlaceFlag;
+    private readonly InputAction m_PlayerMovement_PlaceWall;
     public struct PlayerMovementActions
     {
         private @ControlMap m_Wrapper;
@@ -1018,6 +1043,10 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @RightHandRotVR => m_Wrapper.m_PlayerMovement_RightHandRotVR;
         public InputAction @LeftHandPosVR => m_Wrapper.m_PlayerMovement_LeftHandPosVR;
         public InputAction @LeftHandRotVR => m_Wrapper.m_PlayerMovement_LeftHandRotVR;
+        public InputAction @UnlockMouse => m_Wrapper.m_PlayerMovement_UnlockMouse;
+        public InputAction @FireGun => m_Wrapper.m_PlayerMovement_FireGun;
+        public InputAction @PlaceFlag => m_Wrapper.m_PlayerMovement_PlaceFlag;
+        public InputAction @PlaceWall => m_Wrapper.m_PlayerMovement_PlaceWall;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1072,6 +1101,18 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @LeftHandRotVR.started += instance.OnLeftHandRotVR;
             @LeftHandRotVR.performed += instance.OnLeftHandRotVR;
             @LeftHandRotVR.canceled += instance.OnLeftHandRotVR;
+            @UnlockMouse.started += instance.OnUnlockMouse;
+            @UnlockMouse.performed += instance.OnUnlockMouse;
+            @UnlockMouse.canceled += instance.OnUnlockMouse;
+            @FireGun.started += instance.OnFireGun;
+            @FireGun.performed += instance.OnFireGun;
+            @FireGun.canceled += instance.OnFireGun;
+            @PlaceFlag.started += instance.OnPlaceFlag;
+            @PlaceFlag.performed += instance.OnPlaceFlag;
+            @PlaceFlag.canceled += instance.OnPlaceFlag;
+            @PlaceWall.started += instance.OnPlaceWall;
+            @PlaceWall.performed += instance.OnPlaceWall;
+            @PlaceWall.canceled += instance.OnPlaceWall;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -1121,6 +1162,18 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @LeftHandRotVR.started -= instance.OnLeftHandRotVR;
             @LeftHandRotVR.performed -= instance.OnLeftHandRotVR;
             @LeftHandRotVR.canceled -= instance.OnLeftHandRotVR;
+            @UnlockMouse.started -= instance.OnUnlockMouse;
+            @UnlockMouse.performed -= instance.OnUnlockMouse;
+            @UnlockMouse.canceled -= instance.OnUnlockMouse;
+            @FireGun.started -= instance.OnFireGun;
+            @FireGun.performed -= instance.OnFireGun;
+            @FireGun.canceled -= instance.OnFireGun;
+            @PlaceFlag.started -= instance.OnPlaceFlag;
+            @PlaceFlag.performed -= instance.OnPlaceFlag;
+            @PlaceFlag.canceled -= instance.OnPlaceFlag;
+            @PlaceWall.started -= instance.OnPlaceWall;
+            @PlaceWall.performed -= instance.OnPlaceWall;
+            @PlaceWall.canceled -= instance.OnPlaceWall;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -1144,20 +1197,14 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private List<ILevelControlActions> m_LevelControlActionsCallbackInterfaces = new List<ILevelControlActions>();
     private readonly InputAction m_LevelControl_NextLevel;
     private readonly InputAction m_LevelControl_PreviousLevel;
-    private readonly InputAction m_LevelControl_FireGun;
-    private readonly InputAction m_LevelControl_PlaceWall;
     private readonly InputAction m_LevelControl_Pause;
-    private readonly InputAction m_LevelControl_PlaceFlag;
     public struct LevelControlActions
     {
         private @ControlMap m_Wrapper;
         public LevelControlActions(@ControlMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @NextLevel => m_Wrapper.m_LevelControl_NextLevel;
         public InputAction @PreviousLevel => m_Wrapper.m_LevelControl_PreviousLevel;
-        public InputAction @FireGun => m_Wrapper.m_LevelControl_FireGun;
-        public InputAction @PlaceWall => m_Wrapper.m_LevelControl_PlaceWall;
         public InputAction @Pause => m_Wrapper.m_LevelControl_Pause;
-        public InputAction @PlaceFlag => m_Wrapper.m_LevelControl_PlaceFlag;
         public InputActionMap Get() { return m_Wrapper.m_LevelControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1173,18 +1220,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @PreviousLevel.started += instance.OnPreviousLevel;
             @PreviousLevel.performed += instance.OnPreviousLevel;
             @PreviousLevel.canceled += instance.OnPreviousLevel;
-            @FireGun.started += instance.OnFireGun;
-            @FireGun.performed += instance.OnFireGun;
-            @FireGun.canceled += instance.OnFireGun;
-            @PlaceWall.started += instance.OnPlaceWall;
-            @PlaceWall.performed += instance.OnPlaceWall;
-            @PlaceWall.canceled += instance.OnPlaceWall;
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
-            @PlaceFlag.started += instance.OnPlaceFlag;
-            @PlaceFlag.performed += instance.OnPlaceFlag;
-            @PlaceFlag.canceled += instance.OnPlaceFlag;
         }
 
         private void UnregisterCallbacks(ILevelControlActions instance)
@@ -1195,18 +1233,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @PreviousLevel.started -= instance.OnPreviousLevel;
             @PreviousLevel.performed -= instance.OnPreviousLevel;
             @PreviousLevel.canceled -= instance.OnPreviousLevel;
-            @FireGun.started -= instance.OnFireGun;
-            @FireGun.performed -= instance.OnFireGun;
-            @FireGun.canceled -= instance.OnFireGun;
-            @PlaceWall.started -= instance.OnPlaceWall;
-            @PlaceWall.performed -= instance.OnPlaceWall;
-            @PlaceWall.canceled -= instance.OnPlaceWall;
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
-            @PlaceFlag.started -= instance.OnPlaceFlag;
-            @PlaceFlag.performed -= instance.OnPlaceFlag;
-            @PlaceFlag.canceled -= instance.OnPlaceFlag;
         }
 
         public void RemoveCallbacks(ILevelControlActions instance)
@@ -1303,15 +1332,16 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnRightHandRotVR(InputAction.CallbackContext context);
         void OnLeftHandPosVR(InputAction.CallbackContext context);
         void OnLeftHandRotVR(InputAction.CallbackContext context);
+        void OnUnlockMouse(InputAction.CallbackContext context);
+        void OnFireGun(InputAction.CallbackContext context);
+        void OnPlaceFlag(InputAction.CallbackContext context);
+        void OnPlaceWall(InputAction.CallbackContext context);
     }
     public interface ILevelControlActions
     {
         void OnNextLevel(InputAction.CallbackContext context);
         void OnPreviousLevel(InputAction.CallbackContext context);
-        void OnFireGun(InputAction.CallbackContext context);
-        void OnPlaceWall(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
-        void OnPlaceFlag(InputAction.CallbackContext context);
     }
     public interface IUIControlActions
     {

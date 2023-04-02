@@ -34,10 +34,19 @@ public class MouseLook : MonoBehaviour
 
     private void OnLockMouse()
     {
+        if (LevelManager.Instance.PlayerManager.HasGun)
+        {
+            return;
+        }
         Vector3 view = Camera.main.ScreenToViewportPoint(Input.mousePosition);
         if (view.x >= 0 && view.x <= 1 && view.y >= 0 && view.y <= 1)
         {
             Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
         }
+    }
+
+    private void OnUnlockMouse()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
 }

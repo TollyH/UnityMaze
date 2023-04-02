@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 using UnityEngine.XR;
 
@@ -49,6 +50,9 @@ public class InGameUI : MonoBehaviour
     private RectTransform playerDirectionIndicator;
 
     [SerializeField]
+    private GameObject gunFirstPerson;
+
+    [SerializeField]
     private GameObject mapSquarePrefab;
 
     private void Awake()
@@ -74,6 +78,8 @@ public class InGameUI : MonoBehaviour
         thisCanvas.renderMode = XRSettings.enabled ? RenderMode.ScreenSpaceCamera : RenderMode.ScreenSpaceOverlay;
         thisScaler.uiScaleMode = XRSettings.enabled ? CanvasScaler.ScaleMode.ScaleWithScreenSize : CanvasScaler.ScaleMode.ConstantPixelSize;
 
+        gunFirstPerson.SetActive(LevelManager.Instance.PlayerManager.HasGun);
+
         UpdateStats();
         UpdateCompass();
         UpdateMap();
@@ -94,6 +100,7 @@ public class InGameUI : MonoBehaviour
         statsPanel.color = bgColor;
         controlsPanel.color = bgColor;
         gunControlPanel.color = bgColor;
+        gunControlPanel.gameObject.SetActive(statsPanel.gameObject.activeSelf && player.HasGun);
 
         keySensorIndicator.fillAmount = player.RemainingKeySensorTime / player.KeySensorTime;
     }
@@ -236,8 +243,6 @@ public class InGameUI : MonoBehaviour
         bool newState = !statsPanel.gameObject.activeSelf;
         statsPanel.gameObject.SetActive(newState);
         controlsPanel.gameObject.SetActive(newState);
-        // TODO: Toggle with player's possession of a gun
-        gunControlPanel.gameObject.SetActive(newState);
     }
 
     private void OnToggleMap()

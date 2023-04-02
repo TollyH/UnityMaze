@@ -13,6 +13,9 @@ public class PlayerManager : LevelContentManager
     [NonSerialized]
     public float RemainingKeySensorTime = 0;
 
+    [NonSerialized]
+    public bool HasGun = false;
+
     private CharacterController characterController;
     private CapsuleCollider capsuleCollider;
 
@@ -42,6 +45,7 @@ public class PlayerManager : LevelContentManager
         LevelMoves = 0;
         HasMovedThisLevel = false;
         RemainingKeySensorTime = 0;
+        HasGun = false;
 
         // Initialise player position, place them in the middle of the square
         Vector2 startPos = level.StartPoint * unitSize;
