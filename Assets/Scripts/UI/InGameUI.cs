@@ -180,10 +180,6 @@ public class InGameUI : MonoBehaviour
                 {
                     colour = Colors.Blue;
                 }
-                else if (monster.IsMonsterSpawned && (int)monster.GridPosition.Value.x == (int)pnt.x && (int)monster.GridPosition.Value.y == (int)pnt.y)
-                {
-                    colour = Colors.DarkRed;
-                }
                 // TODO: Player walls
                 // else if (false)
                 // {
