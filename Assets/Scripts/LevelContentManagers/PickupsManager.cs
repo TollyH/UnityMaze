@@ -31,6 +31,14 @@ public class PickupsManager : LevelContentManager
         }
     }
 
+    public void OnCollect(GameObject collectedObject)
+    {
+        if (collectedObject.name.StartsWith("KeySensor"))
+        {
+            LevelManager.Instance.PlayerManager.RemainingKeySensorTime = LevelManager.Instance.PlayerManager.KeySensorTime;
+        }
+    }
+
     public override void OnLevelLoad(Level level)
     {
         ReloadPickups(level);

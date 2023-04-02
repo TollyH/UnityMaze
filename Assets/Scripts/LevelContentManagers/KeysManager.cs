@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class KeysManager : LevelContentManager
@@ -24,6 +25,19 @@ public class KeysManager : LevelContentManager
             keySprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/key");
         }
         TotalLevelKeys = transform.childCount;
+    }
+
+    public HashSet<Vector2> GetRemainingKeyCoords()
+    {
+        float unitSize = LevelManager.Instance.UnitSize;
+        HashSet<Vector2> keyCoords = new(transform.childCount);
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform key = transform.GetChild(i);
+            Vector3 coord = key.localPosition;
+            _ = keyCoords.Add(new Vector2(-coord.x / unitSize, coord.z / unitSize));
+        }
+        return keyCoords;
     }
 
     public override void OnLevelLoad(Level level)

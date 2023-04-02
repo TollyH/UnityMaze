@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,8 @@ public class InGameUI : MonoBehaviour
     private Image statsPanel;
     [SerializeField]
     private Image controlsPanel;
+    [SerializeField]
+    private Image keySensorIndicator;
     [SerializeField]
     private Image gunControlPanel;
     [SerializeField]
@@ -91,6 +94,8 @@ public class InGameUI : MonoBehaviour
         statsPanel.color = bgColor;
         controlsPanel.color = bgColor;
         gunControlPanel.color = bgColor;
+
+        keySensorIndicator.fillAmount = player.RemainingKeySensorTime / player.KeySensorTime;
     }
 
     private void UpdateCompass()
@@ -165,10 +170,10 @@ public class InGameUI : MonoBehaviour
         float playerGridOffset = unitSize / 2;
         Level currentLevel = LevelManager.Instance.CurrentLevel;
         PlayerManager player = LevelManager.Instance.PlayerManager;
-        MonsterManager monster = LevelManager.Instance.MonsterManager;
         Vector2 tileSize = new(Screen.width / currentLevel.Dimensions.x, Screen.height / currentLevel.Dimensions.y);
         Vector2 playerGridPosition = new((-player.transform.position.x + playerGridOffset) / unitSize,
             (player.transform.position.z + playerGridOffset) / unitSize);
+        HashSet<Vector2> keyPositions = LevelManager.Instance.KeysManager.GetRemainingKeyCoords();
 
         for (int x = 0; x < currentLevel.Dimensions.x; x++)
         {
@@ -185,11 +190,10 @@ public class InGameUI : MonoBehaviour
                 // {
                 //     colour = Colors.Purple;
                 // }
-                // TODO: Keys, only if key sensor is held
-                // else if (false)
-                // {
-                //     colour = Colors.Gold;
-                // }
+                else if (player.RemainingKeySensorTime > 0 && keyPositions.Contains(pnt))
+                {
+                    colour = Colors.Gold;
+                }
                 else if (currentLevel.MonsterStart == pnt)
                 {
                     colour = Colors.DarkGreen;

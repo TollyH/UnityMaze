@@ -6,10 +6,12 @@ public class PlayerManager : LevelContentManager
 {
     public bool HasMovedThisLevel { get; private set; }
 
+    public float LevelTime { get; private set; }
+    public float LevelMoves { get; private set; }
+
+    public float KeySensorTime = 10;
     [NonSerialized]
-    public float LevelTime = 0;
-    [NonSerialized]
-    public float LevelMoves = 0;
+    public float RemainingKeySensorTime = 0;
 
     private CharacterController characterController;
     private CapsuleCollider capsuleCollider;
@@ -25,6 +27,11 @@ public class PlayerManager : LevelContentManager
         if (HasMovedThisLevel)
         {
             LevelTime += Time.deltaTime;
+            RemainingKeySensorTime -= Time.deltaTime;
+            if (RemainingKeySensorTime < 0)
+            {
+                RemainingKeySensorTime = 0;
+            }
         }
     }
 
@@ -34,6 +41,7 @@ public class PlayerManager : LevelContentManager
         LevelTime = 0;
         LevelMoves = 0;
         HasMovedThisLevel = false;
+        RemainingKeySensorTime = 0;
 
         // Initialise player position, place them in the middle of the square
         Vector2 startPos = level.StartPoint * unitSize;
