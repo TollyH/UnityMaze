@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5898485420944703298}
   - component: {fileID: 6785540704209205382}
   - component: {fileID: 1933295049837554953}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FlagSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
