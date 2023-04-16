@@ -42,6 +42,12 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timeLabel;
 
+
+    [SerializeField]
+    private Image compassTime;
+    [SerializeField]
+    private Image wallTime;
+
     [SerializeField]
     private RectTransform compassNeedle;
     [SerializeField]
@@ -83,6 +89,7 @@ public class InGameUI : MonoBehaviour
         UpdateStats();
         UpdateCompass();
         UpdateMap();
+        UpdateTimeIndicators();
     }
 
     private void UpdateStats()
@@ -227,6 +234,29 @@ public class InGameUI : MonoBehaviour
 
         playerDirectionIndicator.position = new Vector3(playerGridPosition.x * tileSize.x, Screen.height - (playerGridPosition.y * tileSize.y), 0);
         playerDirectionIndicator.rotation = Quaternion.Euler(0, 0, 180 - player.transform.rotation.eulerAngles.y);
+    }
+
+    private void UpdateTimeIndicators()
+    {
+        compassTime.color = isCompassBurnedOut ? Colors.Red : Colors.DarkGreen;
+        float compassTimeDiameter = 32 * (remainingCompassTime / CompassTime);
+        compassTime.rectTransform.sizeDelta = new Vector2(compassTimeDiameter, compassTimeDiameter);
+
+        PlayerWallManager playerWall = LevelManager.Instance.PlayerWallManager;
+
+        wallTime.color = playerWall.WallTimeRemaining > 0 ? Colors.Red : Colors.DarkGreen;
+        float wallTimeDiameter;
+        if (playerWall.WallCooldownRemaining == 0 && playerWall.WallTimeRemaining == 0)
+        {
+            wallTimeDiameter = 32;
+        }
+        else
+        {
+            wallTimeDiameter = 32 * (playerWall.WallCooldownRemaining > 0
+                ? 1 - (playerWall.WallCooldownRemaining / playerWall.PlayerWallCooldown)
+                : (playerWall.WallTimeRemaining / playerWall.PlayerWallTime));
+        }
+        wallTime.rectTransform.sizeDelta = new Vector2(wallTimeDiameter, wallTimeDiameter);
     }
 
     private void OnToggleCompass()

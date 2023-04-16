@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class PlayerWallManager : LevelContentManager
 {
-    public Vector2? WallPosition => wallTimeRemaining > 0 ? wallPosition : null;
+    public Vector2? WallPosition => WallTimeRemaining > 0 ? wallPosition : null;
     private Vector2 wallPosition;
 
     public float PlayerWallTime = 15;
     public float PlayerWallCooldown = 20;
 
-    private float wallTimeRemaining = 0;
-    private float wallCooldownRemaining = 0;
+    public float WallTimeRemaining { get; private set; } = 0;
+    public float WallCooldownRemaining { get; private set; } = 0;
 
     private Material[] wallMaterials;
 
@@ -36,28 +36,28 @@ public class PlayerWallManager : LevelContentManager
 
     private void Update()
     {
-        if (wallCooldownRemaining > 0)
+        if (WallCooldownRemaining > 0)
         {
-            wallCooldownRemaining -= Time.deltaTime;
-            if (wallCooldownRemaining <= 0)
+            WallCooldownRemaining -= Time.deltaTime;
+            if (WallCooldownRemaining <= 0)
             {
-                wallCooldownRemaining = 0;
+                WallCooldownRemaining = 0;
             }
         }
-        else if (wallTimeRemaining > 0)
+        else if (WallTimeRemaining > 0)
         {
-            wallTimeRemaining -= Time.deltaTime;
-            if (wallTimeRemaining <= 0)
+            WallTimeRemaining -= Time.deltaTime;
+            if (WallTimeRemaining <= 0)
             {
                 gameObject.DestroyAllChildren();
-                wallTimeRemaining = 0;
-                wallCooldownRemaining = PlayerWallCooldown;
+                WallTimeRemaining = 0;
+                WallCooldownRemaining = PlayerWallCooldown;
             }
             else
             {
                 // Select appropriate player wall texture depending on how long the wall has left until breaking
                 Material wallMaterial = wallMaterials[
-                    (int)((PlayerWallTime - wallTimeRemaining) / PlayerWallTime * wallMaterials.Length)];
+                    (int)((PlayerWallTime - WallTimeRemaining) / PlayerWallTime * wallMaterials.Length)];
 
                 MeshRenderer[] meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
                 foreach(MeshRenderer renderer in meshRenderers)
@@ -70,7 +70,7 @@ public class PlayerWallManager : LevelContentManager
 
     private void OnPlaceWall()
     {
-        if (wallCooldownRemaining > 0 || wallTimeRemaining > 0
+        if (WallCooldownRemaining > 0 || WallTimeRemaining > 0
             || !LevelManager.Instance.PlayerManager.HasMovedThisLevel
             || mapContainer.activeSelf)
         {
@@ -139,11 +139,13 @@ public class PlayerWallManager : LevelContentManager
         newPlane.transform.localRotation = Quaternion.Euler(90, -90, 0);
         newPlane.GetComponent<MeshRenderer>().material = wallMaterials[0];
 
-        wallTimeRemaining = PlayerWallTime;
+        WallTimeRemaining = PlayerWallTime;
     }
 
     public override void OnLevelLoad(Level level)
     {
+        WallTimeRemaining = 0;
+        WallCooldownRemaining = 0;
         gameObject.DestroyAllChildren();
     }
 }
