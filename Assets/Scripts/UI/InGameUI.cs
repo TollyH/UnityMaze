@@ -208,11 +208,10 @@ public class InGameUI : MonoBehaviour
                 {
                     colour = Colors.DarkGreen;
                 }
-                // TODO: Player flags
-                // else if (false)
-                // {
-                //     colour = Colors.LightBlue;
-                // }
+                else if (LevelManager.Instance.FlagManager.IsFlagged(pnt, out _))
+                {
+                    colour = Colors.LightBlue;
+                }
                 else if (currentLevel.StartPoint == pnt)
                 {
                     colour = Colors.Red;
