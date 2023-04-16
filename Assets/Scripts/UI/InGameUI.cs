@@ -173,13 +173,10 @@ public class InGameUI : MonoBehaviour
         {
             return;
         }
-        float unitSize = LevelManager.Instance.UnitSize;
-        float playerGridOffset = unitSize / 2;
         Level currentLevel = LevelManager.Instance.CurrentLevel;
         PlayerManager player = LevelManager.Instance.PlayerManager;
         Vector2 tileSize = new(Screen.width / currentLevel.Dimensions.x, Screen.height / currentLevel.Dimensions.y);
-        Vector2 playerGridPosition = new((-player.transform.position.x + playerGridOffset) / unitSize,
-            (player.transform.position.z + playerGridOffset) / unitSize);
+        Vector2 playerGridPosition = player.MazePosition;
         HashSet<Vector2> keyPositions = LevelManager.Instance.KeysManager.GetRemainingKeyCoords();
 
         for (int x = 0; x < currentLevel.Dimensions.x; x++)

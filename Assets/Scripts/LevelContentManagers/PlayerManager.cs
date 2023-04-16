@@ -4,6 +4,10 @@ using UnityEngine.XR;
 
 public class PlayerManager : LevelContentManager
 {
+    public Vector2 MazePosition => new((-transform.position.x + (LevelManager.Instance.UnitSize / 2)) / LevelManager.Instance.UnitSize,
+            (transform.position.z + (LevelManager.Instance.UnitSize / 2)) / LevelManager.Instance.UnitSize);
+    public Vector2 GridPosition => new((int)MazePosition.x, (int)MazePosition.y);
+
     public bool HasMovedThisLevel { get; private set; }
 
     public float LevelTime { get; private set; }

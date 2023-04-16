@@ -100,7 +100,8 @@ public class MonsterManager : LevelContentManager
         }
         List<Vector2> movements = new() { new Vector2(0, 1), new Vector2(0, -1), new Vector2(-1, 0), new Vector2(1, 0) };
         while (movementVector == null || !level.IsCoordInBounds(GridPosition.Value + movementVector.Value)
-            || level[GridPosition.Value + movementVector.Value].MonsterCollide)
+            || level[GridPosition.Value + movementVector.Value].MonsterCollide
+            || GridPosition.Value + movementVector.Value == LevelManager.Instance.PlayerWallManager.WallPosition)
         {
             if (movements.Count == 0)
             {
