@@ -13,6 +13,9 @@ public class PlayerWallManager : LevelContentManager
 
     private Material[] wallMaterials;
 
+    [SerializeField]
+    private GameObject mapContainer;
+
     private ControlMap inputActions;
 
     private void Awake()
@@ -68,7 +71,8 @@ public class PlayerWallManager : LevelContentManager
     private void OnPlaceWall()
     {
         if (wallCooldownRemaining > 0 || wallTimeRemaining > 0
-            || !LevelManager.Instance.PlayerManager.HasMovedThisLevel)
+            || !LevelManager.Instance.PlayerManager.HasMovedThisLevel
+            || mapContainer.activeSelf)
         {
             return;
         }

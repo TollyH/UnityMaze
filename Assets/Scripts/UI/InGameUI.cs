@@ -189,11 +189,10 @@ public class InGameUI : MonoBehaviour
                 {
                     colour = Colors.Blue;
                 }
-                // TODO: Player walls
-                // else if (false)
-                // {
-                //     colour = Colors.Purple;
-                // }
+                else if (pnt == LevelManager.Instance.PlayerWallManager.WallPosition)
+                {
+                    colour = Colors.Purple;
+                }
                 else if (player.RemainingKeySensorTime > 0 && keyPositions.Contains(pnt))
                 {
                     colour = Colors.Gold;
