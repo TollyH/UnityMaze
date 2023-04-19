@@ -132,7 +132,7 @@ public class InGameUI : MonoBehaviour
                 compassBurnIndicator.gameObject.SetActive(false);
                 Vector3 monsterDirection = player.transform.position - monster.transform.position;
                 float yawOffset = Mathf.Atan2(monsterDirection.x, monsterDirection.z) * Mathf.Rad2Deg;
-                compassNeedle.rotation = Quaternion.Euler(0f, 0f, 180 - (yawOffset - Camera.main.transform.rotation.eulerAngles.y));
+                compassNeedle.localRotation = Quaternion.Euler(0f, 0f, 180 - (yawOffset - Camera.main.transform.rotation.eulerAngles.y));
                 compassNeedle.sizeDelta = new Vector2(5, 77.5f * (remainingCompassTime / CompassTime));
             }
         }
@@ -182,7 +182,8 @@ public class InGameUI : MonoBehaviour
         }
         Level currentLevel = LevelManager.Instance.CurrentLevel;
         PlayerManager player = LevelManager.Instance.PlayerManager;
-        Vector2 tileSize = new(Screen.width / currentLevel.Dimensions.x, Screen.height / currentLevel.Dimensions.y);
+        Rect mapContainerRect = mapSquaresContainer.GetComponent<RectTransform>().rect;
+        Vector2 tileSize = new(mapContainerRect.width / currentLevel.Dimensions.x, mapContainerRect.height / currentLevel.Dimensions.y);
         Vector2 playerGridPosition = player.MazePosition;
         HashSet<Vector2> keyPositions = LevelManager.Instance.KeysManager.GetRemainingKeyCoords();
 
@@ -225,14 +226,14 @@ public class InGameUI : MonoBehaviour
                 newMapSquare.name = $"MapSquare{x}-{y}";
                 RectTransform rect = newMapSquare.GetComponent<RectTransform>();
                 rect.sizeDelta = tileSize;
-                rect.position = new Vector3(x * tileSize.x, Screen.height - (y * tileSize.y), 0);
+                rect.localPosition = new Vector3((x * tileSize.x) - (mapContainerRect.width / 2), (mapContainerRect.height / 2) - (y * tileSize.y), 0);
                 Image image = newMapSquare.GetComponent<Image>();
                 image.color = colour;
             }
         }
 
-        playerDirectionIndicator.position = new Vector3(playerGridPosition.x * tileSize.x, Screen.height - (playerGridPosition.y * tileSize.y), 0);
-        playerDirectionIndicator.rotation = Quaternion.Euler(0, 0, 180 - player.transform.rotation.eulerAngles.y);
+        playerDirectionIndicator.localPosition = new Vector3(playerGridPosition.x * tileSize.x, mapContainerRect.height - (playerGridPosition.y * tileSize.y), 0);
+        playerDirectionIndicator.localRotation = Quaternion.Euler(0, 0, 180 - player.transform.rotation.eulerAngles.y);
     }
 
     private void UpdateTimeIndicators()
