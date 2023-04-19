@@ -3298,6 +3298,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1194356112358311790, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042805175649526406, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3512460941354539796, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -3321,6 +3329,10 @@ PrefabInstance:
     - target: {fileID: 7850154813624118141, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
       propertyPath: m_Name
       value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: 7850154813624118141, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}

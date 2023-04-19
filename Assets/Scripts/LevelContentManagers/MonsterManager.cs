@@ -119,9 +119,10 @@ public class MonsterManager : LevelContentManager
         GridPosition += movementVector;
     }
 
-    public void ReturnToSpawn()
+    public void KillMonster()
     {
         GridPosition = LevelManager.Instance.CurrentLevel.MonsterStart;
+        thisRenderer.enabled = false;
     }
 
     private void OnSpriteTrigger(GameObject triggerObject)
@@ -137,6 +138,7 @@ public class MonsterManager : LevelContentManager
     {
         GridPosition = level.MonsterStart;
         TimeToSpawn = level.MonsterWait;
+        TimeToMove = TimeBetweenMoves;
         thisRenderer.enabled = false;
     }
 }

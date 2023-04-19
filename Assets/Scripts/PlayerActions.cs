@@ -45,7 +45,7 @@ public class PlayerActions : MonoBehaviour
             {
                 if (hit.collider.transform == LevelManager.Instance.MonsterManager.transform)
                 {
-                    LevelManager.Instance.MonsterManager.ReturnToSpawn();
+                    LevelManager.Instance.MonsterManager.KillMonster();
                 }
             }
         }
