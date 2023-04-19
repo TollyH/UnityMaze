@@ -27,7 +27,7 @@ public class WallsManager : LevelContentManager
                     newPlane.transform.localPosition = new Vector3(0, 0, unitSize / 2);
                     newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
                     newPlane.transform.localRotation = Quaternion.Euler(90, 0, 0);
-                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{contents.Wall.Value.Item3}");
+                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/Darker/{contents.Wall.Value.Item3}");
 
                     newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
                     newPlane.name = "EastPlane";
@@ -47,7 +47,7 @@ public class WallsManager : LevelContentManager
                     newPlane.transform.localPosition = new Vector3(0, 0, -unitSize / 2);
                     newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
                     newPlane.transform.localRotation = Quaternion.Euler(90, 180, 0);
-                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{contents.Wall.Value.Item1}");
+                    newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/Darker/{contents.Wall.Value.Item1}");
 
                     newPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
                     newPlane.name = "WestPlane";
