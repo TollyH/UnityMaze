@@ -20,7 +20,6 @@ public class MonsterManager : LevelContentManager
 
     [SerializeField]
     private GameObject monsterOverlay;
-    private ControlMap inputActions;
 
     private Renderer thisRenderer;
     private Vector2? lastPosition;
@@ -28,17 +27,6 @@ public class MonsterManager : LevelContentManager
     private void Awake()
     {
         thisRenderer = GetComponentInChildren<Renderer>();
-        inputActions = new ControlMap();
-    }
-
-    private void OnEnable()
-    {
-        inputActions.PlayerMovement.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.PlayerMovement.Disable();
     }
 
     private void LateUpdate()
@@ -181,7 +169,7 @@ public class MonsterManager : LevelContentManager
         remainingEscapeClicks = ClicksToEscape;
     }
 
-    private void OnEscapeMonster()
+    public void EscapeMonsterClick()
     {
         if (remainingEscapeClicks > 0)
         {

@@ -654,7 +654,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d6708636-d584-47c7-8e79-79d0eb60c43b"",
-                    ""path"": ""<XRController>/triggerPressed"",
+                    ""path"": ""<XRController>/gripPressed"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

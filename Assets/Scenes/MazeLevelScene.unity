@@ -3792,36 +3792,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5898485420944703298, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
   m_PrefabInstance: {fileID: 1565518711}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1565518719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565518712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 40515df6c58c4ac46b6dace692fb9f68, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerMovement
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &1571321511
 GameObject:
   m_ObjectHideFlags: 0
@@ -4487,6 +4457,7 @@ GameObject:
   - component: {fileID: 1863836799}
   - component: {fileID: 1863836798}
   - component: {fileID: 1863836797}
+  - component: {fileID: 1863836801}
   - component: {fileID: 1863836796}
   m_Layer: 5
   m_Name: MonsterOverlay
@@ -4507,7 +4478,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 667c9a3371c95d84ca83704c81ae7f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartDistance: 2
+  EndDistance: 0.05
+  TravelDuration: 0.15
   monsterFace: {fileID: 1800478907}
+  hintText: {fileID: 369861900}
+  background: {fileID: 1862817898}
 --- !u!114 &1863836797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4592,6 +4568,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1863836801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863836795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 40515df6c58c4ac46b6dace692fb9f68, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: PlayerMovement
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1867482599
 GameObject:
   m_ObjectHideFlags: 0
