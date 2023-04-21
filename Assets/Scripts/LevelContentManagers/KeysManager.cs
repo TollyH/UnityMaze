@@ -9,6 +9,8 @@ public class KeysManager : LevelContentManager
 
     [SerializeField]
     private GameObject collectibleSpritePrefab;
+    [SerializeField]
+    private ViewportFlash viewportFlash;
 
     public void ReloadKeys(Level level)
     {
@@ -38,6 +40,11 @@ public class KeysManager : LevelContentManager
             _ = keyCoords.Add(new Vector2(-coord.x / unitSize, coord.z / unitSize));
         }
         return keyCoords;
+    }
+
+    public void OnCollect(GameObject _)
+    {
+        viewportFlash.PerformFlash(Colors.White, 0.4f, 0.4f);
     }
 
     public override void OnLevelLoad(Level level)

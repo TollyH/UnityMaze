@@ -6,6 +6,8 @@ public class PickupsManager : LevelContentManager
     private GameObject collectibleSpritePrefab;
     [SerializeField]
     private GameObject triggerSpritePrefab;
+    [SerializeField]
+    private ViewportFlash viewportFlash;
 
     public void ReloadPickups(Level level)
     {
@@ -39,6 +41,7 @@ public class PickupsManager : LevelContentManager
         if (collectedObject.name.StartsWith("KeySensor"))
         {
             player.RemainingKeySensorTime = player.KeySensorTime;
+            viewportFlash.PerformFlash(Colors.White, 0.4f, 0.4f);
         }
     }
 
@@ -54,6 +57,7 @@ public class PickupsManager : LevelContentManager
             }
             player.HasGun = true;
             Destroy(collectedObject);
+            viewportFlash.PerformFlash(Colors.White, 0.4f, 0.4f);
         }
     }
 
