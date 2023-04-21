@@ -113,8 +113,8 @@ public class InGameUI : MonoBehaviour
 
         if (XRSettings.enabled)
         {
-            controlsPanel.enabled = false;
-            gunControlPanel.enabled = false;
+            controlsPanel.gameObject.SetActive(false);
+            gunControlPanel.gameObject.SetActive(false);
         }
     }
 
