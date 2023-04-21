@@ -197,6 +197,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EscapeMonster"",
+                    ""type"": ""Button"",
+                    ""id"": ""52aec281-1552-4517-a794-3daf45c1e940"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -639,6 +648,39 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""PlaceWall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0cb69f5d-422e-4016-b5e1-e5c0063cf799"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EscapeMonster"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""564bdd95-8499-4ce1-afed-29ee90a2d24b"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EscapeMonster"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6708636-d584-47c7-8e79-79d0eb60c43b"",
+                    ""path"": ""<XRController>/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EscapeMonster"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -934,6 +976,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_PlayerMovement_FireGun = m_PlayerMovement.FindAction("FireGun", throwIfNotFound: true);
         m_PlayerMovement_PlaceFlag = m_PlayerMovement.FindAction("PlaceFlag", throwIfNotFound: true);
         m_PlayerMovement_PlaceWall = m_PlayerMovement.FindAction("PlaceWall", throwIfNotFound: true);
+        m_PlayerMovement_EscapeMonster = m_PlayerMovement.FindAction("EscapeMonster", throwIfNotFound: true);
         // LevelControl
         m_LevelControl = asset.FindActionMap("LevelControl", throwIfNotFound: true);
         m_LevelControl_NextLevel = m_LevelControl.FindAction("NextLevel", throwIfNotFound: true);
@@ -1024,6 +1067,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_FireGun;
     private readonly InputAction m_PlayerMovement_PlaceFlag;
     private readonly InputAction m_PlayerMovement_PlaceWall;
+    private readonly InputAction m_PlayerMovement_EscapeMonster;
     public struct PlayerMovementActions
     {
         private @ControlMap m_Wrapper;
@@ -1047,6 +1091,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @FireGun => m_Wrapper.m_PlayerMovement_FireGun;
         public InputAction @PlaceFlag => m_Wrapper.m_PlayerMovement_PlaceFlag;
         public InputAction @PlaceWall => m_Wrapper.m_PlayerMovement_PlaceWall;
+        public InputAction @EscapeMonster => m_Wrapper.m_PlayerMovement_EscapeMonster;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1113,6 +1158,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @PlaceWall.started += instance.OnPlaceWall;
             @PlaceWall.performed += instance.OnPlaceWall;
             @PlaceWall.canceled += instance.OnPlaceWall;
+            @EscapeMonster.started += instance.OnEscapeMonster;
+            @EscapeMonster.performed += instance.OnEscapeMonster;
+            @EscapeMonster.canceled += instance.OnEscapeMonster;
         }
 
         private void UnregisterCallbacks(IPlayerMovementActions instance)
@@ -1174,6 +1222,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @PlaceWall.started -= instance.OnPlaceWall;
             @PlaceWall.performed -= instance.OnPlaceWall;
             @PlaceWall.canceled -= instance.OnPlaceWall;
+            @EscapeMonster.started -= instance.OnEscapeMonster;
+            @EscapeMonster.performed -= instance.OnEscapeMonster;
+            @EscapeMonster.canceled -= instance.OnEscapeMonster;
         }
 
         public void RemoveCallbacks(IPlayerMovementActions instance)
@@ -1336,6 +1387,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnFireGun(InputAction.CallbackContext context);
         void OnPlaceFlag(InputAction.CallbackContext context);
         void OnPlaceWall(InputAction.CallbackContext context);
+        void OnEscapeMonster(InputAction.CallbackContext context);
     }
     public interface ILevelControlActions
     {

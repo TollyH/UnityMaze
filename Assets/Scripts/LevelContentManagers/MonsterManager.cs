@@ -3,13 +3,24 @@ using UnityEngine;
 
 public class MonsterManager : LevelContentManager
 {
+    public float StruggleTime = 5;
+    public float ClicksToEscape = 10;
+
     public Vector2? GridPosition { get; private set; }
     public float? TimeToSpawn { get; private set; }
     public float TimeToMove { get; private set; }
 
-    public bool IsMonsterSpawned => thisRenderer.enabled;
+    public bool IsMonsterSpawned => thisRenderer.enabled || remainingEscapeClicks > -1;
+    public bool IsPlayerStruggling => remainingEscapeClicks > -1;
 
     public float TimeBetweenMoves;
+
+    private float remainingLevelStruggle;
+    private float remainingEscapeClicks = -1;
+
+    [SerializeField]
+    private GameObject monsterOverlay;
+    private ControlMap inputActions;
 
     private Renderer thisRenderer;
     private Vector2? lastPosition;
@@ -17,44 +28,78 @@ public class MonsterManager : LevelContentManager
     private void Awake()
     {
         thisRenderer = GetComponentInChildren<Renderer>();
+        inputActions = new ControlMap();
+    }
+
+    private void OnEnable()
+    {
+        inputActions.PlayerMovement.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inputActions.PlayerMovement.Disable();
     }
 
     private void LateUpdate()
     {
         if (TimeToSpawn == null || GridPosition == null)
         {
+            monsterOverlay.SetActive(false);
             return;
         }
 
         float unitSize = LevelManager.Instance.UnitSize;
         PlayerManager player = LevelManager.Instance.PlayerManager;
         Vector3 gamePos = new(GridPosition.Value.x * -unitSize, 0, GridPosition.Value.y * unitSize);
-        if (!thisRenderer.enabled)
+        if (remainingEscapeClicks < 0)
         {
-            if (player.HasMovedThisLevel)
+            monsterOverlay.SetActive(false);
+            if (!thisRenderer.enabled)
             {
-                TimeToSpawn -= Time.deltaTime;
-                if (TimeToSpawn <= 0 && Vector3.Distance(player.transform.position, gamePos) > 2 * unitSize)
+                if (player.HasMovedThisLevel)
                 {
-                    thisRenderer.enabled = true;
-                    TimeToMove = TimeBetweenMoves;
+                    TimeToSpawn -= Time.deltaTime;
+                    if (TimeToSpawn <= 0 && Vector3.Distance(player.transform.position, gamePos) > 2 * unitSize)
+                    {
+                        thisRenderer.enabled = true;
+                        TimeToMove = TimeBetweenMoves;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
                 else
                 {
                     return;
                 }
             }
-            else
+
+            TimeToMove -= Time.deltaTime;
+            if (TimeToMove <= 0)
             {
-                return;
+                TimeToMove = TimeBetweenMoves;
+                ProcessMonsterMove();
             }
         }
-
-        TimeToMove -= Time.deltaTime;
-        if (TimeToMove <= 0)
+        else if (remainingEscapeClicks > 0)
         {
-            TimeToMove = TimeBetweenMoves;
-            ProcessMonsterMove();
+            thisRenderer.enabled = false;
+            monsterOverlay.SetActive(true);
+            remainingLevelStruggle -= Time.deltaTime;
+
+            if (remainingLevelStruggle <= 0)
+            {
+                Debug.Log("ded");
+            }
+        }
+        else
+        {
+            // Player has clicked enough times to escape
+            remainingEscapeClicks = -1;
+            monsterOverlay.SetActive(false);
+            KillMonster();
         }
 
         transform.localScale = new Vector3(unitSize, unitSize, unitSize);
@@ -131,7 +176,15 @@ public class MonsterManager : LevelContentManager
         {
             return;
         }
-        Debug.Log("Monster hit!");
+        remainingEscapeClicks = ClicksToEscape;
+    }
+
+    private void OnEscapeMonster()
+    {
+        if (remainingEscapeClicks > 0)
+        {
+            remainingEscapeClicks--;
+        }
     }
 
     public override void OnLevelLoad(Level level)
@@ -139,6 +192,10 @@ public class MonsterManager : LevelContentManager
         GridPosition = level.MonsterStart;
         TimeToSpawn = level.MonsterWait;
         TimeToMove = TimeBetweenMoves;
+
+        remainingLevelStruggle = StruggleTime;
+        remainingEscapeClicks = -1;
+
         thisRenderer.enabled = false;
     }
 }

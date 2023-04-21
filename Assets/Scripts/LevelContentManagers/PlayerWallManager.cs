@@ -72,6 +72,7 @@ public class PlayerWallManager : LevelContentManager
     {
         if (WallCooldownRemaining > 0 || WallTimeRemaining > 0
             || !LevelManager.Instance.PlayerManager.HasMovedThisLevel
+            || LevelManager.Instance.MonsterManager.IsPlayerStruggling
             || mapContainer.activeSelf)
         {
             return;

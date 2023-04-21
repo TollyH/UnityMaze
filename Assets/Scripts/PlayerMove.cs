@@ -35,7 +35,8 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        if (mapContainer.activeSelf)
+        if (mapContainer.activeSelf
+            || LevelManager.Instance.MonsterManager.IsPlayerStruggling)
         {
             return;
         }
