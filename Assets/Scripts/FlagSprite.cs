@@ -6,7 +6,6 @@ public class FlagSprite : MonoBehaviour
     {
         if (other.transform == LevelManager.Instance.MonsterManager.transform.GetChild(1).transform)
         {
-            Debug.Log(Random.value);
             if (Random.value < 0.25)
             {
                 Destroy(gameObject);
