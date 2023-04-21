@@ -141,15 +141,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "UnlockMouse",
-                    "type": "Button",
-                    "id": "1bb5a40b-abef-49fc-be16-2de8b794522c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "FireGun",
                     "type": "Button",
                     "id": "c67b5671-577c-4d0a-9756-2031684f3abe",
@@ -508,17 +499,6 @@
                 },
                 {
                     "name": "",
-                    "id": "39c5ae16-1d4a-41a6-be44-e916d958e627",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UnlockMouse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "2e2d31b3-c4c6-49b6-89b0-e6219dffaf63",
                     "path": "<Keyboard>/t",
                     "interactions": "",
@@ -692,6 +672,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "UnlockMouse",
+                    "type": "Button",
+                    "id": "e6affbae-2b9f-427a-8ed9-2802ec678fde",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -791,6 +780,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7065a613-fcc9-4c4e-95d7-4ece766ead46",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UnlockMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

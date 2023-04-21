@@ -43,7 +43,7 @@ public class MonsterManager : LevelContentManager
 
     private void LateUpdate()
     {
-        if (TimeToSpawn == null || GridPosition == null)
+        if (TimeToSpawn == null || GridPosition == null || LevelManager.Instance.IsPlayerDead)
         {
             monsterOverlay.SetActive(false);
             return;
@@ -91,7 +91,9 @@ public class MonsterManager : LevelContentManager
 
             if (remainingLevelStruggle <= 0)
             {
-                Debug.Log("ded");
+                LevelManager.Instance.KillPlayer();
+                monsterOverlay.SetActive(false);
+                KillMonster();
             }
         }
         else

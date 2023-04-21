@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class LevelManager : MonoBehaviour
     public Level CurrentLevel => LoadedLevels[CurrentLevelIndex];
 
     public float UnitSize = 4f;
+
+    public bool IsPlayerDead { get; private set; } = false;
 
     [field: SerializeField]
     public KeysManager KeysManager { get; private set; }
@@ -39,6 +42,11 @@ public class LevelManager : MonoBehaviour
     public FlagManager FlagManager { get; private set; }
 
     private LevelContentManager[] contentManagers;
+
+    [SerializeField]
+    private PlayerInput playerInput;
+    [SerializeField]
+    private GameObject deathScreen;
 
     private void Awake()
     {
@@ -97,10 +105,21 @@ public class LevelManager : MonoBehaviour
         CurrentLevelIndex = levelIndex;
         Level level = LoadedLevels[levelIndex];
 
+        deathScreen.SetActive(false);
+        IsPlayerDead = false;
+        playerInput.enabled = true;
+
         foreach (LevelContentManager manager in contentManagers)
         {
             manager.OnLevelLoad(level);
         }
+    }
+
+    public void KillPlayer()
+    {
+        deathScreen.SetActive(true);
+        IsPlayerDead = true;
+        playerInput.enabled = false;
     }
 
     /// <summary>
@@ -118,5 +137,10 @@ public class LevelManager : MonoBehaviour
     public void SaveLevelJson(string path)
     {
         File.WriteAllText(path, JsonConvert.SerializeObject(LoadedLevels.Select(x => x.GetJsonLevel())));
+    }
+
+    private void OnUnlockMouse()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
 }

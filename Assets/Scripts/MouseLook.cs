@@ -44,9 +44,4 @@ public class MouseLook : MonoBehaviour
             Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
         }
     }
-
-    private void OnUnlockMouse()
-    {
-        Cursor.lockState = CursorLockMode.None;
-    }
 }

@@ -163,15 +163,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""UnlockMouse"",
-                    ""type"": ""Button"",
-                    ""id"": ""1bb5a40b-abef-49fc-be16-2de8b794522c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""FireGun"",
                     ""type"": ""Button"",
                     ""id"": ""c67b5671-577c-4d0a-9756-2031684f3abe"",
@@ -530,17 +521,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""39c5ae16-1d4a-41a6-be44-e916d958e627"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UnlockMouse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""2e2d31b3-c4c6-49b6-89b0-e6219dffaf63"",
                     ""path"": ""<Keyboard>/t"",
                     ""interactions"": """",
@@ -714,6 +694,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UnlockMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6affbae-2b9f-427a-8ed9-2802ec678fde"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -813,6 +802,17 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7065a613-fcc9-4c4e-95d7-4ece766ead46"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UnlockMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -972,7 +972,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_PlayerMovement_RightHandRotVR = m_PlayerMovement.FindAction("RightHandRotVR", throwIfNotFound: true);
         m_PlayerMovement_LeftHandPosVR = m_PlayerMovement.FindAction("LeftHandPosVR", throwIfNotFound: true);
         m_PlayerMovement_LeftHandRotVR = m_PlayerMovement.FindAction("LeftHandRotVR", throwIfNotFound: true);
-        m_PlayerMovement_UnlockMouse = m_PlayerMovement.FindAction("UnlockMouse", throwIfNotFound: true);
         m_PlayerMovement_FireGun = m_PlayerMovement.FindAction("FireGun", throwIfNotFound: true);
         m_PlayerMovement_PlaceFlag = m_PlayerMovement.FindAction("PlaceFlag", throwIfNotFound: true);
         m_PlayerMovement_PlaceWall = m_PlayerMovement.FindAction("PlaceWall", throwIfNotFound: true);
@@ -982,6 +981,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_LevelControl_NextLevel = m_LevelControl.FindAction("NextLevel", throwIfNotFound: true);
         m_LevelControl_PreviousLevel = m_LevelControl.FindAction("PreviousLevel", throwIfNotFound: true);
         m_LevelControl_Pause = m_LevelControl.FindAction("Pause", throwIfNotFound: true);
+        m_LevelControl_UnlockMouse = m_LevelControl.FindAction("UnlockMouse", throwIfNotFound: true);
         // UIControl
         m_UIControl = asset.FindActionMap("UIControl", throwIfNotFound: true);
         m_UIControl_ToggleCompass = m_UIControl.FindAction("ToggleCompass", throwIfNotFound: true);
@@ -1063,7 +1063,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMovement_RightHandRotVR;
     private readonly InputAction m_PlayerMovement_LeftHandPosVR;
     private readonly InputAction m_PlayerMovement_LeftHandRotVR;
-    private readonly InputAction m_PlayerMovement_UnlockMouse;
     private readonly InputAction m_PlayerMovement_FireGun;
     private readonly InputAction m_PlayerMovement_PlaceFlag;
     private readonly InputAction m_PlayerMovement_PlaceWall;
@@ -1087,7 +1086,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @RightHandRotVR => m_Wrapper.m_PlayerMovement_RightHandRotVR;
         public InputAction @LeftHandPosVR => m_Wrapper.m_PlayerMovement_LeftHandPosVR;
         public InputAction @LeftHandRotVR => m_Wrapper.m_PlayerMovement_LeftHandRotVR;
-        public InputAction @UnlockMouse => m_Wrapper.m_PlayerMovement_UnlockMouse;
         public InputAction @FireGun => m_Wrapper.m_PlayerMovement_FireGun;
         public InputAction @PlaceFlag => m_Wrapper.m_PlayerMovement_PlaceFlag;
         public InputAction @PlaceWall => m_Wrapper.m_PlayerMovement_PlaceWall;
@@ -1146,9 +1144,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @LeftHandRotVR.started += instance.OnLeftHandRotVR;
             @LeftHandRotVR.performed += instance.OnLeftHandRotVR;
             @LeftHandRotVR.canceled += instance.OnLeftHandRotVR;
-            @UnlockMouse.started += instance.OnUnlockMouse;
-            @UnlockMouse.performed += instance.OnUnlockMouse;
-            @UnlockMouse.canceled += instance.OnUnlockMouse;
             @FireGun.started += instance.OnFireGun;
             @FireGun.performed += instance.OnFireGun;
             @FireGun.canceled += instance.OnFireGun;
@@ -1210,9 +1205,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @LeftHandRotVR.started -= instance.OnLeftHandRotVR;
             @LeftHandRotVR.performed -= instance.OnLeftHandRotVR;
             @LeftHandRotVR.canceled -= instance.OnLeftHandRotVR;
-            @UnlockMouse.started -= instance.OnUnlockMouse;
-            @UnlockMouse.performed -= instance.OnUnlockMouse;
-            @UnlockMouse.canceled -= instance.OnUnlockMouse;
             @FireGun.started -= instance.OnFireGun;
             @FireGun.performed -= instance.OnFireGun;
             @FireGun.canceled -= instance.OnFireGun;
@@ -1249,6 +1241,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_LevelControl_NextLevel;
     private readonly InputAction m_LevelControl_PreviousLevel;
     private readonly InputAction m_LevelControl_Pause;
+    private readonly InputAction m_LevelControl_UnlockMouse;
     public struct LevelControlActions
     {
         private @ControlMap m_Wrapper;
@@ -1256,6 +1249,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @NextLevel => m_Wrapper.m_LevelControl_NextLevel;
         public InputAction @PreviousLevel => m_Wrapper.m_LevelControl_PreviousLevel;
         public InputAction @Pause => m_Wrapper.m_LevelControl_Pause;
+        public InputAction @UnlockMouse => m_Wrapper.m_LevelControl_UnlockMouse;
         public InputActionMap Get() { return m_Wrapper.m_LevelControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1274,6 +1268,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @UnlockMouse.started += instance.OnUnlockMouse;
+            @UnlockMouse.performed += instance.OnUnlockMouse;
+            @UnlockMouse.canceled += instance.OnUnlockMouse;
         }
 
         private void UnregisterCallbacks(ILevelControlActions instance)
@@ -1287,6 +1284,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @UnlockMouse.started -= instance.OnUnlockMouse;
+            @UnlockMouse.performed -= instance.OnUnlockMouse;
+            @UnlockMouse.canceled -= instance.OnUnlockMouse;
         }
 
         public void RemoveCallbacks(ILevelControlActions instance)
@@ -1383,7 +1383,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnRightHandRotVR(InputAction.CallbackContext context);
         void OnLeftHandPosVR(InputAction.CallbackContext context);
         void OnLeftHandRotVR(InputAction.CallbackContext context);
-        void OnUnlockMouse(InputAction.CallbackContext context);
         void OnFireGun(InputAction.CallbackContext context);
         void OnPlaceFlag(InputAction.CallbackContext context);
         void OnPlaceWall(InputAction.CallbackContext context);
@@ -1394,6 +1393,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnNextLevel(InputAction.CallbackContext context);
         void OnPreviousLevel(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnUnlockMouse(InputAction.CallbackContext context);
     }
     public interface IUIControlActions
     {
