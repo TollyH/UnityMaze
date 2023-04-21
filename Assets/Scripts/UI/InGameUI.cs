@@ -233,7 +233,7 @@ public class InGameUI : MonoBehaviour
         }
 
         playerDirectionIndicator.localPosition = new Vector3(playerGridPosition.x * tileSize.x, mapContainerRect.height - (playerGridPosition.y * tileSize.y), 0);
-        playerDirectionIndicator.localRotation = Quaternion.Euler(0, 0, 180 - player.transform.rotation.eulerAngles.y);
+        playerDirectionIndicator.localRotation = Quaternion.Euler(0, 0, 180 - Camera.main.transform.rotation.eulerAngles.y);
     }
 
     private void UpdateTimeIndicators()
