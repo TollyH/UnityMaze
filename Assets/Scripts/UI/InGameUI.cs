@@ -110,6 +110,12 @@ public class InGameUI : MonoBehaviour
         gunControlPanel.gameObject.SetActive(statsPanel.gameObject.activeSelf && player.HasGun);
 
         keySensorIndicator.fillAmount = player.RemainingKeySensorTime / player.KeySensorTime;
+
+        if (XRSettings.enabled)
+        {
+            controlsPanel.enabled = false;
+            gunControlPanel.enabled = false;
+        }
     }
 
     private void UpdateCompass()
