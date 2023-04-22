@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
 
     public float UnitSize = 4f;
 
-    public bool IsPlayerDead { get; private set; } = false;
+    public bool IsGameOver { get; private set; } = false;
 
     [field: SerializeField]
     public KeysManager KeysManager { get; private set; }
@@ -49,6 +49,8 @@ public class LevelManager : MonoBehaviour
     private PlayerInput uiInput;
     [SerializeField]
     private GameObject deathScreen;
+    [SerializeField]
+    private GameObject victoryScreen;
 
     private void Awake()
     {
@@ -108,7 +110,8 @@ public class LevelManager : MonoBehaviour
         Level level = LoadedLevels[levelIndex];
 
         deathScreen.SetActive(false);
-        IsPlayerDead = false;
+        victoryScreen.SetActive(false);
+        IsGameOver = false;
         playerInput.enabled = true;
         uiInput.enabled = true;
 
@@ -121,7 +124,15 @@ public class LevelManager : MonoBehaviour
     public void KillPlayer()
     {
         deathScreen.SetActive(true);
-        IsPlayerDead = true;
+        IsGameOver = true;
+        playerInput.enabled = false;
+        uiInput.enabled = false;
+    }
+
+    public void WinLevel()
+    {
+        victoryScreen.SetActive(true);
+        IsGameOver = true;
         playerInput.enabled = false;
         uiInput.enabled = false;
     }

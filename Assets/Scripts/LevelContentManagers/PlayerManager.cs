@@ -31,7 +31,7 @@ public class PlayerManager : LevelContentManager
 
     private void Update()
     {
-        if (HasMovedThisLevel && !LevelManager.Instance.IsPlayerDead)
+        if (HasMovedThisLevel && !LevelManager.Instance.IsGameOver)
         {
             LevelTime += Time.deltaTime;
             RemainingKeySensorTime -= Time.deltaTime;

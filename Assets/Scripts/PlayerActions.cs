@@ -29,7 +29,8 @@ public class PlayerActions : MonoBehaviour
     private void OnFireGun()
     {
         if (!player.HasGun
-            || LevelManager.Instance.MonsterManager.IsPlayerStruggling)
+            || LevelManager.Instance.MonsterManager.IsPlayerStruggling
+            || LevelManager.Instance.IsGameOver)
         {
             return;
         }

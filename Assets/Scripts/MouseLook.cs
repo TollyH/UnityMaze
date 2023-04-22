@@ -5,6 +5,9 @@ public class MouseLook : MonoBehaviour
     private ControlMap inputActions;
     public float Sensitivity;
 
+    [SerializeField]
+    private GameObject mapContainer;
+
     private void Awake()
     {
         inputActions = new ControlMap();
@@ -22,6 +25,10 @@ public class MouseLook : MonoBehaviour
 
     private void Update()
     {
+        if (LevelManager.Instance.IsGameOver || mapContainer.activeSelf)
+        {
+            return;
+        }
         float turnValue = inputActions.PlayerMovement.CameraLook.ReadValue<Vector2>().x * Sensitivity * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + turnValue, 0);
 

@@ -59,7 +59,7 @@ public class PointMarkerManager : LevelContentManager
         if (triggerObject != null && triggerObject.name == "ExitPointSprite"
             && LevelManager.Instance.KeysManager.AllKeysCollected)
         {
-            Debug.Log("Level complete!");
+            LevelManager.Instance.WinLevel();
         }
     }
 }
