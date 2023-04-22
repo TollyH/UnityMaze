@@ -97,7 +97,7 @@ public class WallsManager : LevelContentManager
             newPlane.transform.localPosition = new Vector3(0, 0, -unitSize / 2);
             newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
             newPlane.transform.localRotation = Quaternion.Euler(90, 180, 0);
-            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{level.EdgeWallTextureName}");
+            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/Darker/{level.EdgeWallTextureName}");
 
             newWall = new($"MazeWallSouthEdge{x}");
             newWall.transform.parent = transform;
@@ -109,7 +109,7 @@ public class WallsManager : LevelContentManager
             newPlane.transform.localPosition = new Vector3(0, 0, unitSize / 2);
             newPlane.transform.localScale = new Vector3(unitSize / 10, 1, unitSize / 10);
             newPlane.transform.localRotation = Quaternion.Euler(90, 0, 0);
-            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/{level.EdgeWallTextureName}");
+            newPlane.GetComponent<MeshRenderer>().material = Resources.Load<Material>($"Materials/Wall/Darker/{level.EdgeWallTextureName}");
         }
         for (int y = 0; y < level.Dimensions.y; y++)
         {
