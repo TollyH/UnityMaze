@@ -24,9 +24,13 @@ public class MonsterManager : LevelContentManager
     [SerializeField]
     private GameObject monsterOverlay;
     [SerializeField]
+    private ViewportFlash viewportFlash;
+    [SerializeField]
     private AudioSource roamingSound;
     [SerializeField]
     private AudioSource spottedSound;
+    [SerializeField]
+    private AudioSource lightFlickerSound;
 
     private AudioClip[] roamingSoundClips;
 
@@ -177,6 +181,7 @@ public class MonsterManager : LevelContentManager
         }
 
         GridPosition += movementVector;
+        ProcessLightFlicker();
     }
 
     public void KillMonster()
@@ -220,6 +225,19 @@ public class MonsterManager : LevelContentManager
                     timeSinceSeen = 0;
                 }
             }
+        }
+    }
+
+    private void ProcessLightFlicker()
+    {
+        float distance = Mathf.Pow(Vector2.Distance(GridPosition!.Value, LevelManager.Instance.PlayerManager.GridPosition), 2);
+        // Flicker on every monster movement when close. Also don't divide by anything less than 1, it will have no more effect than just 1.
+        distance = Mathf.Max(1, distance - 10);
+        // < 1 exponent makes probability decay less with distance
+        if (Random.value < 1 / Mathf.Pow(distance, 0.6f))
+        {
+            lightFlickerSound.Play();
+            viewportFlash.PerformFlash(Colors.Black, Random.Range(0, 0.5f), 0.5f, 0.5f);
         }
     }
 
