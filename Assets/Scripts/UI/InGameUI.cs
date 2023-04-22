@@ -62,6 +62,11 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private GameObject mapSquarePrefab;
 
+    [SerializeField]
+    private AudioSource mapClosedSound;
+    [SerializeField]
+    private AudioSource compassClosedSound;
+
     private void Awake()
     {
         thisCanvas = GetComponent<Canvas>();
@@ -270,6 +275,10 @@ public class InGameUI : MonoBehaviour
     private void OnToggleCompass()
     {
         outerCompass.gameObject.SetActive(!outerCompass.gameObject.activeSelf);
+        if (!outerCompass.gameObject.activeSelf)
+        {
+            compassClosedSound.Play();
+        }
     }
 
     private void OnToggleStats()
@@ -282,5 +291,9 @@ public class InGameUI : MonoBehaviour
     private void OnToggleMap()
     {
         mapContainer.SetActive(!mapContainer.activeSelf);
+        if (!mapContainer.activeSelf)
+        {
+            mapClosedSound.Play();
+        }
     }
 }

@@ -6,6 +6,9 @@ public class PlayerActions : MonoBehaviour
     private ControlMap inputActions;
     private PlayerManager player;
 
+    [SerializeField]
+    private AudioSource gunfire;
+
     private void Awake()
     {
         inputActions = new ControlMap();
@@ -38,10 +41,11 @@ public class PlayerActions : MonoBehaviour
 
         if (XRSettings.enabled)
         {
-            // TODO: VR gun
+            // TODO: VR gun with different audio source
         }
         else
         {
+            gunfire.Play();
             if (Physics.Raycast(Camera.main.transform.position,
                 Camera.main.transform.TransformDirection(Vector3.forward), out RaycastHit hit))
             {

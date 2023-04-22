@@ -5,6 +5,9 @@ public class MonsterManager : LevelContentManager
 {
     public float StruggleTime = 5;
     public float ClicksToEscape = 10;
+    public float SpottedSoundTimeout = 10;
+    public float TimeBetweenRoamSounds = 7.5f;
+    public float FieldOfViewRaycasts = 50;
 
     public Vector2? GridPosition { get; private set; }
     public float? TimeToSpawn { get; private set; }
@@ -20,13 +23,24 @@ public class MonsterManager : LevelContentManager
 
     [SerializeField]
     private GameObject monsterOverlay;
+    [SerializeField]
+    private AudioSource roamingSound;
+    [SerializeField]
+    private AudioSource spottedSound;
+
+    private AudioClip[] roamingSoundClips;
 
     private Renderer thisRenderer;
     private Vector2? lastPosition;
 
+    private float timeSinceSeen;
+    private float timeToNextRoamSound = 0;
+
     private void Awake()
     {
+        timeSinceSeen = SpottedSoundTimeout;
         thisRenderer = GetComponentInChildren<Renderer>();
+        roamingSoundClips = Resources.LoadAll<AudioClip>("Sounds/monster_roam");
     }
 
     private void LateUpdate()
@@ -70,6 +84,17 @@ public class MonsterManager : LevelContentManager
                 TimeToMove = TimeBetweenMoves;
                 ProcessMonsterMove();
             }
+
+            timeToNextRoamSound -= Time.deltaTime;
+            if (timeToNextRoamSound <= 0)
+            {
+                timeToNextRoamSound = TimeBetweenRoamSounds;
+                roamingSound.clip = roamingSoundClips[Random.Range(0, roamingSoundClips.Length)];
+                roamingSound.Play();
+            }
+
+            timeSinceSeen += Time.deltaTime;
+            ProcessSpotSound();
         }
         else if (remainingEscapeClicks > 0)
         {
@@ -177,6 +202,27 @@ public class MonsterManager : LevelContentManager
         }
     }
 
+    private void ProcessSpotSound()
+    {
+        float degreeIncrements = Camera.main.fieldOfView / (FieldOfViewRaycasts - 1);
+        float fovStartYaw = Camera.main.transform.eulerAngles.y - (Camera.main.fieldOfView / 2);
+        for (int i = 0; i < FieldOfViewRaycasts; i++)
+        {
+            float yawDirection = fovStartYaw + (i * degreeIncrements);
+            if (Physics.Raycast(Camera.main.transform.position, Quaternion.Euler(0, yawDirection, 0) * Vector3.forward, out RaycastHit hit))
+            {
+                if (hit.collider.transform == transform)
+                {
+                    if (!spottedSound.isPlaying && timeSinceSeen >= SpottedSoundTimeout)
+                    {
+                        spottedSound.Play();
+                    }
+                    timeSinceSeen = 0;
+                }
+            }
+        }
+    }
+
     public override void OnLevelLoad(Level level)
     {
         GridPosition = level.MonsterStart;
@@ -185,6 +231,9 @@ public class MonsterManager : LevelContentManager
 
         remainingLevelStruggle = StruggleTime;
         remainingEscapeClicks = -1;
+
+        timeToNextRoamSound = 0;
+        timeSinceSeen = SpottedSoundTimeout;
 
         thisRenderer.enabled = false;
     }

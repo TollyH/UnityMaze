@@ -18,10 +18,15 @@ public class PlayerWallManager : LevelContentManager
 
     private ControlMap inputActions;
 
+    [SerializeField]
+    private AudioSource wallSound;
+    private AudioClip[] wallSoundClips;
+
     private void Awake()
     {
         inputActions = new ControlMap();
         wallMaterials = Resources.LoadAll<Material>("Materials/PlayerWall");
+        wallSoundClips = Resources.LoadAll<AudioClip>("Sounds/wall_place");
     }
 
     private void OnEnable()
@@ -142,6 +147,7 @@ public class PlayerWallManager : LevelContentManager
         newPlane.GetComponent<MeshRenderer>().material = wallMaterials[0];
 
         WallTimeRemaining = PlayerWallTime;
+        wallSound.PlayOneShot(wallSoundClips[Random.Range(0, wallSoundClips.Length)]);
     }
 
     public override void OnLevelLoad(Level level)

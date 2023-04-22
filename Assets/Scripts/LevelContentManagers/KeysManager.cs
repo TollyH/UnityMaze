@@ -12,6 +12,15 @@ public class KeysManager : LevelContentManager
     [SerializeField]
     private ViewportFlash viewportFlash;
 
+    [SerializeField]
+    private AudioSource keySound;
+    private AudioClip[] keySoundClips;
+
+    private void Awake()
+    {
+        keySoundClips = Resources.LoadAll<AudioClip>("Sounds/key_pickup");
+    }
+
     public void ReloadKeys(Level level)
     {
         float unitSize = LevelManager.Instance.UnitSize;
@@ -45,6 +54,8 @@ public class KeysManager : LevelContentManager
     public void OnCollect(GameObject _)
     {
         viewportFlash.PerformFlash(Colors.White, 0.4f, 0.4f);
+
+        keySound.PlayOneShot(keySoundClips[Random.Range(0, keySoundClips.Length)]);
     }
 
     public override void OnLevelLoad(Level level)

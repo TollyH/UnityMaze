@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -23,10 +25,30 @@ public class PlayerManager : LevelContentManager
     private CharacterController characterController;
     private CapsuleCollider capsuleCollider;
 
+    [SerializeField]
+    private AudioSource ambience;
+
+    [SerializeField]
+    private AudioSource footstep;
+    private AudioClip[] footstepClips;
+
+    [SerializeField]
+    private AudioSource breathing;
+    private Dictionary<int, AudioClip> breathingClips;
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+
+        footstepClips = Resources.LoadAll<AudioClip>("Sounds/footsteps");
+
+        breathingClips = new Dictionary<int, AudioClip>()
+        {
+            { 0, Resources.Load<AudioClip>("Sounds/player_breathe/heavy") },
+            { 5, Resources.Load<AudioClip>("Sounds/player_breathe/medium") },
+            { 10, Resources.Load<AudioClip>("Sounds/player_breathe/light") }
+        };
     }
 
     private void Update()
@@ -40,10 +62,27 @@ public class PlayerManager : LevelContentManager
                 RemainingKeySensorTime = 0;
             }
         }
+        else if (breathing.isPlaying)
+        {
+            breathing.Pause();
+        }
+        if (LevelManager.Instance.IsGameOver && ambience.isPlaying)
+        {
+            ambience.Pause();
+        }
     }
 
     public override void OnLevelLoad(Level level)
     {
+        if (!ambience.isPlaying)
+        {
+            ambience.Play();
+        }
+        if (breathing.isPlaying)
+        {
+            breathing.Pause();
+        }
+
         float unitSize = LevelManager.Instance.UnitSize;
         LevelTime = 0;
         LevelMoves = 0;
@@ -68,8 +107,39 @@ public class PlayerManager : LevelContentManager
 
     private void OnMove(float distance)
     {
+        if (!breathing.isPlaying)
+        {
+            breathing.Play();
+        }
         float unitSize = LevelManager.Instance.UnitSize;
         HasMovedThisLevel = true;
+        float oldLevelMoves = LevelMoves;
         LevelMoves += distance / unitSize;
+
+        // Play footstep sound every time move score crosses every other integer boundary.
+        if ((int)(LevelMoves / 2) > (int)(oldLevelMoves / 2))
+        {
+            footstep.PlayOneShot(footstepClips[UnityEngine.Random.Range(0, footstepClips.Length)]);
+        }
+
+        // If there is no monster, play the calmest breathing sound
+        AudioClip selectedSound = breathingClips[breathingClips.Keys.Max()];
+        if (LevelManager.Instance.MonsterManager.IsMonsterSpawned)
+        {
+            float monsterDistance = Vector2.Distance(LevelManager.Instance.MonsterManager.GridPosition!.Value,
+                LevelManager.Instance.PlayerManager.GridPosition);
+            foreach (int minDistance in breathingClips.Keys)
+            {
+                if (monsterDistance >= minDistance)
+                {
+                    selectedSound = breathingClips[minDistance];
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        breathing.clip = selectedSound;
     }
 }

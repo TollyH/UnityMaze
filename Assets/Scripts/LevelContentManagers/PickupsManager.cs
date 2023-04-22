@@ -9,6 +9,11 @@ public class PickupsManager : LevelContentManager
     [SerializeField]
     private ViewportFlash viewportFlash;
 
+    [SerializeField]
+    private AudioSource gunPickup;
+    [SerializeField]
+    private AudioSource sensorPickup;
+
     public void ReloadPickups(Level level)
     {
         float unitSize = LevelManager.Instance.UnitSize;
@@ -40,6 +45,7 @@ public class PickupsManager : LevelContentManager
         PlayerManager player = LevelManager.Instance.PlayerManager;
         if (collectedObject.name.StartsWith("KeySensor"))
         {
+            sensorPickup.Play();
             player.RemainingKeySensorTime = player.KeySensorTime;
             viewportFlash.PerformFlash(Colors.White, 0.4f, 0.4f);
         }
@@ -55,6 +61,7 @@ public class PickupsManager : LevelContentManager
             {
                 return;
             }
+            gunPickup.Play();
             player.HasGun = true;
             Destroy(collectedObject);
             viewportFlash.PerformFlash(Colors.White, 0.4f, 0.4f);

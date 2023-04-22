@@ -10,9 +10,14 @@ public class FlagManager : LevelContentManager
     [SerializeField]
     private GameObject mapContainer;
 
+    [SerializeField]
+    private AudioSource flagSound;
+    private AudioClip[] flagSoundClips;
+
     private void Awake()
     {
         inputActions = new ControlMap();
+        flagSoundClips = Resources.LoadAll<AudioClip>("Sounds/flag_place");
     }
 
     private void OnEnable()
@@ -62,6 +67,8 @@ public class FlagManager : LevelContentManager
         keySprite.name = $"Key{coord.x}-{coord.y}Sprite";
         keySprite.transform.parent = transform;
         keySprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
+
+        flagSound.PlayOneShot(flagSoundClips[Random.Range(0, flagSoundClips.Length)]);
     }
 
     public override void OnLevelLoad(Level level)
