@@ -46,6 +46,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private PlayerInput playerInput;
     [SerializeField]
+    private PlayerInput uiInput;
+    [SerializeField]
     private GameObject deathScreen;
 
     private void Awake()
@@ -108,6 +110,7 @@ public class LevelManager : MonoBehaviour
         deathScreen.SetActive(false);
         IsPlayerDead = false;
         playerInput.enabled = true;
+        uiInput.enabled = true;
 
         foreach (LevelContentManager manager in contentManagers)
         {
@@ -120,6 +123,7 @@ public class LevelManager : MonoBehaviour
         deathScreen.SetActive(true);
         IsPlayerDead = true;
         playerInput.enabled = false;
+        uiInput.enabled = false;
     }
 
     /// <summary>

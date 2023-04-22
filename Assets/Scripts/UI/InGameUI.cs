@@ -41,6 +41,8 @@ public class InGameUI : MonoBehaviour
     private TextMeshProUGUI movesLabel;
     [SerializeField]
     private TextMeshProUGUI timeLabel;
+    [SerializeField]
+    private GameObject deathInputHint;
 
 
     [SerializeField]
@@ -85,6 +87,7 @@ public class InGameUI : MonoBehaviour
         thisScaler.uiScaleMode = XRSettings.enabled ? CanvasScaler.ScaleMode.ScaleWithScreenSize : CanvasScaler.ScaleMode.ConstantPixelSize;
 
         gunFirstPerson.SetActive(LevelManager.Instance.PlayerManager.HasGun);
+        deathInputHint.SetActive(!XRSettings.enabled);
 
         UpdateStats();
         UpdateCompass();

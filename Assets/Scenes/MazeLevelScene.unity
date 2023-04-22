@@ -3614,6 +3614,7 @@ MonoBehaviour:
   <PlayerWallManager>k__BackingField: {fileID: 1975199268}
   <FlagManager>k__BackingField: {fileID: 1571321512}
   playerInput: {fileID: 1206789342}
+  uiInput: {fileID: 1892113963}
   deathScreen: {fileID: 404898770}
 --- !u!114 &1518488895
 MonoBehaviour:
@@ -4912,6 +4913,7 @@ MonoBehaviour:
   keysLabel: {fileID: 1747552944}
   movesLabel: {fileID: 367686884}
   timeLabel: {fileID: 979122709}
+  deathInputHint: {fileID: 338433070}
   compassTime: {fileID: 1730371434}
   wallTime: {fileID: 2022680685}
   compassNeedle: {fileID: 2677923810670680946}
