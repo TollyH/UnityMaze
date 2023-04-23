@@ -48,7 +48,11 @@ public class FlagManager : LevelContentManager
 
     private void OnPlaceFlag()
     {
-        if (!LevelManager.Instance.PlayerManager.HasMovedThisLevel || mapContainer.activeSelf)
+        if (!LevelManager.Instance.PlayerManager.HasMovedThisLevel
+            || LevelManager.Instance.MonsterManager.IsPlayerStruggling
+            || LevelManager.Instance.IsGameOver
+            || LevelManager.Instance.IsPaused
+            || mapContainer.activeSelf)
         {
             return;
         }
