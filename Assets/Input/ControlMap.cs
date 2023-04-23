@@ -859,7 +859,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ac3bc63b-d9aa-4bad-8c1e-8821ed1ca05a"",
-                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""path"": ""<XRController>{RightHand}/triggerPressed"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -892,7 +892,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2c3d3a0d-2c90-469e-9209-3540cdb3bdd6"",
-                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""path"": ""<XRController>{RightHand}/triggerPressed"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

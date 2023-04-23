@@ -5,7 +5,7 @@ using UnityEngine.XR;
 public class VRHand : MonoBehaviour
 {
     private ControlMap inputActions;
-    private Renderer thisRenderer;
+    private SpriteRenderer thisRenderer;
     public bool IsRightHand;
 
     [NonSerialized]
@@ -13,10 +13,15 @@ public class VRHand : MonoBehaviour
     [NonSerialized]
     public float YawOffset = 0;
 
+    [SerializeField]
+    private Sprite resetSprite;
+    [SerializeField]
+    private Sprite unpauseSprite;
+
     private void Awake()
     {
         inputActions = new ControlMap();
-        thisRenderer = GetComponent<Renderer>();
+        thisRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -47,5 +52,21 @@ public class VRHand : MonoBehaviour
             : inputActions.PlayerMovement.LeftHandRotVR.ReadValue<Quaternion>();
         handRot = Quaternion.AngleAxis(-YawOffset, Vector3.up) * handRot;
         transform.SetLocalPositionAndRotation(handPos, handRot);
+
+        UpdateSprite();
+    }
+
+    private void UpdateSprite()
+    {
+        float upProduct = Vector3.Dot(transform.up, Vector3.up);
+
+        if (LevelManager.Instance.IsPaused && IsRightHand)
+        {
+            thisRenderer.sprite = upProduct > 0 ? resetSprite : unpauseSprite;
+        }
+        else
+        {
+            thisRenderer.sprite = null;
+        }
     }
 }

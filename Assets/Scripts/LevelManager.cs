@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 
 public class LevelManager : MonoBehaviour
 {
@@ -54,6 +55,8 @@ public class LevelManager : MonoBehaviour
     private GameObject victoryScreen;
     [SerializeField]
     private GameObject pauseScreen;
+    [SerializeField]
+    private GameObject rightHand;
 
     private void Awake()
     {
@@ -166,6 +169,10 @@ public class LevelManager : MonoBehaviour
 
     private void OnPause()
     {
+        if (IsPaused)
+        {
+            return;
+        }
         IsPaused = true;
         pauseScreen.SetActive(true);
         playerInput.enabled = false;
@@ -174,6 +181,17 @@ public class LevelManager : MonoBehaviour
 
     private void OnUnpause()
     {
+        if (!IsPaused)
+        {
+            return;
+        }
+        float upProduct = Vector3.Dot(rightHand.transform.up, Vector3.up);
+        // When using VR, only unpause if right hand is pointing upwards
+        if (XRSettings.enabled && upProduct > 0)
+        {
+            return;
+        }
+
         IsPaused = false;
         pauseScreen.SetActive(false);
         playerInput.enabled = true;
@@ -182,6 +200,17 @@ public class LevelManager : MonoBehaviour
 
     private void OnPauseReset()
     {
+        if (!IsPaused)
+        {
+            return;
+        }
+        float upProduct = Vector3.Dot(rightHand.transform.up, Vector3.up);
+        // When using VR, only reset if right hand is pointing downwards
+        if (XRSettings.enabled && upProduct <= 0)
+        {
+            return;
+        }
+
         LoadLevel(CurrentLevelIndex);
     }
 }

@@ -8,6 +8,7 @@ public class MonsterManager : LevelContentManager
     public float SpottedSoundTimeout = 10;
     public float TimeBetweenRoamSounds = 7.5f;
     public float FieldOfViewRaycasts = 50;
+    public float FieldOfView = 53;
 
     public Vector2? GridPosition { get; private set; }
     public float? TimeToSpawn { get; private set; }
@@ -210,8 +211,8 @@ public class MonsterManager : LevelContentManager
 
     private void ProcessSpotSound()
     {
-        float degreeIncrements = Camera.main.fieldOfView / (FieldOfViewRaycasts - 1);
-        float fovStartYaw = Camera.main.transform.eulerAngles.y - (Camera.main.fieldOfView / 2);
+        float degreeIncrements = FieldOfView / (FieldOfViewRaycasts - 1);
+        float fovStartYaw = Camera.main.transform.eulerAngles.y - (FieldOfView / 2);
         for (int i = 0; i < FieldOfViewRaycasts; i++)
         {
             float yawDirection = fovStartYaw + (i * degreeIncrements);
