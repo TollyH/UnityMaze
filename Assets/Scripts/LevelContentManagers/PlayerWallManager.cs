@@ -41,6 +41,13 @@ public class PlayerWallManager : LevelContentManager
 
     private void Update()
     {
+        if (!LevelManager.Instance.PlayerManager.HasMovedThisLevel
+            || LevelManager.Instance.IsGameOver
+            || LevelManager.Instance.IsPaused)
+        {
+            return;
+        }
+
         if (WallCooldownRemaining > 0)
         {
             WallCooldownRemaining -= Time.deltaTime;

@@ -161,6 +161,14 @@ public class InGameUI : MonoBehaviour
             isCompassBurnedOut = false;
         }
 
+        if (mapContainer.activeSelf
+            || LevelManager.Instance.MonsterManager.IsPlayerStruggling
+            || LevelManager.Instance.IsGameOver
+            || LevelManager.Instance.IsPaused)
+        {
+            return;
+        }
+
         if (outerCompass.gameObject.activeSelf && monster.IsMonsterSpawned && !isCompassBurnedOut)
         {
             remainingCompassTime -= Time.deltaTime;
