@@ -21,6 +21,7 @@ public class LevelManager : MonoBehaviour
     public float UnitSize = 4f;
 
     public bool IsGameOver { get; private set; } = false;
+    public bool IsPaused { get; private set; } = false;
 
     [field: SerializeField]
     public KeysManager KeysManager { get; private set; }
@@ -51,6 +52,8 @@ public class LevelManager : MonoBehaviour
     private GameObject deathScreen;
     [SerializeField]
     private GameObject victoryScreen;
+    [SerializeField]
+    private GameObject pauseScreen;
 
     private void Awake()
     {
@@ -111,7 +114,9 @@ public class LevelManager : MonoBehaviour
 
         deathScreen.SetActive(false);
         victoryScreen.SetActive(false);
+        pauseScreen.SetActive(false);
         IsGameOver = false;
+        IsPaused = false;
         playerInput.enabled = true;
         uiInput.enabled = true;
 
@@ -157,5 +162,26 @@ public class LevelManager : MonoBehaviour
     private void OnUnlockMouse()
     {
         Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void OnPause()
+    {
+        IsPaused = true;
+        pauseScreen.SetActive(true);
+        playerInput.enabled = false;
+        uiInput.enabled = false;
+    }
+
+    private void OnUnpause()
+    {
+        IsPaused = false;
+        pauseScreen.SetActive(false);
+        playerInput.enabled = true;
+        uiInput.enabled = true;
+    }
+
+    private void OnPauseReset()
+    {
+        LoadLevel(CurrentLevelIndex);
     }
 }

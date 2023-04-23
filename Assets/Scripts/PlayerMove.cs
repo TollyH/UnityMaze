@@ -37,7 +37,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (mapContainer.activeSelf
             || LevelManager.Instance.MonsterManager.IsPlayerStruggling
-            || LevelManager.Instance.IsGameOver)
+            || LevelManager.Instance.IsGameOver
+            || LevelManager.Instance.IsPaused)
         {
             return;
         }

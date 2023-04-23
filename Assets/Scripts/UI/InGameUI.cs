@@ -42,6 +42,8 @@ public class InGameUI : MonoBehaviour
     private TextMeshProUGUI timeLabel;
     [SerializeField]
     private GameObject deathInputHint;
+    [SerializeField]
+    private TextMeshProUGUI resetPrompt;
 
 
     [SerializeField]
@@ -92,6 +94,8 @@ public class InGameUI : MonoBehaviour
 
         gunFirstPerson.SetActive(LevelManager.Instance.PlayerManager.HasGun);
         deathInputHint.SetActive(!XRSettings.enabled);
+
+        resetPrompt.text = XRSettings.enabled ? "PAUSED" : "Press 'y' to reset or 'n' to cancel";
 
         UpdateStats();
         UpdateCompass();

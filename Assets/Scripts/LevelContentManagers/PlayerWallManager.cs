@@ -79,6 +79,7 @@ public class PlayerWallManager : LevelContentManager
             || !LevelManager.Instance.PlayerManager.HasMovedThisLevel
             || LevelManager.Instance.MonsterManager.IsPlayerStruggling
             || LevelManager.Instance.IsGameOver
+            || LevelManager.Instance.IsPaused
             || mapContainer.activeSelf)
         {
             return;

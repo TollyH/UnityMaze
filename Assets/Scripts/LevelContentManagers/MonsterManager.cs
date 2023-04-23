@@ -49,7 +49,8 @@ public class MonsterManager : LevelContentManager
 
     private void LateUpdate()
     {
-        if (TimeToSpawn == null || GridPosition == null || LevelManager.Instance.IsGameOver)
+        if (TimeToSpawn == null || GridPosition == null || LevelManager.Instance.IsGameOver
+            || LevelManager.Instance.IsPaused)
         {
             monsterOverlay.SetActive(false);
             return;

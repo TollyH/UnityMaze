@@ -53,8 +53,34 @@ public class PlayerManager : LevelContentManager
 
     private void Update()
     {
-        if (HasMovedThisLevel && !LevelManager.Instance.IsGameOver)
+        if (HasMovedThisLevel && !LevelManager.Instance.IsGameOver
+            && !LevelManager.Instance.IsPaused)
         {
+            if (!breathing.isPlaying)
+            {
+                breathing.Play();
+            }
+
+            // If there is no monster, play the calmest breathing sound
+            AudioClip selectedSound = breathingClips[breathingClips.Keys.Max()];
+            if (LevelManager.Instance.MonsterManager.IsMonsterSpawned)
+            {
+                float monsterDistance = Vector2.Distance(LevelManager.Instance.MonsterManager.GridPosition!.Value,
+                    LevelManager.Instance.PlayerManager.GridPosition);
+                foreach (int minDistance in breathingClips.Keys)
+                {
+                    if (monsterDistance >= minDistance)
+                    {
+                        selectedSound = breathingClips[minDistance];
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            breathing.clip = selectedSound;
+
             LevelTime += Time.deltaTime;
             RemainingKeySensorTime -= Time.deltaTime;
             if (RemainingKeySensorTime < 0)
@@ -66,9 +92,17 @@ public class PlayerManager : LevelContentManager
         {
             breathing.Pause();
         }
-        if (LevelManager.Instance.IsGameOver && ambience.isPlaying)
+
+        if (LevelManager.Instance.IsGameOver || LevelManager.Instance.IsPaused)
         {
-            ambience.Pause();
+            if (ambience.isPlaying)
+            {
+                ambience.Pause();
+            }
+        }
+        else if (!ambience.isPlaying)
+        {
+            ambience.Play();
         }
     }
 
@@ -107,10 +141,6 @@ public class PlayerManager : LevelContentManager
 
     private void OnMove(float distance)
     {
-        if (!breathing.isPlaying)
-        {
-            breathing.Play();
-        }
         float unitSize = LevelManager.Instance.UnitSize;
         HasMovedThisLevel = true;
         float oldLevelMoves = LevelMoves;
@@ -121,25 +151,5 @@ public class PlayerManager : LevelContentManager
         {
             footstep.PlayOneShot(footstepClips[UnityEngine.Random.Range(0, footstepClips.Length)]);
         }
-
-        // If there is no monster, play the calmest breathing sound
-        AudioClip selectedSound = breathingClips[breathingClips.Keys.Max()];
-        if (LevelManager.Instance.MonsterManager.IsMonsterSpawned)
-        {
-            float monsterDistance = Vector2.Distance(LevelManager.Instance.MonsterManager.GridPosition!.Value,
-                LevelManager.Instance.PlayerManager.GridPosition);
-            foreach (int minDistance in breathingClips.Keys)
-            {
-                if (monsterDistance >= minDistance)
-                {
-                    selectedSound = breathingClips[minDistance];
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-        breathing.clip = selectedSound;
     }
 }

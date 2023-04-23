@@ -25,7 +25,8 @@ public class MouseLook : MonoBehaviour
 
     private void Update()
     {
-        if (LevelManager.Instance.IsGameOver || mapContainer.activeSelf)
+        if (LevelManager.Instance.IsGameOver || mapContainer.activeSelf
+            || LevelManager.Instance.IsPaused)
         {
             return;
         }

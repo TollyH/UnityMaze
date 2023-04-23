@@ -703,6 +703,24 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseReset"",
+                    ""type"": ""Button"",
+                    ""id"": ""8df322ee-f594-4fab-aed5-202acbec20af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Unpause"",
+                    ""type"": ""Button"",
+                    ""id"": ""0dd15e01-851d-41df-b079-64c1502f146d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -813,6 +831,72 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UnlockMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85e33669-ed3f-4416-8bab-6f44deef314b"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseReset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8064fdc7-4468-41ff-87f5-9a268c0801c0"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseReset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac3bc63b-d9aa-4bad-8c1e-8821ed1ca05a"",
+                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseReset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0267d3d2-e018-440a-a839-7d12b42fdf0f"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Unpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90ae7843-fe5f-41a9-b382-c5dbcfaa7487"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Unpause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c3d3a0d-2c90-469e-9209-3540cdb3bdd6"",
+                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Unpause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -982,6 +1066,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_LevelControl_PreviousLevel = m_LevelControl.FindAction("PreviousLevel", throwIfNotFound: true);
         m_LevelControl_Pause = m_LevelControl.FindAction("Pause", throwIfNotFound: true);
         m_LevelControl_UnlockMouse = m_LevelControl.FindAction("UnlockMouse", throwIfNotFound: true);
+        m_LevelControl_PauseReset = m_LevelControl.FindAction("PauseReset", throwIfNotFound: true);
+        m_LevelControl_Unpause = m_LevelControl.FindAction("Unpause", throwIfNotFound: true);
         // UIControl
         m_UIControl = asset.FindActionMap("UIControl", throwIfNotFound: true);
         m_UIControl_ToggleCompass = m_UIControl.FindAction("ToggleCompass", throwIfNotFound: true);
@@ -1242,6 +1328,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_LevelControl_PreviousLevel;
     private readonly InputAction m_LevelControl_Pause;
     private readonly InputAction m_LevelControl_UnlockMouse;
+    private readonly InputAction m_LevelControl_PauseReset;
+    private readonly InputAction m_LevelControl_Unpause;
     public struct LevelControlActions
     {
         private @ControlMap m_Wrapper;
@@ -1250,6 +1338,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @PreviousLevel => m_Wrapper.m_LevelControl_PreviousLevel;
         public InputAction @Pause => m_Wrapper.m_LevelControl_Pause;
         public InputAction @UnlockMouse => m_Wrapper.m_LevelControl_UnlockMouse;
+        public InputAction @PauseReset => m_Wrapper.m_LevelControl_PauseReset;
+        public InputAction @Unpause => m_Wrapper.m_LevelControl_Unpause;
         public InputActionMap Get() { return m_Wrapper.m_LevelControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1271,6 +1361,12 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @UnlockMouse.started += instance.OnUnlockMouse;
             @UnlockMouse.performed += instance.OnUnlockMouse;
             @UnlockMouse.canceled += instance.OnUnlockMouse;
+            @PauseReset.started += instance.OnPauseReset;
+            @PauseReset.performed += instance.OnPauseReset;
+            @PauseReset.canceled += instance.OnPauseReset;
+            @Unpause.started += instance.OnUnpause;
+            @Unpause.performed += instance.OnUnpause;
+            @Unpause.canceled += instance.OnUnpause;
         }
 
         private void UnregisterCallbacks(ILevelControlActions instance)
@@ -1287,6 +1383,12 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @UnlockMouse.started -= instance.OnUnlockMouse;
             @UnlockMouse.performed -= instance.OnUnlockMouse;
             @UnlockMouse.canceled -= instance.OnUnlockMouse;
+            @PauseReset.started -= instance.OnPauseReset;
+            @PauseReset.performed -= instance.OnPauseReset;
+            @PauseReset.canceled -= instance.OnPauseReset;
+            @Unpause.started -= instance.OnUnpause;
+            @Unpause.performed -= instance.OnUnpause;
+            @Unpause.canceled -= instance.OnUnpause;
         }
 
         public void RemoveCallbacks(ILevelControlActions instance)
@@ -1394,6 +1496,8 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnPreviousLevel(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnUnlockMouse(InputAction.CallbackContext context);
+        void OnPauseReset(InputAction.CallbackContext context);
+        void OnUnpause(InputAction.CallbackContext context);
     }
     public interface IUIControlActions
     {

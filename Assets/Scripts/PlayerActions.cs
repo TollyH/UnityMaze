@@ -33,7 +33,8 @@ public class PlayerActions : MonoBehaviour
     {
         if (!player.HasGun
             || LevelManager.Instance.MonsterManager.IsPlayerStruggling
-            || LevelManager.Instance.IsGameOver)
+            || LevelManager.Instance.IsGameOver
+            || LevelManager.Instance.IsPaused)
         {
             return;
         }
