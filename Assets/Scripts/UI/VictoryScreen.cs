@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class VictoryScreen : MonoBehaviour
 {
@@ -82,7 +83,8 @@ public class VictoryScreen : MonoBehaviour
             bestGameTimeScore.text = $"Best Game Time Score: {highscores.Sum(x => x.Item1):F1}";
             bestGameMoveScore.text = $"Best Game Move Score: {highscores.Sum(x => x.Item2):F1}";
         }
-        if (timeOnScreen >= 7.5 && LevelManager.Instance.CurrentLevelIndex < LevelManager.Instance.LoadedLevels.Length - 1)
+        if (timeOnScreen >= 7.5 && LevelManager.Instance.CurrentLevelIndex < LevelManager.Instance.LoadedLevels.Length - 1
+            && !XRSettings.enabled)
         {
             nextLevelHint.gameObject.SetActive(true);
         }
