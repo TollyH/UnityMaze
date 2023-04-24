@@ -5,7 +5,7 @@ using UnityEngine.XR;
 public class MonsterOverlay : MonoBehaviour
 {
     public float StartDistance = 2f;
-    public float EndDistance = 0.05f;
+    public float EndDistance = 0.25f;
 
     public float TravelDuration = 0.15f;
 
@@ -20,6 +20,8 @@ public class MonsterOverlay : MonoBehaviour
     private GameObject hintText;
     [SerializeField]
     private GameObject background;
+    [SerializeField]
+    private GameObject uiCamera;
 
     private ControlMap inputActions;
 
@@ -45,8 +47,7 @@ public class MonsterOverlay : MonoBehaviour
     {
         thisCanvas.renderMode = XRSettings.enabled ? RenderMode.ScreenSpaceCamera : RenderMode.ScreenSpaceOverlay;
         thisScaler.uiScaleMode = XRSettings.enabled ? CanvasScaler.ScaleMode.ScaleWithScreenSize : CanvasScaler.ScaleMode.ConstantPixelSize;
-
-        monsterFace.rectTransform.localPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0);
+        monsterFace.rectTransform.localPosition = Vector3.zero;
 
         if (XRSettings.enabled)
         {
@@ -54,16 +55,17 @@ public class MonsterOverlay : MonoBehaviour
             background.SetActive(false);
 
             time += Time.deltaTime / TravelDuration;
-            monsterFace.rectTransform.localPosition = new Vector3(
-                monsterFace.rectTransform.localPosition.x, monsterFace.rectTransform.localPosition.y,
-                Mathf.Lerp((StartDistance - thisCanvas.planeDistance) * thisScaler.referenceResolution.x,
-                    (EndDistance - thisCanvas.planeDistance) * thisScaler.referenceResolution.x, time));
+            monsterFace.rectTransform.position = Vector3.Lerp(
+                uiCamera.transform.position + (uiCamera.transform.forward * StartDistance),
+                uiCamera.transform.position + (uiCamera.transform.forward * EndDistance), time);
         }
         else
         {
             hintText.SetActive(true);
             background.SetActive(true);
         }
+
+        monsterFace.rectTransform.localPosition += new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0);
     }
 
     private void OnEscapeMonster()
