@@ -22,7 +22,6 @@ public class VictoryScreen : MonoBehaviour
     private TextMeshProUGUI nextLevelHint;
 
     private float timeOnScreen = 0;
-    private (float, float)[] highscores;
 
     private void OnEnable()
     {
@@ -35,27 +34,6 @@ public class VictoryScreen : MonoBehaviour
         bestGameTimeScore.gameObject.SetActive(false);
         bestGameMoveScore.gameObject.SetActive(false);
         nextLevelHint.gameObject.SetActive(false);
-
-        PlayerManager player = LevelManager.Instance.PlayerManager;
-        highscores = new (float, float)[LevelManager.Instance.LoadedLevels.Length];
-        for (int i = 0; i < LevelManager.Instance.LoadedLevels.Length; i++)
-        {
-            highscores[i] = (PlayerPrefs.GetFloat($"{i}-time", 0), PlayerPrefs.GetFloat($"{i}-moves", 0));
-
-            if (i == LevelManager.Instance.CurrentLevelIndex)
-            {
-                if (player.LevelTime < highscores[i].Item1 || highscores[i].Item1 == 0)
-                {
-                    highscores[i] = (player.LevelTime, highscores[i].Item2);
-                    PlayerPrefs.SetFloat($"{i}-time", player.LevelTime);
-                }
-                if (player.LevelMoves < highscores[i].Item2 || highscores[i].Item2 == 0)
-                {
-                    highscores[i] = (highscores[i].Item1, player.LevelMoves);
-                    PlayerPrefs.SetFloat($"{i}-moves", player.LevelMoves);
-                }
-            }
-        }
     }
 
     private void Update()
@@ -73,15 +51,15 @@ public class VictoryScreen : MonoBehaviour
         {
             bestTimeScore.gameObject.SetActive(true);
             bestMoveScore.gameObject.SetActive(true);
-            bestTimeScore.text = $"Best Time Score: {highscores[LevelManager.Instance.CurrentLevelIndex].Item1:F1}";
-            bestMoveScore.text = $"Best Move Score: {highscores[LevelManager.Instance.CurrentLevelIndex].Item2:F1}";
+            bestTimeScore.text = $"Best Time Score: {LevelManager.Instance.Highscores[LevelManager.Instance.CurrentLevelIndex].Item1:F1}";
+            bestMoveScore.text = $"Best Move Score: {LevelManager.Instance.Highscores[LevelManager.Instance.CurrentLevelIndex].Item2:F1}";
         }
         if (timeOnScreen >= 6.5)
         {
             bestGameTimeScore.gameObject.SetActive(true);
             bestGameMoveScore.gameObject.SetActive(true);
-            bestGameTimeScore.text = $"Best Game Time Score: {highscores.Sum(x => x.Item1):F1}";
-            bestGameMoveScore.text = $"Best Game Move Score: {highscores.Sum(x => x.Item2):F1}";
+            bestGameTimeScore.text = $"Best Game Time Score: {LevelManager.Instance.Highscores.Sum(x => x.Item1):F1}";
+            bestGameMoveScore.text = $"Best Game Move Score: {LevelManager.Instance.Highscores.Sum(x => x.Item2):F1}";
         }
         if (timeOnScreen >= 7.5 && LevelManager.Instance.CurrentLevelIndex < LevelManager.Instance.LoadedLevels.Length - 1
             && !XRSettings.enabled)

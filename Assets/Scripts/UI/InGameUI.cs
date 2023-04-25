@@ -108,10 +108,21 @@ public class InGameUI : MonoBehaviour
         KeysManager keys = LevelManager.Instance.KeysManager;
         PlayerManager player = LevelManager.Instance.PlayerManager;
         MonsterManager monster = LevelManager.Instance.MonsterManager;
+        int currentLevelIndex = LevelManager.Instance.CurrentLevelIndex;
 
-        keysLabel.text = $"Keys: {keys.TotalLevelKeys - keys.KeysRemaining}/{keys.TotalLevelKeys}";
-        movesLabel.text = $"Moves: {player.LevelMoves:0.0}";
-        timeLabel.text = $"Time: {player.LevelTime:0.0}";
+        if (player.HasMovedThisLevel)
+        {
+            keysLabel.text = $"Keys: {keys.TotalLevelKeys - keys.KeysRemaining}/{keys.TotalLevelKeys}";
+            movesLabel.text = $"Moves: {player.LevelMoves:0.0}";
+            timeLabel.text = $"Time: {player.LevelTime:0.0}";
+        }
+        else
+        {
+            // Show highscores if player hasn't moved yet
+            keysLabel.text = $"Keys: 0/{keys.TotalLevelKeys}";
+            movesLabel.text = $"Moves: {LevelManager.Instance.Highscores[currentLevelIndex].Item2:0.0}";
+            timeLabel.text = $"Time: {LevelManager.Instance.Highscores[currentLevelIndex].Item1:0.0}";
+        }
 
         Color bgColor = monster.IsMonsterSpawned ? Color.red : Color.black;
         bgColor.a = 0.5f;

@@ -43,6 +43,8 @@ public class LevelManager : MonoBehaviour
     [field: SerializeField]
     public FlagManager FlagManager { get; private set; }
 
+    public (float, float)[] Highscores { get; private set; }
+
     private LevelContentManager[] contentManagers;
 
     [SerializeField]
@@ -92,6 +94,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         LoadLevel(0);
+        UpdateHighscores();
     }
 
     private void OnNextLevel()
@@ -143,6 +146,26 @@ public class LevelManager : MonoBehaviour
         IsGameOver = true;
         playerInput.enabled = false;
         uiInput.enabled = false;
+
+        if (PlayerManager.LevelTime < Highscores[CurrentLevelIndex].Item1 || Highscores[CurrentLevelIndex].Item1 == 0)
+        {
+            Highscores[CurrentLevelIndex] = (PlayerManager.LevelTime, Highscores[CurrentLevelIndex].Item2);
+            PlayerPrefs.SetFloat($"{CurrentLevelIndex}-time", PlayerManager.LevelTime);
+        }
+        if (PlayerManager.LevelMoves < Highscores[CurrentLevelIndex].Item2 || Highscores[CurrentLevelIndex].Item2 == 0)
+        {
+            Highscores[CurrentLevelIndex] = (Highscores[CurrentLevelIndex].Item1, PlayerManager.LevelMoves);
+            PlayerPrefs.SetFloat($"{CurrentLevelIndex}-moves", PlayerManager.LevelMoves);
+        }
+    }
+
+    public void UpdateHighscores()
+    {
+        Highscores = new (float, float)[LoadedLevels.Length];
+        for (int i = 0; i < LoadedLevels.Length; i++)
+        {
+            Highscores[i] = (PlayerPrefs.GetFloat($"{i}-time", 0), PlayerPrefs.GetFloat($"{i}-moves", 0));
+        }
     }
 
     /// <summary>
