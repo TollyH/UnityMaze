@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR;
 
 public class FlagManager : LevelContentManager
 {
@@ -9,6 +10,8 @@ public class FlagManager : LevelContentManager
 
     [SerializeField]
     private GameObject mapContainer;
+    [SerializeField]
+    private VRHand leftHand;
 
     [SerializeField]
     private AudioSource flagSound;
@@ -48,11 +51,14 @@ public class FlagManager : LevelContentManager
 
     private void OnPlaceFlag()
     {
+        float handUpProduct = Vector3.Dot(leftHand.transform.up, Vector3.up);
         if (!LevelManager.Instance.PlayerManager.HasMovedThisLevel
             || LevelManager.Instance.MonsterManager.IsPlayerStruggling
             || LevelManager.Instance.IsGameOver
             || LevelManager.Instance.IsPaused
-            || mapContainer.activeSelf)
+            || mapContainer.activeSelf
+            // Flag action is only if hand is facing downwards
+            || (XRSettings.enabled && handUpProduct < leftHand.ThreewaySelectionCrossover))
         {
             return;
         }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR;
 
 public class PlayerWallManager : LevelContentManager
 {
@@ -15,6 +16,8 @@ public class PlayerWallManager : LevelContentManager
 
     [SerializeField]
     private GameObject mapContainer;
+    [SerializeField]
+    private VRHand leftHand;
 
     private ControlMap inputActions;
 
@@ -82,12 +85,17 @@ public class PlayerWallManager : LevelContentManager
 
     private void OnPlaceWall()
     {
+        float handUpProduct = Vector3.Dot(leftHand.transform.up, Vector3.up);
         if (WallCooldownRemaining > 0 || WallTimeRemaining > 0
             || !LevelManager.Instance.PlayerManager.HasMovedThisLevel
             || LevelManager.Instance.MonsterManager.IsPlayerStruggling
             || LevelManager.Instance.IsGameOver
             || LevelManager.Instance.IsPaused
-            || mapContainer.activeSelf)
+            || mapContainer.activeSelf
+            // Wall action is only if hand is facing outwards
+            || (XRSettings.enabled &&
+                (handUpProduct < -leftHand.ThreewaySelectionCrossover 
+                || handUpProduct > leftHand.ThreewaySelectionCrossover)))
         {
             return;
         }
@@ -112,7 +120,7 @@ public class PlayerWallManager : LevelContentManager
 
         wallPosition = LevelManager.Instance.PlayerManager.GridPosition + wallVector;
 
-        if ((wallVector.x == 0 && wallVector.y == 0)
+        if ((wallVector.x == 0 && wallVector.y == 0) || !LevelManager.Instance.CurrentLevel.IsCoordInBounds(wallPosition)
             || (LevelManager.Instance.CurrentLevel[wallPosition].Wall != null))
         {
             return;

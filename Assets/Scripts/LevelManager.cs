@@ -58,7 +58,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject pauseScreen;
     [SerializeField]
-    private GameObject rightHand;
+    private VRHand leftHand;
+    [SerializeField]
+    private VRHand rightHand;
 
     private void Awake()
     {
@@ -192,7 +194,9 @@ public class LevelManager : MonoBehaviour
 
     private void OnPause()
     {
-        if (IsPaused)
+        float handUpProduct = Vector3.Dot(leftHand.transform.up, Vector3.up);
+        // Pause action is only if hand is facing upwards
+        if (IsPaused || (XRSettings.enabled && handUpProduct > -leftHand.ThreewaySelectionCrossover))
         {
             return;
         }

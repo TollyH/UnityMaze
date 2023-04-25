@@ -1227,8 +1227,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsRightHand: 1
+  ThreewaySelectionCrossover: 0.4
   resetSprite: {fileID: 21300000, guid: 75dd5087e015bc244ba658af9615d475, type: 3}
   unpauseSprite: {fileID: 21300000, guid: 29e2c74cd3c273f4bbde73c7227d73b1, type: 3}
+  pauseSprite: {fileID: 0}
+  wallSprite: {fileID: 0}
+  flagSprite: {fileID: 0}
+  mapContainer: {fileID: 0}
 --- !u!212 &351024525
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1273,7 +1278,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 0.25, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
@@ -5706,7 +5711,8 @@ MonoBehaviour:
   deathScreen: {fileID: 404898770}
   victoryScreen: {fileID: 580459993}
   pauseScreen: {fileID: 1604927923}
-  rightHand: {fileID: 351024519}
+  leftHand: {fileID: 1936967799}
+  rightHand: {fileID: 351024524}
 --- !u!114 &1518488895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6357,6 +6363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flagSpritePrefab: {fileID: 7850154813624118141, guid: 9288f9cbecac2bb4fb71cabfffe84952, type: 3}
   mapContainer: {fileID: 1601196858}
+  leftHand: {fileID: 1936967799}
   flagSound: {fileID: 1206789356}
 --- !u!114 &1571321513
 MonoBehaviour:
@@ -8136,8 +8143,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsRightHand: 0
+  ThreewaySelectionCrossover: 0.6
   resetSprite: {fileID: 0}
   unpauseSprite: {fileID: 0}
+  pauseSprite: {fileID: 21300000, guid: 29e2c74cd3c273f4bbde73c7227d73b1, type: 3}
+  wallSprite: {fileID: 21300000, guid: c00bd74c82703a8499115a49347de668, type: 3}
+  flagSprite: {fileID: 21300000, guid: 67b53dfe805d7ea4cb19656fbad41991, type: 3}
+  mapContainer: {fileID: 1601196858}
 --- !u!212 &1936967800
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8182,7 +8194,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 0.25, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
@@ -8373,6 +8385,7 @@ MonoBehaviour:
   PlayerWallTime: 15
   PlayerWallCooldown: 20
   mapContainer: {fileID: 1601196858}
+  leftHand: {fileID: 1936967799}
   wallSound: {fileID: 1206789355}
 --- !u!114 &1975199269
 MonoBehaviour:

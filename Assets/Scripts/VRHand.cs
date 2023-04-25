@@ -8,6 +8,8 @@ public class VRHand : MonoBehaviour
     private SpriteRenderer thisRenderer;
     public bool IsRightHand;
 
+    public float ThreewaySelectionCrossover = 0.6f;
+
     [NonSerialized]
     public Vector3 PosOffset = new();
     [NonSerialized]
@@ -17,6 +19,15 @@ public class VRHand : MonoBehaviour
     private Sprite resetSprite;
     [SerializeField]
     private Sprite unpauseSprite;
+    [SerializeField]
+    private Sprite pauseSprite;
+    [SerializeField]
+    private Sprite wallSprite;
+    [SerializeField]
+    private Sprite flagSprite;
+
+    [SerializeField]
+    private GameObject mapContainer;
 
     private void Awake()
     {
@@ -63,6 +74,15 @@ public class VRHand : MonoBehaviour
         if (LevelManager.Instance.IsPaused && IsRightHand)
         {
             thisRenderer.sprite = upProduct > 0 ? resetSprite : unpauseSprite;
+        }
+        else if (!IsRightHand && LevelManager.Instance.PlayerManager.HasMovedThisLevel
+            && !LevelManager.Instance.MonsterManager.IsPlayerStruggling
+            && !LevelManager.Instance.IsGameOver
+            && !LevelManager.Instance.IsPaused
+            && !mapContainer.activeSelf)
+        {
+            thisRenderer.sprite = upProduct > ThreewaySelectionCrossover ? flagSprite :
+                upProduct < -ThreewaySelectionCrossover ? pauseSprite : wallSprite;
         }
         else
         {
