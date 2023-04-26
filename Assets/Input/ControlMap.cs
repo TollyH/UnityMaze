@@ -952,6 +952,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UIScaleVR"",
+                    ""type"": ""Value"",
+                    ""id"": ""649624e9-7f3c-464c-815d-da5c2c7f40a7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -1053,6 +1062,17 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""ToggleMap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ec6e8d6-411f-41f4-bba3-b486809846b6"",
+                    ""path"": ""<XRController>{RightHand}/thumbstick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone(min=0.5),ScaleVector2(x=0.00075,y=0.00075)"",
+                    ""groups"": """",
+                    ""action"": ""UIScaleVR"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1094,6 +1114,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_UIControl_ToggleCompass = m_UIControl.FindAction("ToggleCompass", throwIfNotFound: true);
         m_UIControl_ToggleStats = m_UIControl.FindAction("ToggleStats", throwIfNotFound: true);
         m_UIControl_ToggleMap = m_UIControl.FindAction("ToggleMap", throwIfNotFound: true);
+        m_UIControl_UIScaleVR = m_UIControl.FindAction("UIScaleVR", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1442,6 +1463,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_UIControl_ToggleCompass;
     private readonly InputAction m_UIControl_ToggleStats;
     private readonly InputAction m_UIControl_ToggleMap;
+    private readonly InputAction m_UIControl_UIScaleVR;
     public struct UIControlActions
     {
         private @ControlMap m_Wrapper;
@@ -1449,6 +1471,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @ToggleCompass => m_Wrapper.m_UIControl_ToggleCompass;
         public InputAction @ToggleStats => m_Wrapper.m_UIControl_ToggleStats;
         public InputAction @ToggleMap => m_Wrapper.m_UIControl_ToggleMap;
+        public InputAction @UIScaleVR => m_Wrapper.m_UIControl_UIScaleVR;
         public InputActionMap Get() { return m_Wrapper.m_UIControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1467,6 +1490,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @ToggleMap.started += instance.OnToggleMap;
             @ToggleMap.performed += instance.OnToggleMap;
             @ToggleMap.canceled += instance.OnToggleMap;
+            @UIScaleVR.started += instance.OnUIScaleVR;
+            @UIScaleVR.performed += instance.OnUIScaleVR;
+            @UIScaleVR.canceled += instance.OnUIScaleVR;
         }
 
         private void UnregisterCallbacks(IUIControlActions instance)
@@ -1480,6 +1506,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @ToggleMap.started -= instance.OnToggleMap;
             @ToggleMap.performed -= instance.OnToggleMap;
             @ToggleMap.canceled -= instance.OnToggleMap;
+            @UIScaleVR.started -= instance.OnUIScaleVR;
+            @UIScaleVR.performed -= instance.OnUIScaleVR;
+            @UIScaleVR.canceled -= instance.OnUIScaleVR;
         }
 
         public void RemoveCallbacks(IUIControlActions instance)
@@ -1534,5 +1563,6 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnToggleCompass(InputAction.CallbackContext context);
         void OnToggleStats(InputAction.CallbackContext context);
         void OnToggleMap(InputAction.CallbackContext context);
+        void OnUIScaleVR(InputAction.CallbackContext context);
     }
 }

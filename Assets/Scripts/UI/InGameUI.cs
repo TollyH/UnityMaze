@@ -44,6 +44,8 @@ public class InGameUI : MonoBehaviour
     private GameObject deathInputHint;
     [SerializeField]
     private TextMeshProUGUI resetPrompt;
+    [SerializeField]
+    public GameObject pauseBorder;
 
 
     [SerializeField]
@@ -83,11 +85,12 @@ public class InGameUI : MonoBehaviour
 
     private void Update()
     {
-        thisCanvas.renderMode = XRSettings.enabled ? RenderMode.ScreenSpaceCamera : RenderMode.ScreenSpaceOverlay;
+        thisCanvas.renderMode = XRSettings.enabled ? RenderMode.WorldSpace : RenderMode.ScreenSpaceOverlay;
         thisScaler.uiScaleMode = XRSettings.enabled ? CanvasScaler.ScaleMode.ScaleWithScreenSize : CanvasScaler.ScaleMode.ConstantPixelSize;
 
         gunFirstPerson.SetActive(LevelManager.Instance.PlayerManager.HasGun && !XRSettings.enabled);
         deathInputHint.SetActive(!XRSettings.enabled);
+        pauseBorder.SetActive(XRSettings.enabled);
 
         resetPrompt.text = XRSettings.enabled ? "PAUSED" : "Press 'y' to reset or 'n' to cancel";
 

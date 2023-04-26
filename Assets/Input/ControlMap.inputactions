@@ -930,6 +930,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "UIScaleVR",
+                    "type": "Value",
+                    "id": "649624e9-7f3c-464c-815d-da5c2c7f40a7",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -1029,6 +1038,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleMap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ec6e8d6-411f-41f4-bba3-b486809846b6",
+                    "path": "<XRController>{RightHand}/thumbstick",
+                    "interactions": "",
+                    "processors": "StickDeadzone(min=0.5),ScaleVector2(x=0.00075,y=0.00075)",
+                    "groups": "",
+                    "action": "UIScaleVR",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

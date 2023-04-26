@@ -23,17 +23,10 @@ public class MonsterOverlay : MonoBehaviour
     [SerializeField]
     private GameObject uiCamera;
 
-    private ControlMap inputActions;
-
     private void Awake()
     {
         thisCanvas = GetComponent<Canvas>();
         thisScaler = GetComponent<CanvasScaler>();
-    }
-
-    private void Start()
-    {
-        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void OnEnable()
@@ -43,7 +36,7 @@ public class MonsterOverlay : MonoBehaviour
 
     private void Update()
     {
-        thisCanvas.renderMode = XRSettings.enabled ? RenderMode.ScreenSpaceCamera : RenderMode.ScreenSpaceOverlay;
+        thisCanvas.renderMode = XRSettings.enabled ? RenderMode.WorldSpace : RenderMode.ScreenSpaceOverlay;
         thisScaler.uiScaleMode = XRSettings.enabled ? CanvasScaler.ScaleMode.ScaleWithScreenSize : CanvasScaler.ScaleMode.ConstantPixelSize;
         monsterFace.rectTransform.localPosition = Vector3.zero;
 

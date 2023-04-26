@@ -21,7 +21,7 @@ public class ViewportFlash : MonoBehaviour
 
     private void Update()
     {
-        thisCanvas.renderMode = XRSettings.enabled ? RenderMode.ScreenSpaceCamera : RenderMode.ScreenSpaceOverlay;
+        thisCanvas.renderMode = XRSettings.enabled ? RenderMode.WorldSpace : RenderMode.ScreenSpaceOverlay;
 
         time += Time.deltaTime / duration;
         thisImage.color = Color.Lerp(startColor, endColor, time);
