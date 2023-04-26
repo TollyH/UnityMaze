@@ -62,6 +62,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private VRHand rightHand;
 
+    private PlayerInput[] allInputs;
+
     private void Awake()
     {
         // LevelManager is a singleton
@@ -69,6 +71,7 @@ public class LevelManager : MonoBehaviour
         {
             Instance = this;
             InputActions = new ControlMap();
+            allInputs = FindObjectsOfType<PlayerInput>();
             contentManagers = new LevelContentManager[9]
             {
                 KeysManager, DecorationsManager, WallsManager, PickupsManager, PointMarkerManager,
@@ -243,5 +246,15 @@ public class LevelManager : MonoBehaviour
         }
 
         LoadLevel(CurrentLevelIndex);
+    }
+
+    private void OnVRMount()
+    {
+        // Disable then re-enable all player inputs so that VR controllers are recognised fully
+        foreach (PlayerInput input in allInputs)
+        {
+            input.enabled = false;
+            input.enabled = true;
+        }
     }
 }

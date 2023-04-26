@@ -699,6 +699,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "VRMount",
+                    "type": "Button",
+                    "id": "7e59b20c-f874-4bf7-b8b6-92b8a43ec57f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -875,6 +884,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Unpause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4cf7c9ea-2443-4beb-9e93-a38c84151493",
+                    "path": "<XRHMD>/userPresence",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VRMount",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

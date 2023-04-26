@@ -721,6 +721,15 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""VRMount"",
+                    ""type"": ""Button"",
+                    ""id"": ""7e59b20c-f874-4bf7-b8b6-92b8a43ec57f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -899,6 +908,17 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                     ""action"": ""Unpause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4cf7c9ea-2443-4beb-9e93-a38c84151493"",
+                    ""path"": ""<XRHMD>/userPresence"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""VRMount"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1068,6 +1088,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         m_LevelControl_UnlockMouse = m_LevelControl.FindAction("UnlockMouse", throwIfNotFound: true);
         m_LevelControl_PauseReset = m_LevelControl.FindAction("PauseReset", throwIfNotFound: true);
         m_LevelControl_Unpause = m_LevelControl.FindAction("Unpause", throwIfNotFound: true);
+        m_LevelControl_VRMount = m_LevelControl.FindAction("VRMount", throwIfNotFound: true);
         // UIControl
         m_UIControl = asset.FindActionMap("UIControl", throwIfNotFound: true);
         m_UIControl_ToggleCompass = m_UIControl.FindAction("ToggleCompass", throwIfNotFound: true);
@@ -1330,6 +1351,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_LevelControl_UnlockMouse;
     private readonly InputAction m_LevelControl_PauseReset;
     private readonly InputAction m_LevelControl_Unpause;
+    private readonly InputAction m_LevelControl_VRMount;
     public struct LevelControlActions
     {
         private @ControlMap m_Wrapper;
@@ -1340,6 +1362,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         public InputAction @UnlockMouse => m_Wrapper.m_LevelControl_UnlockMouse;
         public InputAction @PauseReset => m_Wrapper.m_LevelControl_PauseReset;
         public InputAction @Unpause => m_Wrapper.m_LevelControl_Unpause;
+        public InputAction @VRMount => m_Wrapper.m_LevelControl_VRMount;
         public InputActionMap Get() { return m_Wrapper.m_LevelControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1367,6 +1390,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @Unpause.started += instance.OnUnpause;
             @Unpause.performed += instance.OnUnpause;
             @Unpause.canceled += instance.OnUnpause;
+            @VRMount.started += instance.OnVRMount;
+            @VRMount.performed += instance.OnVRMount;
+            @VRMount.canceled += instance.OnVRMount;
         }
 
         private void UnregisterCallbacks(ILevelControlActions instance)
@@ -1389,6 +1415,9 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
             @Unpause.started -= instance.OnUnpause;
             @Unpause.performed -= instance.OnUnpause;
             @Unpause.canceled -= instance.OnUnpause;
+            @VRMount.started -= instance.OnVRMount;
+            @VRMount.performed -= instance.OnVRMount;
+            @VRMount.canceled -= instance.OnVRMount;
         }
 
         public void RemoveCallbacks(ILevelControlActions instance)
@@ -1498,6 +1527,7 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
         void OnUnlockMouse(InputAction.CallbackContext context);
         void OnPauseReset(InputAction.CallbackContext context);
         void OnUnpause(InputAction.CallbackContext context);
+        void OnVRMount(InputAction.CallbackContext context);
     }
     public interface IUIControlActions
     {
