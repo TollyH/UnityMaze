@@ -13,24 +13,10 @@ public class PlayerMove : MonoBehaviour
     private bool runToggle = false;
     private bool crawlToggle = false;
 
-    private void Awake()
-    {
-        inputActions = new ControlMap();
-    }
-
     private void Start()
     {
         character = GetComponent<CharacterController>();
-    }
-
-    private void OnEnable()
-    {
-        inputActions.PlayerMovement.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.PlayerMovement.Disable();
+        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void Update()

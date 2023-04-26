@@ -19,18 +19,12 @@ public class FlagManager : LevelContentManager
 
     private void Awake()
     {
-        inputActions = new ControlMap();
         flagSoundClips = Resources.LoadAll<AudioClip>("Sounds/flag_place");
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        inputActions.PlayerMovement.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.PlayerMovement.Disable();
+        inputActions = LevelManager.Instance.InputActions;
     }
 
     public bool IsFlagged(Vector2 coord, out GameObject flag)

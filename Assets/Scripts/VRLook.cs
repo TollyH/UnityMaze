@@ -9,19 +9,9 @@ public class VRLook : MonoBehaviour
     public float YawOffset { get; private set; } = 0;
     public List<GameObject> Hands = new();
 
-    private void Awake()
+    private void Start()
     {
-        inputActions = new ControlMap();
-    }
-
-    private void OnEnable()
-    {
-        inputActions.PlayerMovement.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.PlayerMovement.Disable();
+        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void Update()

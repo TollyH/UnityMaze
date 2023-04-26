@@ -27,19 +27,13 @@ public class PlayerWallManager : LevelContentManager
 
     private void Awake()
     {
-        inputActions = new ControlMap();
         wallMaterials = Resources.LoadAll<Material>("Materials/PlayerWall");
         wallSoundClips = Resources.LoadAll<AudioClip>("Sounds/wall_place");
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        inputActions.PlayerMovement.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.PlayerMovement.Disable();
+        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void Update()

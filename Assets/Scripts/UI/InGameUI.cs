@@ -73,18 +73,12 @@ public class InGameUI : MonoBehaviour
     {
         thisCanvas = GetComponent<Canvas>();
         thisScaler = GetComponent<CanvasScaler>();
-        inputActions = new ControlMap();
         remainingCompassTime = CompassTime;
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        inputActions.UIControl.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.UIControl.Disable();
+        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void Update()

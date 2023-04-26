@@ -14,24 +14,10 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject barrelStart;
 
-    private void Awake()
-    {
-        inputActions = new ControlMap();
-    }
-
     private void Start()
     {
         player = LevelManager.Instance.PlayerManager;
-    }
-
-    private void OnEnable()
-    {
-        inputActions.PlayerMovement.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.PlayerMovement.Disable();
+        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void OnFireGun()

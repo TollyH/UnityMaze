@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
 
-    private ControlMap inputActions;
+    public ControlMap InputActions { get; private set; }
 
     public int CurrentLevelIndex { get; private set; }
 
@@ -68,7 +68,7 @@ public class LevelManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            inputActions = new ControlMap();
+            InputActions = new ControlMap();
             contentManagers = new LevelContentManager[9]
             {
                 KeysManager, DecorationsManager, WallsManager, PickupsManager, PointMarkerManager,
@@ -85,30 +85,22 @@ public class LevelManager : MonoBehaviour
 
     private void OnEnable()
     {
-        inputActions.LevelControl.Enable();
+        InputActions.PlayerMovement.Enable();
+        InputActions.LevelControl.Enable();
+        InputActions.UIControl.Enable();
     }
 
     private void OnDisable()
     {
-        inputActions.LevelControl.Disable();
+        InputActions.PlayerMovement.Disable();
+        InputActions.LevelControl.Disable();
+        InputActions.UIControl.Disable();
     }
 
     private void Start()
     {
         LoadLevel(0);
         UpdateHighscores();
-    }
-
-    private void Update()
-    {
-        if (!IsGameOver && !IsPaused)
-        {
-            // Ensures VR controls function correctly ¯\_(ツ)_/¯
-            playerInput.enabled = false;
-            uiInput.enabled = false;
-            playerInput.enabled = true;
-            uiInput.enabled = true;
-        }
     }
 
     private void OnNextLevel()

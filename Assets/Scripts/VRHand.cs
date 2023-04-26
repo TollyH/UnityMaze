@@ -38,18 +38,12 @@ public class VRHand : MonoBehaviour
 
     private void Awake()
     {
-        inputActions = new ControlMap();
         thisRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        inputActions.PlayerMovement.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.PlayerMovement.Disable();
+        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void Update()

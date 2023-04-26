@@ -8,19 +8,9 @@ public class MouseLook : MonoBehaviour
     [SerializeField]
     private GameObject mapContainer;
 
-    private void Awake()
+    private void Start()
     {
-        inputActions = new ControlMap();
-    }
-
-    private void OnEnable()
-    {
-        inputActions.PlayerMovement.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.PlayerMovement.Disable();
+        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void Update()

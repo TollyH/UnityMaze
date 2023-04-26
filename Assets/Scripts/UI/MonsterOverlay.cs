@@ -29,18 +29,16 @@ public class MonsterOverlay : MonoBehaviour
     {
         thisCanvas = GetComponent<Canvas>();
         thisScaler = GetComponent<CanvasScaler>();
-        inputActions = new ControlMap();
+    }
+
+    private void Start()
+    {
+        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void OnEnable()
     {
-        inputActions.PlayerMovement.Enable();
         time = 0;
-    }
-
-    private void OnDisable()
-    {
-        inputActions.PlayerMovement.Disable();
     }
 
     private void Update()
