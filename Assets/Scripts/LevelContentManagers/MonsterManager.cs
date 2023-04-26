@@ -33,6 +33,9 @@ public class MonsterManager : LevelContentManager
     [SerializeField]
     private AudioSource lightFlickerSound;
 
+    [SerializeField]
+    private Light[] lights;
+
     private AudioClip[] roamingSoundClips;
 
     private Renderer thisRenderer;
@@ -40,6 +43,8 @@ public class MonsterManager : LevelContentManager
 
     private float timeSinceSeen;
     private float timeToNextRoamSound = 0;
+
+    private float flickerTimeRemaining = 0;
 
     private void Awake()
     {
@@ -125,6 +130,18 @@ public class MonsterManager : LevelContentManager
 
         transform.localScale = new Vector3(unitSize, unitSize, unitSize);
         transform.position = gamePos;
+    }
+
+    private void Update()
+    {
+        flickerTimeRemaining -= Time.deltaTime;
+        if (flickerTimeRemaining <= 0)
+        {
+            foreach (Light light in lights)
+            {
+                light.intensity = 1;
+            }
+        }
     }
 
     public void ProcessMonsterMove()
@@ -238,8 +255,14 @@ public class MonsterManager : LevelContentManager
         // < 1 exponent makes probability decay less with distance
         if (Random.value < 1 / Mathf.Pow(distance, 0.6f))
         {
+            float duration = Random.Range(0, 0.5f);
             lightFlickerSound.Play();
-            viewportFlash.PerformFlash(Colors.Black, Random.Range(0, 0.5f), 0.5f, 0.5f);
+            viewportFlash.PerformFlash(Colors.Black, duration, 0.5f, 0.5f);
+            flickerTimeRemaining = duration;
+            foreach (Light light in lights)
+            {
+                light.intensity = 0.5f;
+            }
         }
     }
 
