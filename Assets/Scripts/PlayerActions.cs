@@ -8,6 +8,11 @@ public class PlayerActions : MonoBehaviour
 
     [SerializeField]
     private AudioSource gunfire;
+    [SerializeField]
+    private AudioSource vrGunfire;
+
+    [SerializeField]
+    private GameObject barrelStart;
 
     private void Awake()
     {
@@ -40,20 +45,27 @@ public class PlayerActions : MonoBehaviour
         }
         player.HasGun = false;
 
+        Vector3 direction;
+        Vector3 position;
         if (XRSettings.enabled)
         {
-            // TODO: VR gun with different audio source
+            vrGunfire.Play();
+            position = barrelStart.transform.position;
+            direction = barrelStart.transform.forward;
         }
         else
         {
             gunfire.Play();
-            if (Physics.Raycast(Camera.main.transform.position,
-                Camera.main.transform.TransformDirection(Vector3.forward), out RaycastHit hit))
+            position = Camera.main.transform.position;
+            direction = Camera.main.transform.forward;
+        }
+
+        if (Physics.Raycast(position, direction, out RaycastHit hit))
+        {
+            Debug.DrawLine(position, hit.point, Colors.Green, 500);
+            if (hit.collider.transform == LevelManager.Instance.MonsterManager.transform)
             {
-                if (hit.collider.transform == LevelManager.Instance.MonsterManager.transform)
-                {
-                    LevelManager.Instance.MonsterManager.KillMonster();
-                }
+                LevelManager.Instance.MonsterManager.KillMonster();
             }
         }
     }

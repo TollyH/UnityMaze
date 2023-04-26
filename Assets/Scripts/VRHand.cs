@@ -27,6 +27,13 @@ public class VRHand : MonoBehaviour
     private Sprite flagSprite;
 
     [SerializeField]
+    private GameObject gun;
+    [SerializeField]
+    private GameObject tracer;
+    [SerializeField]
+    private Animator gunAnimator;
+
+    [SerializeField]
     private GameObject mapContainer;
 
     private void Awake()
@@ -48,9 +55,21 @@ public class VRHand : MonoBehaviour
     private void Update()
     {
         thisRenderer.enabled = XRSettings.enabled;
+        if (gun != null)
+        {
+            bool levelActive = !LevelManager.Instance.MonsterManager.IsPlayerStruggling
+                && !LevelManager.Instance.IsGameOver
+                && !LevelManager.Instance.IsPaused;
+            gun.SetActive(XRSettings.enabled && levelActive);
+            tracer.SetActive(XRSettings.enabled && LevelManager.Instance.PlayerManager.HasGun && levelActive);
+        }
         if (!thisRenderer.enabled)
         {
             return;
+        }
+        else if (gunAnimator != null && gun.activeSelf)
+        {
+            gunAnimator.Play(LevelManager.Instance.PlayerManager.HasGun ? "Closed" : "Opened", 0);
         }
 
         Vector3 handPos = IsRightHand
@@ -83,6 +102,10 @@ public class VRHand : MonoBehaviour
         {
             thisRenderer.sprite = upProduct > ThreewaySelectionCrossover ? flagSprite :
                 upProduct < -ThreewaySelectionCrossover ? pauseSprite : wallSprite;
+        }
+        else if (LevelManager.Instance.IsGameOver && !LevelManager.Instance.IsPaused && !IsRightHand)
+        {
+            thisRenderer.sprite = pauseSprite;
         }
         else
         {

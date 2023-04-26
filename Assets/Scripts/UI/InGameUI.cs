@@ -92,7 +92,7 @@ public class InGameUI : MonoBehaviour
         thisCanvas.renderMode = XRSettings.enabled ? RenderMode.ScreenSpaceCamera : RenderMode.ScreenSpaceOverlay;
         thisScaler.uiScaleMode = XRSettings.enabled ? CanvasScaler.ScaleMode.ScaleWithScreenSize : CanvasScaler.ScaleMode.ConstantPixelSize;
 
-        gunFirstPerson.SetActive(LevelManager.Instance.PlayerManager.HasGun);
+        gunFirstPerson.SetActive(LevelManager.Instance.PlayerManager.HasGun && !XRSettings.enabled);
         deathInputHint.SetActive(!XRSettings.enabled);
 
         resetPrompt.text = XRSettings.enabled ? "PAUSED" : "Press 'y' to reset or 'n' to cancel";

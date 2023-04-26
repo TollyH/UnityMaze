@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -99,6 +99,18 @@ public class LevelManager : MonoBehaviour
         UpdateHighscores();
     }
 
+    private void Update()
+    {
+        if (!IsGameOver && !IsPaused)
+        {
+            // Ensures VR controls function correctly ¯\_(ツ)_/¯
+            playerInput.enabled = false;
+            uiInput.enabled = false;
+            playerInput.enabled = true;
+            uiInput.enabled = true;
+        }
+    }
+
     private void OnNextLevel()
     {
         if (CurrentLevelIndex < LoadedLevels.Length - 1)
@@ -196,7 +208,7 @@ public class LevelManager : MonoBehaviour
     {
         float handUpProduct = Vector3.Dot(leftHand.transform.up, Vector3.up);
         // Pause action is only if hand is facing upwards
-        if (IsPaused || (XRSettings.enabled && handUpProduct > -leftHand.ThreewaySelectionCrossover))
+        if (IsPaused || (XRSettings.enabled && handUpProduct > -leftHand.ThreewaySelectionCrossover && !IsGameOver))
         {
             return;
         }
