@@ -24,7 +24,7 @@ public class PlayerActions : MonoBehaviour
             || LevelManager.Instance.MonsterManager.IsPlayerStruggling
             || LevelManager.Instance.IsGameOver
             || LevelManager.Instance.IsPaused
-            || Cursor.lockState != CursorLockMode.Locked)
+            || (Cursor.lockState != CursorLockMode.Locked && !XRSettings.enabled))
         {
             return;
         }
