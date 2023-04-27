@@ -296,6 +296,10 @@ public class InGameUI : MonoBehaviour
 
     private void OnToggleStats()
     {
+        if (LevelManager.Instance.MonsterManager.IsPlayerStruggling)
+        {
+            return;
+        }
         bool newState = !statsPanel.gameObject.activeSelf;
         statsPanel.gameObject.SetActive(newState);
         controlsPanel.gameObject.SetActive(newState);
