@@ -3,7 +3,6 @@ using UnityEngine.XR;
 
 public class PlayerActions : MonoBehaviour
 {
-    private ControlMap inputActions;
     private PlayerManager player;
 
     [SerializeField]
@@ -17,7 +16,6 @@ public class PlayerActions : MonoBehaviour
     private void Start()
     {
         player = LevelManager.Instance.PlayerManager;
-        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void OnFireGun()
@@ -25,7 +23,8 @@ public class PlayerActions : MonoBehaviour
         if (!player.HasGun
             || LevelManager.Instance.MonsterManager.IsPlayerStruggling
             || LevelManager.Instance.IsGameOver
-            || LevelManager.Instance.IsPaused)
+            || LevelManager.Instance.IsPaused
+            || Cursor.lockState != CursorLockMode.Locked)
         {
             return;
         }

@@ -209,7 +209,7 @@ public class MonsterManager : LevelContentManager
         thisRenderer.enabled = false;
     }
 
-    private void OnSpriteTrigger(GameObject triggerObject)
+    private void OnSpriteTrigger(GameObject _)
     {
         if (!thisRenderer.enabled)
         {

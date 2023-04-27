@@ -106,6 +106,11 @@ public class LevelManager : MonoBehaviour
         UpdateHighscores();
     }
 
+    private void LateUpdate()
+    {
+        IsPaused = pauseScreen.activeSelf;
+    }
+
     private void OnNextLevel()
     {
         if (CurrentLevelIndex < LoadedLevels.Length - 1)
@@ -226,7 +231,6 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        IsPaused = false;
         pauseScreen.SetActive(false);
         playerInput.enabled = true;
         uiInput.enabled = true;

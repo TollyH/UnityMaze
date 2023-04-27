@@ -19,8 +19,6 @@ public class PlayerWallManager : LevelContentManager
     [SerializeField]
     private VRHand leftHand;
 
-    private ControlMap inputActions;
-
     [SerializeField]
     private AudioSource wallSound;
     private AudioClip[] wallSoundClips;
@@ -29,11 +27,6 @@ public class PlayerWallManager : LevelContentManager
     {
         wallMaterials = Resources.LoadAll<Material>("Materials/PlayerWall");
         wallSoundClips = Resources.LoadAll<AudioClip>("Sounds/wall_place");
-    }
-
-    private void Start()
-    {
-        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void Update()
@@ -69,7 +62,7 @@ public class PlayerWallManager : LevelContentManager
                     (int)((PlayerWallTime - WallTimeRemaining) / PlayerWallTime * wallMaterials.Length)];
 
                 MeshRenderer[] meshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>();
-                foreach(MeshRenderer renderer in meshRenderers)
+                foreach (MeshRenderer renderer in meshRenderers)
                 {
                     renderer.material = wallMaterial;
                 }

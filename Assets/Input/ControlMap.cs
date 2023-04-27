@@ -268,6 +268,17 @@ public partial class @ControlMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""39ec510b-de8d-48a5-8f78-e1d2be7546f5"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LockMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""412161e8-3e1c-48ca-9c5f-b5c877c0935e"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",

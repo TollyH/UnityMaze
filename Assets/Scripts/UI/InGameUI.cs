@@ -18,8 +18,6 @@ public class InGameUI : MonoBehaviour
     private Canvas thisCanvas;
     private CanvasScaler thisScaler;
 
-    private ControlMap inputActions;
-
     [SerializeField]
     private Image statsPanel;
     [SerializeField]
@@ -76,11 +74,6 @@ public class InGameUI : MonoBehaviour
         thisCanvas = GetComponent<Canvas>();
         thisScaler = GetComponent<CanvasScaler>();
         remainingCompassTime = CompassTime;
-    }
-
-    private void Start()
-    {
-        inputActions = LevelManager.Instance.InputActions;
     }
 
     private void Update()

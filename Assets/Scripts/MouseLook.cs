@@ -32,7 +32,7 @@ public class MouseLook : MonoBehaviour
 
     private void OnLockMouse()
     {
-        if (LevelManager.Instance.PlayerManager.HasGun)
+        if (LevelManager.Instance.PlayerManager.HasGun && Cursor.lockState == CursorLockMode.Locked)
         {
             return;
         }

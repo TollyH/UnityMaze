@@ -3,8 +3,6 @@ using UnityEngine.XR;
 
 public class FlagManager : LevelContentManager
 {
-    private ControlMap inputActions;
-
     [SerializeField]
     private GameObject flagSpritePrefab;
 
@@ -20,11 +18,6 @@ public class FlagManager : LevelContentManager
     private void Awake()
     {
         flagSoundClips = Resources.LoadAll<AudioClip>("Sounds/flag_place");
-    }
-
-    private void Start()
-    {
-        inputActions = LevelManager.Instance.InputActions;
     }
 
     public bool IsFlagged(Vector2 coord, out GameObject flag)
