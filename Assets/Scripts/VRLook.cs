@@ -27,9 +27,20 @@ public class VRLook : MonoBehaviour
 
         if (inputActions.PlayerMovement.ResetVR.IsPressed())
         {
-            Vector3 rawHmdPos = inputActions.PlayerMovement.CameraMoveVR.ReadValue<Vector3>();
-            PosOffset = new Vector3(rawHmdPos.x, 0, rawHmdPos.z);
-            YawOffset = inputActions.PlayerMovement.CameraLookVR.ReadValue<Quaternion>().eulerAngles.y;
+            if (!LevelManager.Instance.IsPaused)
+            {
+                Vector3 rawHmdPos = inputActions.PlayerMovement.CameraMoveVR.ReadValue<Vector3>();
+                PosOffset = new Vector3(rawHmdPos.x, PosOffset.y, rawHmdPos.z);
+                YawOffset = inputActions.PlayerMovement.CameraLookVR.ReadValue<Quaternion>().eulerAngles.y;
+            }
+            else
+            {
+                PosOffset = new Vector3(
+                    PosOffset.x,
+                    Mathf.Min(inputActions.PlayerMovement.LeftHandPosVR.ReadValue<Vector3>().y,
+                        inputActions.PlayerMovement.RightHandPosVR.ReadValue<Vector3>().y),
+                    PosOffset.z);
+            }
 
             foreach (GameObject hand in Hands)
             {
