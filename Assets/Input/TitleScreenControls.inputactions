@@ -1,0 +1,56 @@
+{
+    "name": "TitleScreen",
+    "maps": [
+        {
+            "name": "Buttons",
+            "id": "39f01419-eecc-4846-ac5f-bd4fb9d4c8a9",
+            "actions": [
+                {
+                    "name": "Play",
+                    "type": "Button",
+                    "id": "5033324c-4d5d-4e3d-b4a1-eab4f5ba31ca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5e72d84f-eb29-4c62-a687-c0d8686e04e0",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Play",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5cbde3cb-a2a6-479a-b3e6-0ac84624fceb",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Play",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09090089-dd65-4bcd-ac22-58cb3d7276ff",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Play",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
