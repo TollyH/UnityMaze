@@ -6,6 +6,14 @@ A Unity remake of PyMaze/CSMaze, with controller and VR support
 
 ## Controls
 
+### Title Screen
+
+| Action | Keyboard/Mouse | Controller | VR |
+|--------|----------------|------------|----|
+| Play | Space/Click Play Button | South Button (Cross on DualShock, A on XBox, B on Nintendo) | Right Secondary Button (B on Oculus Touch) |
+
+### In-game
+
 | Action | Keyboard/Mouse | Controller | VR |
 |--------|----------------|------------|----|
 | Move | WASD | Left Analog Stick | Left Thumb Stick |
