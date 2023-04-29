@@ -44,14 +44,16 @@ public class Multiplayer
             }
             if (joinResponse is null)
             {
-                // TODO: "Could not connect to server", "Connection error"
+                TitleUI.NewPopupTitle = "Connection error";
+                TitleUI.NewPopupContent = "Could not connect to server";
                 quit = true;
             }
         }
         catch (Exception ex)
         {
-            Debug.LogError(ex);
-            // TODO: "Invalid server information provided", "Connection error"
+            Debug.LogWarning(ex);
+            TitleUI.NewPopupTitle = "Connection error";
+            TitleUI.NewPopupContent = "Invalid server information provided";
             quit = true;
         }
 
