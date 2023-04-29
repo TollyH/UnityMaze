@@ -109,6 +109,19 @@ public class PlayerManager : LevelContentManager
         }
     }
 
+    public void RandomisePlayerCoords()
+    {
+        Vector2 dimensions = levelManager.CurrentLevel.Dimensions;
+        Vector2? newCoord = null;
+        while (newCoord is null || levelManager.CurrentLevel[newCoord.Value].PlayerCollide)
+        {
+            newCoord = new Vector2(UnityEngine.Random.Range(0, (int)dimensions.x),
+                UnityEngine.Random.Range(0, (int)dimensions.y));
+        }
+        newCoord *= levelManager.UnitSize;
+        characterController.MoveAbsolute(new Vector3(-newCoord.Value.x, transform.position.y, newCoord.Value.y));
+    }
+
     public override void OnLevelLoad(Level level)
     {
         if (!ambience.isPlaying)
