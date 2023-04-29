@@ -52,7 +52,7 @@ public partial class @TitleScreenControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5cbde3cb-a2a6-479a-b3e6-0ac84624fceb"",
-                    ""path"": ""<XRController>{RightHand}/primaryButton"",
+                    ""path"": ""<XRController>{RightHand}/secondaryButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
