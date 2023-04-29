@@ -4,6 +4,9 @@ using UnityEngine.XR;
 
 public class VRLook : MonoBehaviour
 {
+    [SerializeField]
+    private LevelManager levelManager;
+
     private ControlMap inputActions;
     public Vector3 PosOffset { get; private set; } = new();
     public float YawOffset { get; private set; } = 0;
@@ -11,7 +14,7 @@ public class VRLook : MonoBehaviour
 
     private void Start()
     {
-        inputActions = LevelManager.Instance.InputActions;
+        inputActions = levelManager.InputActions;
     }
 
     private void Update()
@@ -27,7 +30,7 @@ public class VRLook : MonoBehaviour
 
         if (inputActions.PlayerMovement.ResetVR.IsPressed())
         {
-            if (!LevelManager.Instance.IsPaused)
+            if (!levelManager.IsPaused)
             {
                 Vector3 rawHmdPos = inputActions.PlayerMovement.CameraMoveVR.ReadValue<Vector3>();
                 PosOffset = new Vector3(rawHmdPos.x, PosOffset.y, rawHmdPos.z);

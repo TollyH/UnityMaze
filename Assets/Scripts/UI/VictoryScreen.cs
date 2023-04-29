@@ -7,6 +7,9 @@ using UnityEngine.XR;
 public class VictoryScreen : MonoBehaviour
 {
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private TextMeshProUGUI timeScore;
     [SerializeField]
     private TextMeshProUGUI moveScore;
@@ -38,7 +41,7 @@ public class VictoryScreen : MonoBehaviour
 
     private void Update()
     {
-        PlayerManager player = LevelManager.Instance.PlayerManager;
+        PlayerManager player = levelManager.PlayerManager;
         timeOnScreen += Time.deltaTime;
 
         timeScore.text = $"Time Score: {player.LevelTime * Math.Min(1.0, timeOnScreen / 2):F1}";
@@ -51,17 +54,17 @@ public class VictoryScreen : MonoBehaviour
         {
             bestTimeScore.gameObject.SetActive(true);
             bestMoveScore.gameObject.SetActive(true);
-            bestTimeScore.text = $"Best Time Score: {LevelManager.Instance.Highscores[LevelManager.Instance.CurrentLevelIndex].Item1:F1}";
-            bestMoveScore.text = $"Best Move Score: {LevelManager.Instance.Highscores[LevelManager.Instance.CurrentLevelIndex].Item2:F1}";
+            bestTimeScore.text = $"Best Time Score: {levelManager.Highscores[levelManager.CurrentLevelIndex].Item1:F1}";
+            bestMoveScore.text = $"Best Move Score: {levelManager.Highscores[levelManager.CurrentLevelIndex].Item2:F1}";
         }
         if (timeOnScreen >= 6.5)
         {
             bestGameTimeScore.gameObject.SetActive(true);
             bestGameMoveScore.gameObject.SetActive(true);
-            bestGameTimeScore.text = $"Best Game Time Score: {LevelManager.Instance.Highscores.Sum(x => x.Item1):F1}";
-            bestGameMoveScore.text = $"Best Game Move Score: {LevelManager.Instance.Highscores.Sum(x => x.Item2):F1}";
+            bestGameTimeScore.text = $"Best Game Time Score: {levelManager.Highscores.Sum(x => x.Item1):F1}";
+            bestGameMoveScore.text = $"Best Game Move Score: {levelManager.Highscores.Sum(x => x.Item2):F1}";
         }
-        if (timeOnScreen >= 7.5 && LevelManager.Instance.CurrentLevelIndex < LevelManager.Instance.LoadedLevels.Length - 1
+        if (timeOnScreen >= 7.5 && levelManager.CurrentLevelIndex < levelManager.LoadedLevels.Length - 1
             && !XRSettings.enabled)
         {
             nextLevelHint.gameObject.SetActive(true);

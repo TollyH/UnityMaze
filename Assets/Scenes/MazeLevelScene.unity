@@ -668,6 +668,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 361205736}
     m_Modifications:
+    - target: {fileID: -8012211384352132000, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 1518488894}
     - target: {fileID: 1194356112358311790, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
       propertyPath: m_Layer
       value: 2
@@ -1323,6 +1327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsRightHand: 1
   ThreewaySelectionCrossover: 0.4
+  levelManager: {fileID: 1518488894}
   resetSprite: {fileID: 21300000, guid: 75dd5087e015bc244ba658af9615d475, type: 3}
   unpauseSprite: {fileID: 21300000, guid: 29e2c74cd3c273f4bbde73c7227d73b1, type: 3}
   pauseSprite: {fileID: 0}
@@ -1416,6 +1421,7 @@ MonoBehaviour:
   <StartPointSprite>k__BackingField: {fileID: 215730901}
   <ExitPointSprite>k__BackingField: {fileID: 164804722}
   <MonsterSpawnSprite>k__BackingField: {fileID: 461197530}
+  levelManager: {fileID: 1518488894}
 --- !u!4 &361205736
 Transform:
   m_ObjectHideFlags: 0
@@ -2056,6 +2062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96441dacdbc43a84db2198c07e752819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1518488894}
   collectibleSpritePrefab: {fileID: 7850154813624118141, guid: 72ebfcf79cc687347b2c16bf66434994, type: 3}
   triggerSpritePrefab: {fileID: 7850154813624118141, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
   viewportFlash: {fileID: 518296380}
@@ -2731,6 +2738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25da49164e82d674999603dc7f5e5c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1518488894}
   rects:
   - {fileID: 1892113961}
   - {fileID: 518296379}
@@ -2861,6 +2869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2302b31d3167394f8a5ae72a7ff59e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1518488894}
   timeScore: {fileID: 373457091}
   moveScore: {fileID: 1563175069}
   bestTimeScore: {fileID: 60465432}
@@ -3162,6 +3171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d447aa43ba39f14daa7edb1115d4b29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1518488894}
   spritePrefab: {fileID: 3687834168950131581, guid: 8a895bd6ecec15049b3925f37f81560f, type: 3}
   triggerSpritePrefab: {fileID: 7850154813624118141, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
 --- !u!1 &684761389
@@ -3244,6 +3254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c59442ef12a1834899fe8cf350b0683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1518488894}
   collectibleSpritePrefab: {fileID: 7850154813624118141, guid: 72ebfcf79cc687347b2c16bf66434994, type: 3}
   viewportFlash: {fileID: 518296380}
   keySound: {fileID: 1206789357}
@@ -4400,6 +4411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 10
+  levelManager: {fileID: 1518488894}
   mapContainer: {fileID: 1601196858}
 --- !u!114 &1206789341
 MonoBehaviour:
@@ -4414,6 +4426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sensitivity: 10
+  levelManager: {fileID: 1518488894}
   mapContainer: {fileID: 1601196858}
 --- !u!114 &1206789342
 MonoBehaviour:
@@ -4493,6 +4506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c607ba1a60f1704991bc46f8d16ac77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1518488894}
   Hands:
   - {fileID: 351024519}
   - {fileID: 1936967794}
@@ -4509,6 +4523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KeySensorTime: 10
+  levelManager: {fileID: 1518488894}
   ambience: {fileID: 1206789351}
   footstep: {fileID: 1206789358}
   breathing: {fileID: 1206789359}
@@ -4538,6 +4553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b4207add0260b4eb3029dad5923e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1518488894}
   gunfire: {fileID: 1206789354}
   vrGunfire: {fileID: 919132147890835671}
   barrelStart: {fileID: 1072327852}
@@ -6634,6 +6650,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8012211384352132000, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 1518488894}
     - target: {fileID: 1194356112358311790, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -6696,6 +6716,7 @@ MonoBehaviour:
   FieldOfViewRaycasts: 50
   FieldOfView: 53
   TimeBetweenMoves: 0.5
+  levelManager: {fileID: 1518488894}
   monsterOverlay: {fileID: 1863836795}
   viewportFlash: {fileID: 518296380}
   roamingSound: {fileID: 1565518719}
@@ -6943,6 +6964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bc93351a098934da596bd64a0907a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1518488894}
   flagSpritePrefab: {fileID: 7850154813624118141, guid: 9288f9cbecac2bb4fb71cabfffe84952, type: 3}
   mapContainer: {fileID: 1601196858}
   leftHand: {fileID: 1936967799}
@@ -8094,6 +8116,7 @@ MonoBehaviour:
   StartDistance: 2
   EndDistance: 0.25
   TravelDuration: 0.15
+  levelManager: {fileID: 1518488894}
   monsterFace: {fileID: 1800478907}
   hintText: {fileID: 369861900}
   background: {fileID: 1862817898}
@@ -8256,6 +8279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3e033966f5cf94998aa4acef567388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelManager: {fileID: 1518488894}
 --- !u!1 &1878495330
 GameObject:
   m_ObjectHideFlags: 0
@@ -8520,6 +8544,7 @@ MonoBehaviour:
   CompassChargeNormMultiplier: 0.5
   CompassChargeBurnMultiplier: 1
   CompassChargeDelay: 1.5
+  levelManager: {fileID: 1518488894}
   statsPanel: {fileID: 584435706}
   controlsPanel: {fileID: 753291657}
   keySensorIndicator: {fileID: 1521048832}
@@ -8811,6 +8836,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsRightHand: 0
   ThreewaySelectionCrossover: 0.6
+  levelManager: {fileID: 1518488894}
   resetSprite: {fileID: 0}
   unpauseSprite: {fileID: 0}
   pauseSprite: {fileID: 21300000, guid: 29e2c74cd3c273f4bbde73c7227d73b1, type: 3}
@@ -9054,6 +9080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerWallTime: 15
   PlayerWallCooldown: 20
+  levelManager: {fileID: 1518488894}
   mapContainer: {fileID: 1601196858}
   leftHand: {fileID: 1936967799}
   wallSound: {fileID: 1206789355}

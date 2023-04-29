@@ -8,6 +8,9 @@ public class KeysManager : LevelContentManager
     public int TotalLevelKeys { get; private set; }
 
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private GameObject collectibleSpritePrefab;
     [SerializeField]
     private ViewportFlash viewportFlash;
@@ -23,7 +26,7 @@ public class KeysManager : LevelContentManager
 
     public void ReloadKeys(Level level)
     {
-        float unitSize = LevelManager.Instance.UnitSize;
+        float unitSize = levelManager.UnitSize;
         gameObject.DestroyAllChildren();
 
         foreach (Vector2 coord in level.ExitKeys)
@@ -34,13 +37,14 @@ public class KeysManager : LevelContentManager
             keySprite.transform.parent = transform;
             keySprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
             keySprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/key");
+            keySprite.GetComponent<CollectibleSprite>().levelManager = levelManager;
         }
         TotalLevelKeys = transform.childCount;
     }
 
     public HashSet<Vector2> GetRemainingKeyCoords()
     {
-        float unitSize = LevelManager.Instance.UnitSize;
+        float unitSize = levelManager.UnitSize;
         HashSet<Vector2> keyCoords = new(transform.childCount);
         for (int i = 0; i < transform.childCount; i++)
         {

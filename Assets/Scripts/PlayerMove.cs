@@ -8,6 +8,9 @@ public class PlayerMove : MonoBehaviour
     public float MovementSpeed;
 
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private GameObject mapContainer;
 
     private bool runToggle = false;
@@ -16,15 +19,15 @@ public class PlayerMove : MonoBehaviour
     private void Start()
     {
         character = GetComponent<CharacterController>();
-        inputActions = LevelManager.Instance.InputActions;
+        inputActions = levelManager.InputActions;
     }
 
     private void Update()
     {
         if (mapContainer.activeSelf
-            || LevelManager.Instance.MonsterManager.IsPlayerStruggling
-            || LevelManager.Instance.IsGameOver
-            || LevelManager.Instance.IsPaused)
+            || levelManager.MonsterManager.IsPlayerStruggling
+            || levelManager.IsGameOver
+            || levelManager.IsPaused)
         {
             return;
         }

@@ -6,16 +6,19 @@ public class UIScaleVR : MonoBehaviour
     ControlMap inputActions;
 
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private RectTransform[] rects;
 
     private void Start()
     {
-        inputActions = LevelManager.Instance.InputActions;
+        inputActions = levelManager.InputActions;
     }
 
     private void Update()
     {
-        if (!LevelManager.Instance.IsPaused || !XRSettings.enabled)
+        if (!levelManager.IsPaused || !XRSettings.enabled)
         {
             return;
         }

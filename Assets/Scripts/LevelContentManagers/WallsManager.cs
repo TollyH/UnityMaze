@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class WallsManager : LevelContentManager
 {
+    [SerializeField]
+    private LevelManager levelManager;
+
     public void ReloadWalls(Level level)
     {
-        float unitSize = LevelManager.Instance.UnitSize;
+        float unitSize = levelManager.UnitSize;
         gameObject.DestroyAllChildren();
 
         // Create walls and collision

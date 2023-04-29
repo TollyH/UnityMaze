@@ -3,6 +3,9 @@ using UnityEngine;
 public class PickupsManager : LevelContentManager
 {
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private GameObject collectibleSpritePrefab;
     [SerializeField]
     private GameObject triggerSpritePrefab;
@@ -16,7 +19,7 @@ public class PickupsManager : LevelContentManager
 
     public void ReloadPickups(Level level)
     {
-        float unitSize = LevelManager.Instance.UnitSize;
+        float unitSize = levelManager.UnitSize;
         gameObject.DestroyAllChildren();
 
         foreach (Vector2 coord in level.KeySensors)
@@ -27,6 +30,7 @@ public class PickupsManager : LevelContentManager
             keySensorSprite.transform.parent = transform;
             keySensorSprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
             keySensorSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/key_sensor");
+            keySensorSprite.GetComponent<CollectibleSprite>().levelManager = levelManager;
         }
 
         foreach (Vector2 coord in level.Guns)
@@ -37,12 +41,13 @@ public class PickupsManager : LevelContentManager
             gunSprite.transform.parent = transform;
             gunSprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
             gunSprite.GetComponentInChildren<SpriteRenderer>().sprite = Resources.Load<Sprite>("Textures/sprite/gun");
+            gunSprite.GetComponent<TriggerSprite>().levelManager = levelManager;
         }
     }
 
     public void OnCollect(GameObject collectedObject)
     {
-        PlayerManager player = LevelManager.Instance.PlayerManager;
+        PlayerManager player = levelManager.PlayerManager;
         if (collectedObject.name.StartsWith("KeySensor"))
         {
             sensorPickup.Play();
@@ -53,7 +58,7 @@ public class PickupsManager : LevelContentManager
 
     public void OnSpriteTrigger(GameObject collectedObject)
     {
-        PlayerManager player = LevelManager.Instance.PlayerManager;
+        PlayerManager player = levelManager.PlayerManager;
         if (collectedObject.name.StartsWith("Gun"))
         {
             // Player already has a gun, it shouldn't be collected

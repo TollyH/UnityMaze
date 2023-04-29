@@ -15,6 +15,9 @@ public class PlayerWallManager : LevelContentManager
     private Material[] wallMaterials;
 
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private GameObject mapContainer;
     [SerializeField]
     private VRHand leftHand;
@@ -31,9 +34,9 @@ public class PlayerWallManager : LevelContentManager
 
     private void Update()
     {
-        if (!LevelManager.Instance.PlayerManager.HasMovedThisLevel
-            || LevelManager.Instance.IsGameOver
-            || LevelManager.Instance.IsPaused)
+        if (!levelManager.PlayerManager.HasMovedThisLevel
+            || levelManager.IsGameOver
+            || levelManager.IsPaused)
         {
             return;
         }
@@ -74,10 +77,10 @@ public class PlayerWallManager : LevelContentManager
     {
         float handUpProduct = Vector3.Dot(leftHand.transform.up, Vector3.up);
         if (WallCooldownRemaining > 0 || WallTimeRemaining > 0
-            || !LevelManager.Instance.PlayerManager.HasMovedThisLevel
-            || LevelManager.Instance.MonsterManager.IsPlayerStruggling
-            || LevelManager.Instance.IsGameOver
-            || LevelManager.Instance.IsPaused
+            || !levelManager.PlayerManager.HasMovedThisLevel
+            || levelManager.MonsterManager.IsPlayerStruggling
+            || levelManager.IsGameOver
+            || levelManager.IsPaused
             || mapContainer.activeSelf
             // Wall action is only if hand is facing outwards
             || (XRSettings.enabled &&
@@ -87,7 +90,7 @@ public class PlayerWallManager : LevelContentManager
             return;
         }
 
-        float unitSize = LevelManager.Instance.UnitSize;
+        float unitSize = levelManager.UnitSize;
 
         // Get the angle the camera is facing, then round it to the closest 90deg
         float roundedYaw = Mathf.Round(Camera.main.transform.eulerAngles.y / 90) * 90;
@@ -105,10 +108,10 @@ public class PlayerWallManager : LevelContentManager
             _ => new Vector2(0, 0)
         };
 
-        wallPosition = LevelManager.Instance.PlayerManager.GridPosition + wallVector;
+        wallPosition = levelManager.PlayerManager.GridPosition + wallVector;
 
-        if ((wallVector.x == 0 && wallVector.y == 0) || !LevelManager.Instance.CurrentLevel.IsCoordInBounds(wallPosition)
-            || (LevelManager.Instance.CurrentLevel[wallPosition].Wall != null))
+        if ((wallVector.x == 0 && wallVector.y == 0) || !levelManager.CurrentLevel.IsCoordInBounds(wallPosition)
+            || (levelManager.CurrentLevel[wallPosition].Wall != null))
         {
             return;
         }

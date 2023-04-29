@@ -3,13 +3,14 @@ using UnityEngine;
 public class DecorationsManager : LevelContentManager
 {
     [SerializeField]
-    private GameObject spritePrefab;
+    private LevelManager levelManager;
+
     [SerializeField]
-    private GameObject triggerSpritePrefab;
+    private GameObject spritePrefab;
 
     public void ReloadDecorations(Level level)
     {
-        float unitSize = LevelManager.Instance.UnitSize;
+        float unitSize = levelManager.UnitSize;
         gameObject.DestroyAllChildren();
 
         foreach ((Vector2 coords, string texture) in level.Decorations)

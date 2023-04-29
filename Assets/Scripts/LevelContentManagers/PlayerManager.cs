@@ -6,8 +6,8 @@ using UnityEngine.XR;
 
 public class PlayerManager : LevelContentManager
 {
-    public Vector2 MazePosition => new((-transform.position.x + (LevelManager.Instance.UnitSize / 2)) / LevelManager.Instance.UnitSize,
-            (transform.position.z + (LevelManager.Instance.UnitSize / 2)) / LevelManager.Instance.UnitSize);
+    public Vector2 MazePosition => new((-transform.position.x + (levelManager.UnitSize / 2)) / levelManager.UnitSize,
+            (transform.position.z + (levelManager.UnitSize / 2)) / levelManager.UnitSize);
     public Vector2 GridPosition => new((int)MazePosition.x, (int)MazePosition.y);
 
     public bool HasMovedThisLevel { get; private set; }
@@ -21,6 +21,9 @@ public class PlayerManager : LevelContentManager
 
     [NonSerialized]
     public bool HasGun = false;
+
+    [SerializeField]
+    private LevelManager levelManager;
 
     private CharacterController characterController;
     private CapsuleCollider capsuleCollider;
@@ -53,8 +56,8 @@ public class PlayerManager : LevelContentManager
 
     private void Update()
     {
-        if (HasMovedThisLevel && !LevelManager.Instance.IsGameOver
-            && !LevelManager.Instance.IsPaused)
+        if (HasMovedThisLevel && !levelManager.IsGameOver
+            && !levelManager.IsPaused)
         {
             if (!breathing.isPlaying)
             {
@@ -63,10 +66,10 @@ public class PlayerManager : LevelContentManager
 
             // If there is no monster, play the calmest breathing sound
             AudioClip selectedSound = breathingClips[breathingClips.Keys.Max()];
-            if (LevelManager.Instance.MonsterManager.IsMonsterSpawned)
+            if (levelManager.MonsterManager.IsMonsterSpawned)
             {
-                float monsterDistance = Vector2.Distance(LevelManager.Instance.MonsterManager.GridPosition!.Value,
-                    LevelManager.Instance.PlayerManager.GridPosition);
+                float monsterDistance = Vector2.Distance(levelManager.MonsterManager.GridPosition!.Value,
+                    levelManager.PlayerManager.GridPosition);
                 foreach (int minDistance in breathingClips.Keys)
                 {
                     if (monsterDistance >= minDistance)
@@ -93,7 +96,7 @@ public class PlayerManager : LevelContentManager
             breathing.Pause();
         }
 
-        if (LevelManager.Instance.IsGameOver || LevelManager.Instance.IsPaused)
+        if (levelManager.IsGameOver || levelManager.IsPaused)
         {
             if (ambience.isPlaying)
             {
@@ -117,7 +120,7 @@ public class PlayerManager : LevelContentManager
             breathing.Pause();
         }
 
-        float unitSize = LevelManager.Instance.UnitSize;
+        float unitSize = levelManager.UnitSize;
         LevelTime = 0;
         LevelMoves = 0;
         HasMovedThisLevel = false;
@@ -141,7 +144,7 @@ public class PlayerManager : LevelContentManager
 
     private void OnMove(float distance)
     {
-        float unitSize = LevelManager.Instance.UnitSize;
+        float unitSize = levelManager.UnitSize;
         HasMovedThisLevel = true;
         float oldLevelMoves = LevelMoves;
         LevelMoves += distance / unitSize;

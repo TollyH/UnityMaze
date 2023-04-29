@@ -16,6 +16,9 @@ public class VRHand : MonoBehaviour
     public float YawOffset = 0;
 
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private Sprite resetSprite;
     [SerializeField]
     private Sprite unpauseSprite;
@@ -43,7 +46,7 @@ public class VRHand : MonoBehaviour
 
     private void Start()
     {
-        inputActions = LevelManager.Instance.InputActions;
+        inputActions = levelManager.InputActions;
     }
 
     private void Update()
@@ -51,11 +54,11 @@ public class VRHand : MonoBehaviour
         thisRenderer.enabled = XRSettings.enabled;
         if (gun != null)
         {
-            bool levelActive = !LevelManager.Instance.MonsterManager.IsPlayerStruggling
-                && !LevelManager.Instance.IsGameOver
-                && !LevelManager.Instance.IsPaused;
+            bool levelActive = !levelManager.MonsterManager.IsPlayerStruggling
+                && !levelManager.IsGameOver
+                && !levelManager.IsPaused;
             gun.SetActive(XRSettings.enabled && levelActive);
-            tracer.SetActive(XRSettings.enabled && LevelManager.Instance.PlayerManager.HasGun && levelActive);
+            tracer.SetActive(XRSettings.enabled && levelManager.PlayerManager.HasGun && levelActive);
         }
         if (!thisRenderer.enabled)
         {
@@ -63,7 +66,7 @@ public class VRHand : MonoBehaviour
         }
         else if (gunAnimator != null && gun.activeSelf)
         {
-            gunAnimator.Play(LevelManager.Instance.PlayerManager.HasGun ? "Closed" : "Opened", 0);
+            gunAnimator.Play(levelManager.PlayerManager.HasGun ? "Closed" : "Opened", 0);
         }
 
         Vector3 handPos = IsRightHand
@@ -84,20 +87,20 @@ public class VRHand : MonoBehaviour
     {
         float upProduct = Vector3.Dot(transform.up, Vector3.up);
 
-        if (LevelManager.Instance.IsPaused && IsRightHand)
+        if (levelManager.IsPaused && IsRightHand)
         {
             thisRenderer.sprite = upProduct > 0 ? resetSprite : unpauseSprite;
         }
-        else if (!IsRightHand && LevelManager.Instance.PlayerManager.HasMovedThisLevel
-            && !LevelManager.Instance.MonsterManager.IsPlayerStruggling
-            && !LevelManager.Instance.IsGameOver
-            && !LevelManager.Instance.IsPaused
+        else if (!IsRightHand && levelManager.PlayerManager.HasMovedThisLevel
+            && !levelManager.MonsterManager.IsPlayerStruggling
+            && !levelManager.IsGameOver
+            && !levelManager.IsPaused
             && !mapContainer.activeSelf)
         {
             thisRenderer.sprite = upProduct > ThreewaySelectionCrossover ? flagSprite :
                 upProduct < -ThreewaySelectionCrossover ? pauseSprite : wallSprite;
         }
-        else if (LevelManager.Instance.IsGameOver && !LevelManager.Instance.IsPaused && !IsRightHand)
+        else if (levelManager.IsGameOver && !levelManager.IsPaused && !IsRightHand)
         {
             thisRenderer.sprite = pauseSprite;
         }

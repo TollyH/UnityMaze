@@ -19,6 +19,9 @@ public class InGameUI : MonoBehaviour
     private CanvasScaler thisScaler;
 
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private Image statsPanel;
     [SerializeField]
     private Image controlsPanel;
@@ -81,7 +84,7 @@ public class InGameUI : MonoBehaviour
         thisCanvas.renderMode = XRSettings.enabled ? RenderMode.WorldSpace : RenderMode.ScreenSpaceOverlay;
         thisScaler.uiScaleMode = XRSettings.enabled ? CanvasScaler.ScaleMode.ScaleWithScreenSize : CanvasScaler.ScaleMode.ConstantPixelSize;
 
-        gunFirstPerson.SetActive(LevelManager.Instance.PlayerManager.HasGun && !XRSettings.enabled);
+        gunFirstPerson.SetActive(levelManager.PlayerManager.HasGun && !XRSettings.enabled);
         deathInputHint.SetActive(!XRSettings.enabled);
         pauseBorder.SetActive(XRSettings.enabled);
 
@@ -95,10 +98,10 @@ public class InGameUI : MonoBehaviour
 
     private void UpdateStats()
     {
-        KeysManager keys = LevelManager.Instance.KeysManager;
-        PlayerManager player = LevelManager.Instance.PlayerManager;
-        MonsterManager monster = LevelManager.Instance.MonsterManager;
-        int currentLevelIndex = LevelManager.Instance.CurrentLevelIndex;
+        KeysManager keys = levelManager.KeysManager;
+        PlayerManager player = levelManager.PlayerManager;
+        MonsterManager monster = levelManager.MonsterManager;
+        int currentLevelIndex = levelManager.CurrentLevelIndex;
 
         if (player.HasMovedThisLevel)
         {
@@ -110,8 +113,8 @@ public class InGameUI : MonoBehaviour
         {
             // Show highscores if player hasn't moved yet
             keysLabel.text = $"Keys: 0/{keys.TotalLevelKeys}";
-            movesLabel.text = $"Moves: {LevelManager.Instance.Highscores[currentLevelIndex].Item2:0.0}";
-            timeLabel.text = $"Time: {LevelManager.Instance.Highscores[currentLevelIndex].Item1:0.0}";
+            movesLabel.text = $"Moves: {levelManager.Highscores[currentLevelIndex].Item2:0.0}";
+            timeLabel.text = $"Time: {levelManager.Highscores[currentLevelIndex].Item1:0.0}";
         }
 
         Color bgColor = monster.IsMonsterSpawned ? Color.red : Color.black;
@@ -132,8 +135,8 @@ public class InGameUI : MonoBehaviour
 
     private void UpdateCompass()
     {
-        PlayerManager player = LevelManager.Instance.PlayerManager;
-        MonsterManager monster = LevelManager.Instance.MonsterManager;
+        PlayerManager player = levelManager.PlayerManager;
+        MonsterManager monster = levelManager.MonsterManager;
 
         if (monster.IsMonsterSpawned)
         {
@@ -163,9 +166,9 @@ public class InGameUI : MonoBehaviour
         }
 
         if (mapContainer.activeSelf
-            || LevelManager.Instance.MonsterManager.IsPlayerStruggling
-            || LevelManager.Instance.IsGameOver
-            || LevelManager.Instance.IsPaused)
+            || levelManager.MonsterManager.IsPlayerStruggling
+            || levelManager.IsGameOver
+            || levelManager.IsPaused)
         {
             return;
         }
@@ -206,12 +209,12 @@ public class InGameUI : MonoBehaviour
         {
             return;
         }
-        Level currentLevel = LevelManager.Instance.CurrentLevel;
-        PlayerManager player = LevelManager.Instance.PlayerManager;
+        Level currentLevel = levelManager.CurrentLevel;
+        PlayerManager player = levelManager.PlayerManager;
         Rect mapContainerRect = mapSquaresContainer.GetComponent<RectTransform>().rect;
         Vector2 tileSize = new(mapContainerRect.width / currentLevel.Dimensions.x, mapContainerRect.height / currentLevel.Dimensions.y);
         Vector2 playerGridPosition = player.MazePosition;
-        HashSet<Vector2> keyPositions = LevelManager.Instance.KeysManager.GetRemainingKeyCoords();
+        HashSet<Vector2> keyPositions = levelManager.KeysManager.GetRemainingKeyCoords();
 
         for (int x = 0; x < currentLevel.Dimensions.x; x++)
         {
@@ -223,7 +226,7 @@ public class InGameUI : MonoBehaviour
                 {
                     colour = Colors.Blue;
                 }
-                else if (pnt == LevelManager.Instance.PlayerWallManager.WallPosition)
+                else if (pnt == levelManager.PlayerWallManager.WallPosition)
                 {
                     colour = Colors.Purple;
                 }
@@ -235,7 +238,7 @@ public class InGameUI : MonoBehaviour
                 {
                     colour = Colors.DarkGreen;
                 }
-                else if (LevelManager.Instance.FlagManager.IsFlagged(pnt, out _))
+                else if (levelManager.FlagManager.IsFlagged(pnt, out _))
                 {
                     colour = Colors.LightBlue;
                 }
@@ -268,7 +271,7 @@ public class InGameUI : MonoBehaviour
         float compassTimeDiameter = 32 * (remainingCompassTime / CompassTime);
         compassTime.rectTransform.sizeDelta = new Vector2(compassTimeDiameter, compassTimeDiameter);
 
-        PlayerWallManager playerWall = LevelManager.Instance.PlayerWallManager;
+        PlayerWallManager playerWall = levelManager.PlayerWallManager;
 
         wallTime.color = playerWall.WallTimeRemaining > 0 ? Colors.Red : Colors.DarkGreen;
         float wallTimeDiameter;
@@ -296,7 +299,7 @@ public class InGameUI : MonoBehaviour
 
     private void OnToggleStats()
     {
-        if (LevelManager.Instance.MonsterManager.IsPlayerStruggling)
+        if (levelManager.MonsterManager.IsPlayerStruggling)
         {
             return;
         }

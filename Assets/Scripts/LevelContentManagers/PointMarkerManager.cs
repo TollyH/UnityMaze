@@ -9,6 +9,9 @@ public class PointMarkerManager : LevelContentManager
     [field: SerializeField]
     public GameObject MonsterSpawnSprite { get; private set; }
 
+    [SerializeField]
+    private LevelManager levelManager;
+
     private SpriteRenderer exitPointSpriteRenderer;
 
     private Sprite endPoint;
@@ -23,12 +26,12 @@ public class PointMarkerManager : LevelContentManager
 
     private void Update()
     {
-        exitPointSpriteRenderer.sprite = LevelManager.Instance.KeysManager.AllKeysCollected ? endPointActive : endPoint;
+        exitPointSpriteRenderer.sprite = levelManager.KeysManager.AllKeysCollected ? endPointActive : endPoint;
     }
 
     public void ReloadPointMarkers(Level level)
     {
-        float unitSize = LevelManager.Instance.UnitSize;
+        float unitSize = levelManager.UnitSize;
 
         Vector3 scale = new(unitSize, unitSize, unitSize);
         StartPointSprite.transform.localScale = scale;
@@ -57,9 +60,9 @@ public class PointMarkerManager : LevelContentManager
     private void OnSpriteTrigger(GameObject triggerObject)
     {
         if (triggerObject != null && triggerObject.name == "ExitPointSprite"
-            && LevelManager.Instance.KeysManager.AllKeysCollected)
+            && levelManager.KeysManager.AllKeysCollected)
         {
-            LevelManager.Instance.WinLevel();
+            levelManager.WinLevel();
         }
     }
 }

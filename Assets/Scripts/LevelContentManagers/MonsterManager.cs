@@ -23,6 +23,9 @@ public class MonsterManager : LevelContentManager
     private float remainingEscapeClicks = -1;
 
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private GameObject monsterOverlay;
     [SerializeField]
     private ViewportFlash viewportFlash;
@@ -55,15 +58,15 @@ public class MonsterManager : LevelContentManager
 
     private void LateUpdate()
     {
-        if (TimeToSpawn == null || GridPosition == null || LevelManager.Instance.IsGameOver
-            || LevelManager.Instance.IsPaused)
+        if (TimeToSpawn == null || GridPosition == null || levelManager.IsGameOver
+            || levelManager.IsPaused)
         {
             monsterOverlay.SetActive(false);
             return;
         }
 
-        float unitSize = LevelManager.Instance.UnitSize;
-        PlayerManager player = LevelManager.Instance.PlayerManager;
+        float unitSize = levelManager.UnitSize;
+        PlayerManager player = levelManager.PlayerManager;
         Vector3 gamePos = new(GridPosition.Value.x * -unitSize, 0, GridPosition.Value.y * unitSize);
         if (remainingEscapeClicks < 0)
         {
@@ -115,7 +118,7 @@ public class MonsterManager : LevelContentManager
 
             if (remainingLevelStruggle <= 0)
             {
-                LevelManager.Instance.KillPlayer();
+                levelManager.KillPlayer();
                 monsterOverlay.SetActive(false);
                 KillMonster();
             }
@@ -146,9 +149,9 @@ public class MonsterManager : LevelContentManager
 
     public void ProcessMonsterMove()
     {
-        Level level = LevelManager.Instance.CurrentLevel;
-        Transform player = LevelManager.Instance.PlayerManager.transform;
-        float unitSize = LevelManager.Instance.UnitSize;
+        Level level = levelManager.CurrentLevel;
+        Transform player = levelManager.PlayerManager.transform;
+        float unitSize = levelManager.UnitSize;
         Vector3 heightOffset = new(0, unitSize / 4, 0);
 
         if (TimeToSpawn == null || GridPosition == null || !thisRenderer.enabled)
@@ -184,7 +187,7 @@ public class MonsterManager : LevelContentManager
         List<Vector2> movements = new() { new Vector2(0, 1), new Vector2(0, -1), new Vector2(-1, 0), new Vector2(1, 0) };
         while (movementVector == null || !level.IsCoordInBounds(GridPosition.Value + movementVector.Value)
             || level[GridPosition.Value + movementVector.Value].MonsterCollide
-            || GridPosition.Value + movementVector.Value == LevelManager.Instance.PlayerWallManager.WallPosition)
+            || GridPosition.Value + movementVector.Value == levelManager.PlayerWallManager.WallPosition)
         {
             if (movements.Count == 0)
             {
@@ -205,7 +208,7 @@ public class MonsterManager : LevelContentManager
 
     public void KillMonster()
     {
-        GridPosition = LevelManager.Instance.CurrentLevel.MonsterStart;
+        GridPosition = levelManager.CurrentLevel.MonsterStart;
         thisRenderer.enabled = false;
     }
 
@@ -249,7 +252,7 @@ public class MonsterManager : LevelContentManager
 
     private void ProcessLightFlicker()
     {
-        float distance = Mathf.Pow(Vector2.Distance(GridPosition!.Value, LevelManager.Instance.PlayerManager.GridPosition), 2);
+        float distance = Mathf.Pow(Vector2.Distance(GridPosition!.Value, levelManager.PlayerManager.GridPosition), 2);
         // Flicker on every monster movement when close. Also don't divide by anything less than 1, it will have no more effect than just 1.
         distance = Mathf.Max(1, distance - 10);
         // < 1 exponent makes probability decay less with distance

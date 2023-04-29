@@ -4,6 +4,9 @@ using UnityEngine.XR;
 public class FlagManager : LevelContentManager
 {
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private GameObject flagSpritePrefab;
 
     [SerializeField]
@@ -22,7 +25,7 @@ public class FlagManager : LevelContentManager
 
     public bool IsFlagged(Vector2 coord, out GameObject flag)
     {
-        float unitSize = LevelManager.Instance.UnitSize;
+        float unitSize = levelManager.UnitSize;
         Vector3 pos = new(coord.x * -unitSize, 0, coord.y * unitSize);
         foreach (Transform child in transform)
         {
@@ -39,18 +42,18 @@ public class FlagManager : LevelContentManager
     private void OnPlaceFlag()
     {
         float handUpProduct = Vector3.Dot(leftHand.transform.up, Vector3.up);
-        if (!LevelManager.Instance.PlayerManager.HasMovedThisLevel
-            || LevelManager.Instance.MonsterManager.IsPlayerStruggling
-            || LevelManager.Instance.IsGameOver
-            || LevelManager.Instance.IsPaused
+        if (!levelManager.PlayerManager.HasMovedThisLevel
+            || levelManager.MonsterManager.IsPlayerStruggling
+            || levelManager.IsGameOver
+            || levelManager.IsPaused
             || mapContainer.activeSelf
             // Flag action is only if hand is facing downwards
             || (XRSettings.enabled && handUpProduct < leftHand.ThreewaySelectionCrossover))
         {
             return;
         }
-        float unitSize = LevelManager.Instance.UnitSize;
-        Vector2 coord = LevelManager.Instance.PlayerManager.GridPosition;
+        float unitSize = levelManager.UnitSize;
+        Vector2 coord = levelManager.PlayerManager.GridPosition;
         Vector3 pos = new(coord.x * -unitSize, 0, coord.y * unitSize);
 
         if (IsFlagged(coord, out GameObject flag))
@@ -59,11 +62,12 @@ public class FlagManager : LevelContentManager
             return;
         }
 
-        GameObject keySprite = Instantiate(
+        GameObject flagSprite = Instantiate(
                 flagSpritePrefab, pos, Quaternion.identity);
-        keySprite.name = $"Key{coord.x}-{coord.y}Sprite";
-        keySprite.transform.parent = transform;
-        keySprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
+        flagSprite.name = $"Key{coord.x}-{coord.y}Sprite";
+        flagSprite.transform.parent = transform;
+        flagSprite.transform.localScale = new Vector3(unitSize, unitSize, unitSize);
+        flagSprite.GetComponent<FlagSprite>().levelManager = levelManager;
 
         flagSound.PlayOneShot(flagSoundClips[Random.Range(0, flagSoundClips.Length)]);
     }

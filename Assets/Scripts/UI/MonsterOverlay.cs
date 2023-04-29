@@ -15,6 +15,9 @@ public class MonsterOverlay : MonoBehaviour
     private CanvasScaler thisScaler;
 
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private Image monsterFace;
     [SerializeField]
     private GameObject hintText;
@@ -61,6 +64,6 @@ public class MonsterOverlay : MonoBehaviour
 
     private void OnEscapeMonster()
     {
-        LevelManager.Instance.MonsterManager.EscapeMonsterClick();
+        levelManager.MonsterManager.EscapeMonsterClick();
     }
 }

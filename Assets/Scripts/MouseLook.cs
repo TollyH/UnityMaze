@@ -6,17 +6,20 @@ public class MouseLook : MonoBehaviour
     public float Sensitivity;
 
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private GameObject mapContainer;
 
     private void Start()
     {
-        inputActions = LevelManager.Instance.InputActions;
+        inputActions = levelManager.InputActions;
     }
 
     private void Update()
     {
-        if (LevelManager.Instance.IsGameOver || mapContainer.activeSelf
-            || LevelManager.Instance.IsPaused)
+        if (levelManager.IsGameOver || mapContainer.activeSelf
+            || levelManager.IsPaused)
         {
             return;
         }
@@ -32,7 +35,7 @@ public class MouseLook : MonoBehaviour
 
     private void OnLockMouse()
     {
-        if (LevelManager.Instance.PlayerManager.HasGun && Cursor.lockState == CursorLockMode.Locked)
+        if (levelManager.PlayerManager.HasGun && Cursor.lockState == CursorLockMode.Locked)
         {
             return;
         }

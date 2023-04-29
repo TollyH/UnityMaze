@@ -6,6 +6,9 @@ public class PlayerActions : MonoBehaviour
     private PlayerManager player;
 
     [SerializeField]
+    private LevelManager levelManager;
+
+    [SerializeField]
     private AudioSource gunfire;
     [SerializeField]
     private AudioSource vrGunfire;
@@ -15,15 +18,15 @@ public class PlayerActions : MonoBehaviour
 
     private void Start()
     {
-        player = LevelManager.Instance.PlayerManager;
+        player = levelManager.PlayerManager;
     }
 
     private void OnFireGun()
     {
         if (!player.HasGun
-            || LevelManager.Instance.MonsterManager.IsPlayerStruggling
-            || LevelManager.Instance.IsGameOver
-            || LevelManager.Instance.IsPaused
+            || levelManager.MonsterManager.IsPlayerStruggling
+            || levelManager.IsGameOver
+            || levelManager.IsPaused
             || (Cursor.lockState != CursorLockMode.Locked && !XRSettings.enabled))
         {
             return;
@@ -48,9 +51,9 @@ public class PlayerActions : MonoBehaviour
         if (Physics.Raycast(position, direction, out RaycastHit hit))
         {
             Debug.DrawLine(position, hit.point, Colors.Green, 500);
-            if (hit.collider.transform == LevelManager.Instance.MonsterManager.transform)
+            if (hit.collider.transform == levelManager.MonsterManager.transform)
             {
-                LevelManager.Instance.MonsterManager.KillMonster();
+                levelManager.MonsterManager.KillMonster();
             }
         }
     }

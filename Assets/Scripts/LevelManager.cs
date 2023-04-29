@@ -10,8 +10,6 @@ using UnityEngine.XR;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager Instance { get; private set; }
-
     public ControlMap InputActions { get; private set; }
 
     public int CurrentLevelIndex { get; private set; }
@@ -66,24 +64,14 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        // LevelManager is a singleton
-        if (Instance == null)
+        InputActions = new ControlMap();
+        allInputs = FindObjectsOfType<PlayerInput>();
+        contentManagers = new LevelContentManager[9]
         {
-            Instance = this;
-            InputActions = new ControlMap();
-            allInputs = FindObjectsOfType<PlayerInput>();
-            contentManagers = new LevelContentManager[9]
-            {
-                KeysManager, DecorationsManager, WallsManager, PickupsManager, PointMarkerManager,
-                MonsterManager, PlayerManager, PlayerWallManager, FlagManager
-            };
-            DontDestroyOnLoad(gameObject);
-            LoadLevelJson(Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+            KeysManager, DecorationsManager, WallsManager, PickupsManager, PointMarkerManager,
+            MonsterManager, PlayerManager, PlayerWallManager, FlagManager
+        };
+        LoadLevelJson(Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
     }
 
     private void OnEnable()
