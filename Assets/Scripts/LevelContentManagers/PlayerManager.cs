@@ -24,11 +24,17 @@ public class PlayerManager : LevelContentManager
     [SerializeField]
     private LevelManager levelManager;
 
+    [SerializeField]
+    private ViewportFlash viewportFlash;
+
     private CharacterController characterController;
     private CapsuleCollider capsuleCollider;
 
     [SerializeField]
     private AudioSource ambience;
+
+    [SerializeField]
+    private AudioSource playerHit;
 
     [SerializeField]
     private AudioSource footstep;
@@ -37,6 +43,8 @@ public class PlayerManager : LevelContentManager
     [SerializeField]
     private AudioSource breathing;
     private Dictionary<int, AudioClip> breathingClips;
+
+    private int lastHitsRemaining;
 
     private void Awake()
     {
@@ -51,6 +59,14 @@ public class PlayerManager : LevelContentManager
             { 5, Resources.Load<AudioClip>("Sounds/player_breathe/medium") },
             { 10, Resources.Load<AudioClip>("Sounds/player_breathe/light") }
         };
+    }
+
+    private void Start()
+    {
+        if (levelManager.IsMulti)
+        {
+            lastHitsRemaining = levelManager.MultiplayerManager.HitsRemaining;
+        }
     }
 
     private void Update()
@@ -105,6 +121,16 @@ public class PlayerManager : LevelContentManager
         else if (!ambience.isPlaying)
         {
             ambience.Play();
+        }
+
+        if (levelManager.IsMulti)
+        {
+            if (levelManager.MultiplayerManager.HitsRemaining < lastHitsRemaining)
+            {
+                playerHit.Play();
+                float hitsValue = 1 / (levelManager.MultiplayerManager.HitsRemaining + 1f);
+                viewportFlash.PerformFlash(Colors.Red, hitsValue, startAlpha: hitsValue);
+            }
         }
     }
 
