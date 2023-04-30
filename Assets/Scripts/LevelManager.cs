@@ -97,7 +97,10 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        LoadLevel(0);
+        if (!IsMulti)
+        {
+            LoadLevel(0);
+        }
         UpdateHighscores();
     }
 

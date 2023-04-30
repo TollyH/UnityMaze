@@ -71,8 +71,8 @@ public class Multiplayer
         }
 
         playerKey = joinResponse.Value.Item1;
-        levelManager.LoadLevel(joinResponse.Value.Item2);
         IsCoop = joinResponse.Value.Item3;
+        levelManager.LoadLevel(joinResponse.Value.Item2);
     }
 
     public void Ping(Vector3 position)
@@ -106,7 +106,20 @@ public class Multiplayer
                 // Remove items no longer present on the server
                 foreach (Transform child in levelManager.PickupsManager.transform)
                 {
-                    if (!pickedUpItems.Contains(child.position.ToMazePosition(levelManager.UnitSize)))
+                    Vector2 pos = child.position.ToMazePosition(levelManager.UnitSize);
+                    Vector2 roundedPos = new(Mathf.Round(pos.x - (2 / levelManager.UnitSize)),
+                        Mathf.Round(pos.y - (2 / levelManager.UnitSize)));
+                    if (!pickedUpItems.Contains(roundedPos))
+                    {
+                        UnityEngine.Object.Destroy(child.gameObject);
+                    }
+                }
+                foreach (Transform child in levelManager.KeysManager.transform)
+                {
+                    Vector2 pos = child.position.ToMazePosition(levelManager.UnitSize);
+                    Vector2 roundedPos = new(Mathf.Round(pos.x - (2 / levelManager.UnitSize)),
+                        Mathf.Round(pos.y - (2 / levelManager.UnitSize)));
+                    if (!pickedUpItems.Contains(roundedPos))
                     {
                         UnityEngine.Object.Destroy(child.gameObject);
                     }
