@@ -61,6 +61,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private GameObject pauseScreen;
     [SerializeField]
+    private ViewportFlash viewportFlash;
+    [SerializeField]
     private VRHand leftHand;
     [SerializeField]
     private VRHand rightHand;
@@ -259,6 +261,7 @@ public class LevelManager : MonoBehaviour
         {
             MultiplayerManager.Respawn();
             PlayerManager.RandomisePlayerCoords();
+            viewportFlash.PerformFlash(Colors.Red, 1);
             return;
         }
 

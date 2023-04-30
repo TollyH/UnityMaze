@@ -6449,6 +6449,7 @@ MonoBehaviour:
   deathScreen: {fileID: 404898770}
   victoryScreen: {fileID: 580459993}
   pauseScreen: {fileID: 1604927923}
+  viewportFlash: {fileID: 518296380}
   leftHand: {fileID: 1936967799}
   rightHand: {fileID: 351024524}
 --- !u!114 &1518488895
