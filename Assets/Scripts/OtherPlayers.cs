@@ -29,7 +29,7 @@ public class OtherPlayers : MonoBehaviour
         while (playerRenderers.Count < otherPlayers.Length)
         {
             GameObject newPlayer = Instantiate(spritePrefab, transform);
-            playerRenderers.Add(newPlayer.GetComponent<SpriteRenderer>());
+            playerRenderers.Add(newPlayer.GetComponentInChildren<SpriteRenderer>());
         }
 
         while (playerRenderers.Count > otherPlayers.Length)
@@ -44,6 +44,7 @@ public class OtherPlayers : MonoBehaviour
             Vector2 maze2dPos = otherPlayers[i].Pos.ToVector2().MazeToWorldPosition(levelManager.UnitSize);
             Vector3 mazePos = new(maze2dPos.x, 0, maze2dPos.y);
             playerRenderers[i].transform.position = mazePos;
+            playerRenderers[i].transform.localScale = new Vector3(levelManager.UnitSize, levelManager.UnitSize, levelManager.UnitSize);
         }
     }
 }
