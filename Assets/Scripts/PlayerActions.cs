@@ -50,7 +50,6 @@ public class PlayerActions : MonoBehaviour
 
         if (Physics.Raycast(position, direction, out RaycastHit hit))
         {
-            Debug.DrawLine(position, hit.point, Colors.Green, 500);
             if (hit.collider.transform == levelManager.MonsterManager.transform)
             {
                 levelManager.MonsterManager.KillMonster();
