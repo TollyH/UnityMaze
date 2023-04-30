@@ -61,14 +61,6 @@ public class PlayerManager : LevelContentManager
         };
     }
 
-    private void Start()
-    {
-        if (levelManager.IsMulti)
-        {
-            lastHitsRemaining = levelManager.MultiplayerManager.HitsRemaining;
-        }
-    }
-
     private void Update()
     {
         if (HasMovedThisLevel && !levelManager.IsGameOver
@@ -123,13 +115,18 @@ public class PlayerManager : LevelContentManager
             ambience.Play();
         }
 
-        if (levelManager.IsMulti)
+        if (levelManager.IsMulti && !levelManager.IsGameOver)
         {
             if (levelManager.MultiplayerManager.HitsRemaining < lastHitsRemaining)
             {
                 playerHit.Play();
                 float hitsValue = 1 / (levelManager.MultiplayerManager.HitsRemaining + 1f);
                 viewportFlash.PerformFlash(Colors.Red, hitsValue, startAlpha: hitsValue);
+                lastHitsRemaining = levelManager.MultiplayerManager.HitsRemaining;
+            }
+            else if (levelManager.MultiplayerManager.HitsRemaining > lastHitsRemaining)
+            {
+                lastHitsRemaining = levelManager.MultiplayerManager.HitsRemaining;
             }
         }
     }
