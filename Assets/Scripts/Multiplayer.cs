@@ -73,25 +73,6 @@ public class Multiplayer
         playerKey = joinResponse.Value.Item1;
         levelManager.LoadLevel(joinResponse.Value.Item2);
         IsCoop = joinResponse.Value.Item3;
-
-        if (!IsCoop)
-        {
-            levelManager.PlayerManager.RandomisePlayerCoords();
-            // Remove pickups and monsters from deathmatches.
-            levelManager.KeysManager.gameObject.DestroyAllChildren();
-            levelManager.PickupsManager.gameObject.DestroyAllChildren();
-            levelManager.CurrentLevel.MonsterStart = null;
-            levelManager.CurrentLevel.MonsterWait = null;
-            levelManager.CurrentLevel.EndPoint = new Vector2(-1, -1);  // Make end inaccessible in deathmatches
-            levelManager.CurrentLevel.StartPoint = new Vector2(-1, -1);  // Hide start point in deathmatches
-            levelManager.PointMarkerManager.ReloadPointMarkers(levelManager.CurrentLevel);
-            levelManager.PlayerManager.HasGun = true; // Player always has gun in deathmatch
-        }
-        else
-        {
-            // Spawn monster instantly in coop (if there is one)
-            levelManager.CurrentLevel.MonsterWait = levelManager.CurrentLevel.MonsterStart == null ? null : 0;
-        }
     }
 
     public void Ping(Vector3 position)

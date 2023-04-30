@@ -163,6 +163,29 @@ public class LevelManager : MonoBehaviour
         playerInput.enabled = true;
         uiInput.enabled = true;
 
+        if (IsMulti)
+        {
+            if (!MultiplayerManager.IsCoop)
+            {
+                PlayerManager.RandomisePlayerCoords();
+                // Remove pickups and monsters from deathmatches.
+                CurrentLevel.ExitKeys.Clear();
+                CurrentLevel.KeySensors.Clear();
+                CurrentLevel.Guns.Clear();
+                CurrentLevel.MonsterStart = null;
+                CurrentLevel.MonsterWait = null;
+                CurrentLevel.EndPoint = new Vector2(-1, -1);  // Make end inaccessible in deathmatches
+                CurrentLevel.StartPoint = new Vector2(-1, -1);  // Hide start point in deathmatches
+                PointMarkerManager.ReloadPointMarkers(CurrentLevel);
+                PlayerManager.HasGun = true; // Player always has gun in deathmatch
+            }
+            else
+            {
+                // Spawn monster instantly in coop (if there is one)
+                CurrentLevel.MonsterWait = CurrentLevel.MonsterStart == null ? null : 0;
+            }
+        }
+
         foreach (LevelContentManager manager in contentManagers)
         {
             manager.OnLevelLoad(level);
