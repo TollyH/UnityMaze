@@ -3173,7 +3173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1518488894}
   spritePrefab: {fileID: 3687834168950131581, guid: 8a895bd6ecec15049b3925f37f81560f, type: 3}
-  triggerSpritePrefab: {fileID: 7850154813624118141, guid: 4d541926f9debdf40b2705981e7c8e99, type: 3}
 --- !u!1 &684761389
 GameObject:
   m_ObjectHideFlags: 0
@@ -4554,6 +4553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1518488894}
+  viewportFlash: {fileID: 518296380}
   gunfire: {fileID: 1206789354}
   vrGunfire: {fileID: 919132147890835671}
   barrelStart: {fileID: 1072327852}

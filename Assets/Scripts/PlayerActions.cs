@@ -9,6 +9,9 @@ public class PlayerActions : MonoBehaviour
     private LevelManager levelManager;
 
     [SerializeField]
+    private ViewportFlash viewportFlash;
+
+    [SerializeField]
     private AudioSource gunfire;
     [SerializeField]
     private AudioSource vrGunfire;
@@ -31,19 +34,19 @@ public class PlayerActions : MonoBehaviour
         {
             return;
         }
-        player.HasGun = false;
 
         Vector3 direction;
         Vector3 position;
+        AudioSource audioSource;
         if (XRSettings.enabled)
         {
-            vrGunfire.Play();
+            audioSource = vrGunfire;
             position = barrelStart.transform.position;
             direction = barrelStart.transform.forward;
         }
         else
         {
-            gunfire.Play();
+            audioSource = gunfire;
             position = Camera.main.transform.position;
             direction = Camera.main.transform.forward;
         }
@@ -54,6 +57,28 @@ public class PlayerActions : MonoBehaviour
             {
                 levelManager.MonsterManager.KillMonster();
             }
+        }
+
+        if (levelManager.IsMulti)
+        {
+            ShotResponse response = levelManager.MultiplayerManager.FireGun(position, direction);
+            if (!levelManager.MultiplayerManager.IsCoop && response is ShotResponse.HitNoKill or ShotResponse.Killed)
+            {
+                viewportFlash.PerformFlash(Colors.White, 0.4f, 0.4f);
+            }
+            if (response != ShotResponse.Denied)
+            {
+                audioSource.Play();
+            }
+            if (levelManager.MultiplayerManager.IsCoop)
+            {
+                player.HasGun = false;
+            }
+        }
+        else
+        {
+            player.HasGun = false;
+            audioSource.Play();
         }
     }
 }
