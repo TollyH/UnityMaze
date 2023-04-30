@@ -84,10 +84,9 @@ public class Multiplayer
 
     public ShotResponse FireGun(Vector3 position, Vector3 direction)
     {
-        Vector2 mazePosition = new((-position.x + (levelManager.UnitSize / 2)) / levelManager.UnitSize,
-            (position.z + (levelManager.UnitSize / 2)) / levelManager.UnitSize);
         Vector2 direction2d = new Vector2(direction.x, direction.z).normalized;
-        ShotResponse? response = NetCode.FireGun(sock, addr, playerKey, mazePosition, direction2d);
+        ShotResponse? response = NetCode.FireGun(sock, addr, playerKey,
+            position.ToMazePosition(levelManager.UnitSize), direction2d);
         return response ?? ShotResponse.Denied;
     }
 }

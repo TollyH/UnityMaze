@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public static class Extensions
@@ -24,7 +23,13 @@ public static class Extensions
     {
         while (gameObject.transform.childCount > 0)
         {
-            UnityEngine.Object.DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
+            Object.DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
         }
+    }
+
+    public static Vector2 ToMazePosition(this Vector3 position, float unitSize)
+    {
+        return new((-position.x + (unitSize / 2)) / unitSize,
+            (position.z + (unitSize / 2)) / unitSize);
     }
 }
