@@ -259,6 +259,11 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        if (IsMulti)
+        {
+            return;
+        }
+
         float handUpProduct = Vector3.Dot(leftHand.transform.up, Vector3.up);
         // Pause action is only if hand is facing upwards
         if (IsPaused || (XRSettings.enabled && handUpProduct > -leftHand.ThreewaySelectionCrossover && !IsGameOver))
