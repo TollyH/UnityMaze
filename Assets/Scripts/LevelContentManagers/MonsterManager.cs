@@ -162,7 +162,7 @@ public class MonsterManager : LevelContentManager
         Vector2? prevLastPosition = lastPosition;
         lastPosition = GridPosition;
 
-        Vector3 rayDirection = (player.position + heightOffset) - (transform.position + heightOffset);
+        Vector3 rayDirection = player.position + heightOffset - (transform.position + heightOffset);
         Vector2? movementVector = null;
         if (Physics.Raycast(transform.position + heightOffset, rayDirection, out RaycastHit hit))
         {

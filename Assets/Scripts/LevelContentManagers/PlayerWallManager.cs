@@ -85,7 +85,7 @@ public class PlayerWallManager : LevelContentManager
             || mapContainer.activeSelf
             // Wall action is only if hand is facing outwards
             || (XRSettings.enabled &&
-                (handUpProduct < -leftHand.ThreewaySelectionCrossover 
+                (handUpProduct < -leftHand.ThreewaySelectionCrossover
                 || handUpProduct > leftHand.ThreewaySelectionCrossover)))
         {
             return;

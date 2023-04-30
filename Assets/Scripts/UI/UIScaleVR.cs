@@ -3,7 +3,7 @@ using UnityEngine.XR;
 
 public class UIScaleVR : MonoBehaviour
 {
-    ControlMap inputActions;
+    private ControlMap inputActions;
 
     [SerializeField]
     private LevelManager levelManager;
