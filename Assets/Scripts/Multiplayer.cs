@@ -57,8 +57,12 @@ public class Multiplayer
             quit = true;
         }
 
-        if (!quit)
+        if (quit)
         {
+            Application.Quit();
+            return;
+        }
+
             playerKey = joinResponse.Value.Item1;
             levelManager.LoadLevel(joinResponse.Value.Item2);
             IsCoop = joinResponse.Value.Item3;
@@ -74,11 +78,7 @@ public class Multiplayer
                 levelManager.CurrentLevel.EndPoint = new Vector2(-1, -1);  // Make end inaccessible in deathmatches
                 levelManager.CurrentLevel.StartPoint = new Vector2(-1, -1);  // Hide start point in deathmatches
                 levelManager.PointMarkerManager.ReloadPointMarkers(levelManager.CurrentLevel);
-            }
-        }
-        else
-        {
-            Application.Quit();
+            levelManager.PlayerManager.HasGun = true; // Player always has gun in deathmatch
         }
     }
 }
