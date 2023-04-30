@@ -15,6 +15,8 @@ public class InGameUI : MonoBehaviour
     private float timeToCompassCharge;
     private bool isCompassBurnedOut;
 
+    private Vector2 lastMapDrawnDimensions = new(-1, -1);
+
     private Canvas thisCanvas;
     private CanvasScaler thisScaler;
 
@@ -204,7 +206,6 @@ public class InGameUI : MonoBehaviour
 
     private void UpdateMap()
     {
-        mapSquaresContainer.DestroyAllChildren();
         if (!mapContainer.activeSelf)
         {
             return;
@@ -215,6 +216,23 @@ public class InGameUI : MonoBehaviour
         Vector2 tileSize = new(mapContainerRect.width / currentLevel.Dimensions.x, mapContainerRect.height / currentLevel.Dimensions.y);
         Vector2 playerGridPosition = player.MazePosition;
         HashSet<Vector2> keyPositions = levelManager.KeysManager.GetRemainingKeyCoords();
+
+        if (lastMapDrawnDimensions != currentLevel.Dimensions)
+        {
+            mapSquaresContainer.DestroyAllChildren();
+            for (int x = 0; x < currentLevel.Dimensions.x; x++)
+            {
+                for (int y = 0; y < currentLevel.Dimensions.y; y++)
+                {
+                    GameObject newMapSquare = Instantiate(mapSquarePrefab, mapSquaresContainer.transform, false);
+                    newMapSquare.name = $"MapSquare{x}-{y}";
+                    RectTransform rect = newMapSquare.GetComponent<RectTransform>();
+                    rect.sizeDelta = tileSize;
+                    rect.localPosition = new Vector3((x * tileSize.x) - (mapContainerRect.width / 2), (mapContainerRect.height / 2) - (y * tileSize.y), 0);
+                }
+            }
+            lastMapDrawnDimensions = currentLevel.Dimensions;
+        }
 
         for (int x = 0; x < currentLevel.Dimensions.x; x++)
         {
@@ -251,13 +269,7 @@ public class InGameUI : MonoBehaviour
                     colour = currentLevel[pnt].Wall is null ? Colors.White : Colors.Black;
                 }
 
-                GameObject newMapSquare = Instantiate(mapSquarePrefab, mapSquaresContainer.transform, false);
-                newMapSquare.name = $"MapSquare{x}-{y}";
-                RectTransform rect = newMapSquare.GetComponent<RectTransform>();
-                rect.sizeDelta = tileSize;
-                rect.localPosition = new Vector3((x * tileSize.x) - (mapContainerRect.width / 2), (mapContainerRect.height / 2) - (y * tileSize.y), 0);
-                Image image = newMapSquare.GetComponent<Image>();
-                image.color = colour;
+                mapSquaresContainer.transform.GetChild((x * (int)currentLevel.Dimensions.y) + y).GetComponent<Image>().color = colour;
             }
         }
 
