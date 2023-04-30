@@ -229,6 +229,13 @@ public class LevelManager : MonoBehaviour
 
     private void OnPause()
     {
+        if (IsMulti && !MultiplayerManager.IsCoop && deathScreen.activeSelf)
+        {
+            MultiplayerManager.Respawn();
+            PlayerManager.RandomisePlayerCoords();
+            return;
+        }
+
         float handUpProduct = Vector3.Dot(leftHand.transform.up, Vector3.up);
         // Pause action is only if hand is facing upwards
         if (IsPaused || (XRSettings.enabled && handUpProduct > -leftHand.ThreewaySelectionCrossover && !IsGameOver))

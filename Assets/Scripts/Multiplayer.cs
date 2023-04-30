@@ -137,6 +137,11 @@ public class Multiplayer
         return response ?? ShotResponse.Denied;
     }
 
+    public void Respawn()
+    {
+        NetCode.Respawn(sock, addr, playerKey);
+    }
+
     public void LeaveServer()
     {
         NetCode.LeaveServer(sock, addr, playerKey);
