@@ -32,4 +32,10 @@ public static class Extensions
         return new((-position.x + (unitSize / 2)) / unitSize,
             (position.z + (unitSize / 2)) / unitSize);
     }
+
+    public static Vector2 MazeToWorldPosition(this Vector2 position, float unitSize)
+    {
+        return new((unitSize / 2) - (position.x * unitSize),
+            (position.y * unitSize) - (unitSize / 2));
+    }
 }
