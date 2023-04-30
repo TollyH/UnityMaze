@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -7,6 +8,12 @@ using UnityEngine;
 public class Multiplayer
 {
     public bool IsCoop { get; private set; } = false;
+
+    public NetData.Player[] OtherPlayers { get; private set; } = Array.Empty<NetData.Player>();
+    public byte HitsRemaining { get; private set; } = 1;
+    public byte LastKillerSkin { get; private set; } = 0;
+    public ushort Kills { get; private set; } = 0;
+    public ushort Deaths { get; private set; } = 0;
 
     private LevelManager levelManager;
 
@@ -79,6 +86,46 @@ public class Multiplayer
             levelManager.CurrentLevel.StartPoint = new Vector2(-1, -1);  // Hide start point in deathmatches
             levelManager.PointMarkerManager.ReloadPointMarkers(levelManager.CurrentLevel);
             levelManager.PlayerManager.HasGun = true; // Player always has gun in deathmatch
+        }
+    }
+
+    public void Ping(Vector3 position)
+    {
+        if (!IsCoop)
+        {
+            (byte, byte, ushort, ushort, NetData.Player[])? pingResponse = NetCode.PingServer(
+                sock, addr, playerKey, position.ToMazePosition(levelManager.UnitSize));
+            if (pingResponse != null)
+            {
+                HitsRemaining = pingResponse.Value.Item1;
+                LastKillerSkin = pingResponse.Value.Item2;
+                Kills = pingResponse.Value.Item3;
+                Deaths = pingResponse.Value.Item4;
+                OtherPlayers = pingResponse.Value.Item5;
+            }
+        }
+        else
+        {
+            (bool, Vector2?, NetData.Player[], HashSet<Vector2>)? pingResponse = NetCode.PingServerCoop(
+                sock, addr, playerKey, position.ToMazePosition(levelManager.UnitSize));
+            if (pingResponse != null)
+            {
+                if (pingResponse.Value.Item1)
+                {
+                    levelManager.KillPlayer();
+                }
+                levelManager.MonsterManager.GridPosition = pingResponse.Value.Item2;
+                OtherPlayers = pingResponse.Value.Item3;
+                HashSet<Vector2> pickedUpItems = pingResponse.Value.Item4;
+                // Remove items no longer present on the server
+                foreach (Transform child in levelManager.PickupsManager.transform)
+                {
+                    if (!pickedUpItems.Contains(child.position.ToMazePosition(levelManager.UnitSize)))
+                    {
+                        UnityEngine.Object.Destroy(child.gameObject);
+                    }
+                }
+            }
         }
     }
 

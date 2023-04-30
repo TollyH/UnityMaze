@@ -19,6 +19,8 @@ public class LevelManager : MonoBehaviour
 
     public float UnitSize = 4f;
 
+    public float MultiplayerPingInterval = 0.04f;
+
     public bool IsGameOver { get; private set; } = false;
     public bool IsPaused { get; private set; } = false;
 
@@ -63,6 +65,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private VRHand rightHand;
 
+    private float timeSinceServerPing = 0;
+
     private PlayerInput[] allInputs;
 
     private void Awake()
@@ -95,6 +99,34 @@ public class LevelManager : MonoBehaviour
     {
         LoadLevel(0);
         UpdateHighscores();
+    }
+
+    private void Update()
+    {
+        if (IsMulti)
+        {
+            timeSinceServerPing += Time.deltaTime;
+            if (timeSinceServerPing >= MultiplayerPingInterval)
+            {
+                timeSinceServerPing = 0;
+                MultiplayerManager.Ping(PlayerManager.transform.position);
+                if (!MultiplayerManager.IsCoop)
+                {
+                    if (MultiplayerManager.HitsRemaining == 0)
+                    {
+                        KillPlayer();
+                    }
+                    if (deathScreen.activeSelf && MultiplayerManager.HitsRemaining != 0)
+                    {
+                        // We were dead, but server has processed our respawn.
+                        IsGameOver = false;
+                        deathScreen.SetActive(false);
+                        playerInput.enabled = true;
+                        uiInput.enabled = true;
+                    }
+                }
+            }
+        }
     }
 
     private void LateUpdate()

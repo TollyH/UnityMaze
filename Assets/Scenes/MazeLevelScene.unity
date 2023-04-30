@@ -6289,6 +6289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitSize: 4
+  MultiplayerPingInterval: 0.04
   <KeysManager>k__BackingField: {fileID: 717386423}
   <DecorationsManager>k__BackingField: {fileID: 660790188}
   <WallsManager>k__BackingField: {fileID: 1867482601}

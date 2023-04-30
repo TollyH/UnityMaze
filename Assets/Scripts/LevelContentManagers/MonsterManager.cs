@@ -10,7 +10,7 @@ public class MonsterManager : LevelContentManager
     public float FieldOfViewRaycasts = 50;
     public float FieldOfView = 53;
 
-    public Vector2? GridPosition { get; private set; }
+    public Vector2? GridPosition { get; internal set; }
     public float? TimeToSpawn { get; private set; }
     public float TimeToMove { get; private set; }
 
