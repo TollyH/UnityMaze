@@ -15,9 +15,9 @@ public class Multiplayer
     public ushort Kills { get; private set; } = 0;
     public ushort Deaths { get; private set; } = 0;
 
-    private LevelManager levelManager;
+    private readonly LevelManager levelManager;
 
-    private string multiplayerServer;
+    private readonly string multiplayerServer;
 
     private UdpClient sock;
     private IPEndPoint addr;

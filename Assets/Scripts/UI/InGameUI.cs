@@ -48,7 +48,7 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI resetPrompt;
     [SerializeField]
-    public GameObject pauseBorder;
+    private GameObject pauseBorder;
 
 
     [SerializeField]
