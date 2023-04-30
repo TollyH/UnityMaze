@@ -163,7 +163,8 @@ public class PlayerManager : LevelContentManager
         LevelMoves = 0;
         HasMovedThisLevel = false;
         RemainingKeySensorTime = 0;
-        HasGun = false;
+        // Player always starts with gun in deathmatch
+        HasGun = levelManager.IsMulti && !levelManager.MultiplayerManager.IsCoop;
 
         // Initialise player position, place them in the middle of the square
         Vector2 startPos = level.StartPoint * unitSize;
