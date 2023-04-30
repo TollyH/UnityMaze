@@ -136,4 +136,9 @@ public class Multiplayer
             position.ToMazePosition(levelManager.UnitSize), direction2d);
         return response ?? ShotResponse.Denied;
     }
+
+    public void LeaveServer()
+    {
+        NetCode.LeaveServer(sock, addr, playerKey);
+    }
 }

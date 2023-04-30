@@ -11,6 +11,15 @@ public class ReturnToTitle
 
     private static bool Application_wantsToQuit()
     {
+        // Leave any multiplayer games
+        foreach (LevelManager levelManager in Object.FindObjectsOfType<LevelManager>())
+        {
+            if (levelManager.IsMulti)
+            {
+                levelManager.MultiplayerManager.LeaveServer();
+            }
+        }
+
         // Return to title screen when quitting if title screen isn't already active
         if (SceneManager.GetActiveScene().path != "Assets/Scenes/TitleScreen.unity")
         {
