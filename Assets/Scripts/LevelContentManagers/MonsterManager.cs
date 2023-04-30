@@ -73,7 +73,7 @@ public class MonsterManager : LevelContentManager
             monsterOverlay.SetActive(false);
             if (!thisRenderer.enabled)
             {
-                if (player.HasMovedThisLevel)
+                if (player.HasMovedThisLevel || levelManager.IsMulti)
                 {
                     TimeToSpawn -= Time.deltaTime;
                     if ((TimeToSpawn <= 0 && Vector3.Distance(player.transform.position, gamePos) > 2 * unitSize)
