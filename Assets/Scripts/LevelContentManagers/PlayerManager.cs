@@ -166,9 +166,12 @@ public class PlayerManager : LevelContentManager
         // Player always starts with gun in deathmatch
         HasGun = levelManager.IsMulti && !levelManager.MultiplayerManager.IsCoop;
 
-        // Initialise player position, place them in the middle of the square
-        Vector2 startPos = level.StartPoint * unitSize;
-        characterController.MoveAbsolute(new Vector3(-startPos.x, transform.position.y, startPos.y));
+        if (!levelManager.IsMulti || levelManager.MultiplayerManager.IsCoop)
+        {
+            // Initialise player position, place them in the middle of the square
+            Vector2 startPos = level.StartPoint * unitSize;
+            characterController.MoveAbsolute(new Vector3(-startPos.x, transform.position.y, startPos.y));
+        }
         if (!XRSettings.enabled)
         {
             characterController.height = unitSize / 2;
