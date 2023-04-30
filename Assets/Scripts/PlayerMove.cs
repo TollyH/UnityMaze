@@ -35,7 +35,10 @@ public class PlayerMove : MonoBehaviour
         float moveMultiplier = MovementSpeed;
         if (runToggle || inputActions.PlayerMovement.RunModifier.IsPressed())
         {
-            moveMultiplier *= 2;
+            if (!levelManager.IsMulti || levelManager.MultiplayerManager.IsCoop)
+            {
+                moveMultiplier *= 2;
+            }
         }
         if (crawlToggle || inputActions.PlayerMovement.CrawlModifier.IsPressed())
         {

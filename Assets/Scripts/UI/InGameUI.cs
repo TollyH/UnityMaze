@@ -290,6 +290,10 @@ public class InGameUI : MonoBehaviour
 
     private void OnToggleCompass()
     {
+        if (levelManager.IsMulti && !levelManager.MultiplayerManager.IsCoop)
+        {
+            return;
+        }
         outerCompass.gameObject.SetActive(!outerCompass.gameObject.activeSelf);
         if (!outerCompass.gameObject.activeSelf)
         {

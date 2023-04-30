@@ -136,7 +136,7 @@ public class LevelManager : MonoBehaviour
 
     private void OnNextLevel()
     {
-        if (CurrentLevelIndex < LoadedLevels.Length - 1)
+        if (CurrentLevelIndex < LoadedLevels.Length - 1 && !IsMulti)
         {
             LoadLevel(CurrentLevelIndex + 1);
         }
@@ -144,7 +144,7 @@ public class LevelManager : MonoBehaviour
 
     private void OnPreviousLevel()
     {
-        if (CurrentLevelIndex > 0)
+        if (CurrentLevelIndex > 0 && !IsMulti)
         {
             LoadLevel(CurrentLevelIndex - 1);
         }

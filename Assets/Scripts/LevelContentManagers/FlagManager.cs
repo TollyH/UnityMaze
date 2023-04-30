@@ -46,6 +46,7 @@ public class FlagManager : LevelContentManager
             || levelManager.MonsterManager.IsPlayerStruggling
             || levelManager.IsGameOver
             || levelManager.IsPaused
+            || levelManager.IsMulti
             || mapContainer.activeSelf
             // Flag action is only if hand is facing downwards
             || (XRSettings.enabled && handUpProduct < leftHand.ThreewaySelectionCrossover))

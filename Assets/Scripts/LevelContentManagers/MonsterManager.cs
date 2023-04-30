@@ -76,7 +76,8 @@ public class MonsterManager : LevelContentManager
                 if (player.HasMovedThisLevel)
                 {
                     TimeToSpawn -= Time.deltaTime;
-                    if (TimeToSpawn <= 0 && Vector3.Distance(player.transform.position, gamePos) > 2 * unitSize)
+                    if ((TimeToSpawn <= 0 && Vector3.Distance(player.transform.position, gamePos) > 2 * unitSize)
+                        || (levelManager.IsMulti && levelManager.MultiplayerManager.IsCoop))
                     {
                         thisRenderer.enabled = true;
                         TimeToMove = TimeBetweenMoves;
@@ -93,7 +94,7 @@ public class MonsterManager : LevelContentManager
             }
 
             TimeToMove -= Time.deltaTime;
-            if (TimeToMove <= 0)
+            if (TimeToMove <= 0 && !levelManager.IsMulti)
             {
                 TimeToMove = TimeBetweenMoves;
                 ProcessMonsterMove();
@@ -214,7 +215,7 @@ public class MonsterManager : LevelContentManager
 
     private void OnSpriteTrigger(GameObject _)
     {
-        if (!thisRenderer.enabled)
+        if (!thisRenderer.enabled || levelManager.IsMulti)
         {
             return;
         }

@@ -87,6 +87,11 @@ public class Multiplayer
             levelManager.PointMarkerManager.ReloadPointMarkers(levelManager.CurrentLevel);
             levelManager.PlayerManager.HasGun = true; // Player always has gun in deathmatch
         }
+        else
+        {
+            // Spawn monster instantly in coop (if there is one)
+            levelManager.CurrentLevel.MonsterWait = levelManager.CurrentLevel.MonsterStart == null ? null : 0;
+        }
     }
 
     public void Ping(Vector3 position)

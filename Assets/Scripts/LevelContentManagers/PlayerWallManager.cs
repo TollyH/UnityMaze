@@ -81,6 +81,7 @@ public class PlayerWallManager : LevelContentManager
             || levelManager.MonsterManager.IsPlayerStruggling
             || levelManager.IsGameOver
             || levelManager.IsPaused
+            || levelManager.IsMulti
             || mapContainer.activeSelf
             // Wall action is only if hand is facing outwards
             || (XRSettings.enabled &&
