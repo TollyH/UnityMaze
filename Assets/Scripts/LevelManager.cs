@@ -22,6 +22,9 @@ public class LevelManager : MonoBehaviour
     public bool IsGameOver { get; private set; } = false;
     public bool IsPaused { get; private set; } = false;
 
+    public bool IsMulti { get; private set; } = false;
+    public Multiplayer MultiplayerManager { get; private set; }
+
     [field: SerializeField]
     public KeysManager KeysManager { get; private set; }
     [field: SerializeField]
