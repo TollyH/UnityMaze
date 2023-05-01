@@ -16,7 +16,11 @@ public class ReturnToTitle
         {
             if (levelManager.IsMulti)
             {
-                levelManager.MultiplayerManager.LeaveServer();
+                try
+                {
+                    levelManager.MultiplayerManager.LeaveServer();
+                }
+                catch (System.InvalidOperationException) { }
             }
         }
 

@@ -35,6 +35,15 @@ public partial class @TitleScreenControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ServerConnect"",
+                    ""type"": ""Button"",
+                    ""id"": ""4e6f0903-a2f6-49f8-a916-201705159071"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -70,6 +79,39 @@ public partial class @TitleScreenControls: IInputActionCollection2, IDisposable
                     ""action"": ""Play"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4e5aa44-e3d4-4192-955b-b11ca7e24447"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ServerConnect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f251c7ce-a968-4e79-b733-c6a0f1558032"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ServerConnect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d461c10f-3e24-4678-abd4-106a99f32a13"",
+                    ""path"": ""<XRController>{LeftHand}/secondaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ServerConnect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -79,6 +121,7 @@ public partial class @TitleScreenControls: IInputActionCollection2, IDisposable
         // Buttons
         m_Buttons = asset.FindActionMap("Buttons", throwIfNotFound: true);
         m_Buttons_Play = m_Buttons.FindAction("Play", throwIfNotFound: true);
+        m_Buttons_ServerConnect = m_Buttons.FindAction("ServerConnect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,11 +184,13 @@ public partial class @TitleScreenControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Buttons;
     private List<IButtonsActions> m_ButtonsActionsCallbackInterfaces = new List<IButtonsActions>();
     private readonly InputAction m_Buttons_Play;
+    private readonly InputAction m_Buttons_ServerConnect;
     public struct ButtonsActions
     {
         private @TitleScreenControls m_Wrapper;
         public ButtonsActions(@TitleScreenControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Play => m_Wrapper.m_Buttons_Play;
+        public InputAction @ServerConnect => m_Wrapper.m_Buttons_ServerConnect;
         public InputActionMap Get() { return m_Wrapper.m_Buttons; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -158,6 +203,9 @@ public partial class @TitleScreenControls: IInputActionCollection2, IDisposable
             @Play.started += instance.OnPlay;
             @Play.performed += instance.OnPlay;
             @Play.canceled += instance.OnPlay;
+            @ServerConnect.started += instance.OnServerConnect;
+            @ServerConnect.performed += instance.OnServerConnect;
+            @ServerConnect.canceled += instance.OnServerConnect;
         }
 
         private void UnregisterCallbacks(IButtonsActions instance)
@@ -165,6 +213,9 @@ public partial class @TitleScreenControls: IInputActionCollection2, IDisposable
             @Play.started -= instance.OnPlay;
             @Play.performed -= instance.OnPlay;
             @Play.canceled -= instance.OnPlay;
+            @ServerConnect.started -= instance.OnServerConnect;
+            @ServerConnect.performed -= instance.OnServerConnect;
+            @ServerConnect.canceled -= instance.OnServerConnect;
         }
 
         public void RemoveCallbacks(IButtonsActions instance)
@@ -185,5 +236,6 @@ public partial class @TitleScreenControls: IInputActionCollection2, IDisposable
     public interface IButtonsActions
     {
         void OnPlay(InputAction.CallbackContext context);
+        void OnServerConnect(InputAction.CallbackContext context);
     }
 }

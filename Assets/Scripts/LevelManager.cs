@@ -11,6 +11,17 @@ using UnityEngine.XR;
 
 public class LevelManager : MonoBehaviour
 {
+    /// <summary>
+    /// Set this before a LevelManager instance is created to
+    /// make a multiplayer game. Automatically set back to null.
+    /// </summary>
+    public static string NewMultiplayerServer = null;
+    /// <summary>
+    /// Set this before a LevelManager instance is created to
+    /// make a multiplayer game. Automatically set back to null.
+    /// </summary>
+    public static string NewMultiplayerName = null;
+
     public ControlMap InputActions { get; private set; }
 
     public int CurrentLevelIndex { get; private set; }
@@ -82,12 +93,8 @@ public class LevelManager : MonoBehaviour
             MonsterManager, PlayerManager, PlayerWallManager, FlagManager
         };
         LoadLevelJson(Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
-        if (IsMulti && !MultiplayerManager.Initialised)
-        {
-            TitleUI.NewPopupTitle = "Connection error";
-            TitleUI.NewPopupContent = MultiplayerManager.LastErrorMessage;
-            SceneManager.LoadScene("Scenes/TitleScreen");
-        }
+
+        IsMulti = NewMultiplayerServer != null;
     }
 
     private void OnEnable()
@@ -109,6 +116,23 @@ public class LevelManager : MonoBehaviour
         if (!IsMulti)
         {
             LoadLevel(0);
+        }
+        else
+        {
+            string server = NewMultiplayerServer;
+            string name = NewMultiplayerName;
+            NewMultiplayerServer = null;
+            NewMultiplayerName = null;
+
+            MultiplayerManager = new Multiplayer(this, server, name);
+            MultiplayerManager.Initialise();
+            if (!MultiplayerManager.Initialised)
+            {
+                // Some error occurred preventing the connection from being established
+                TitleUI.NewPopupTitle = "Connection error";
+                TitleUI.NewPopupContent = MultiplayerManager.LastErrorMessage;
+                SceneManager.LoadScene("Scenes/TitleScreen");
+            }
         }
         UpdateHighscores();
     }
