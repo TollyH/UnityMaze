@@ -17,6 +17,9 @@ public class PlayerActions : MonoBehaviour
     private AudioSource vrGunfire;
 
     [SerializeField]
+    private Animator gunAnimator;
+
+    [SerializeField]
     private GameObject barrelStart;
 
     private void Start()
@@ -69,6 +72,10 @@ public class PlayerActions : MonoBehaviour
             if (response != ShotResponse.Denied)
             {
                 audioSource.Play();
+                if (!levelManager.MultiplayerManager.IsCoop)
+                {
+                    gunAnimator.Play("FireCycle", 0);
+                }
             }
             if (levelManager.MultiplayerManager.IsCoop)
             {

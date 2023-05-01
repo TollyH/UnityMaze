@@ -57,7 +57,16 @@ public class VRHand : MonoBehaviour
             bool levelActive = !levelManager.MonsterManager.IsPlayerStruggling
                 && !levelManager.IsGameOver
                 && !levelManager.IsPaused;
+            bool gunActive = gun.activeSelf;
             gun.SetActive(XRSettings.enabled && levelActive);
+            if (XRSettings.enabled && levelActive && !gunActive)
+            {
+                // Gun wasn't active but now is. If gun needs to start closed, close it.
+                if (levelManager.IsMulti && !levelManager.MultiplayerManager.IsCoop && IsRightHand)
+                {
+                    gunAnimator.Play("Closed", 0);
+                }
+            }
             tracer.SetActive(XRSettings.enabled && levelManager.PlayerManager.HasGun && levelActive);
         }
         if (!thisRenderer.enabled)
@@ -66,7 +75,10 @@ public class VRHand : MonoBehaviour
         }
         else if (gunAnimator != null && gun.activeSelf)
         {
-            gunAnimator.Play(levelManager.PlayerManager.HasGun ? "Closed" : "Opened", 0);
+            if (!levelManager.IsMulti || levelManager.MultiplayerManager.IsCoop)
+            {
+                gunAnimator.Play(levelManager.PlayerManager.HasGun ? "Closed" : "Opened", 0);
+            }
         }
 
         Vector3 handPos = IsRightHand
@@ -95,12 +107,14 @@ public class VRHand : MonoBehaviour
             && !levelManager.MonsterManager.IsPlayerStruggling
             && !levelManager.IsGameOver
             && !levelManager.IsPaused
+            && !levelManager.IsMulti
             && !mapContainer.activeSelf)
         {
             thisRenderer.sprite = upProduct > ThreewaySelectionCrossover ? flagSprite :
                 upProduct < -ThreewaySelectionCrossover ? pauseSprite : wallSprite;
         }
-        else if (levelManager.IsGameOver && !levelManager.IsPaused && !IsRightHand)
+        else if (levelManager.IsGameOver && !levelManager.IsPaused && !IsRightHand
+            && (!levelManager.IsMulti || !levelManager.MultiplayerManager.IsCoop))
         {
             thisRenderer.sprite = pauseSprite;
         }

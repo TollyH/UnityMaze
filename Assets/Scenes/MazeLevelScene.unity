@@ -6320,6 +6320,7 @@ MonoBehaviour:
   viewportFlash: {fileID: 518296380}
   gunfire: {fileID: 1206789354}
   vrGunfire: {fileID: 919132147890835671}
+  gunAnimator: {fileID: 919132147890835670}
   barrelStart: {fileID: 1072327852}
 --- !u!82 &1206789351
 AudioSource:
@@ -10424,7 +10425,6 @@ MonoBehaviour:
   keysLabel: {fileID: 1747552944}
   movesLabel: {fileID: 367686884}
   timeLabel: {fileID: 979122709}
-  deathInputHint: {fileID: 338433070}
   resetPrompt: {fileID: 718744753}
   pauseBorder: {fileID: 543971452}
   compassTime: {fileID: 1730371434}
@@ -11752,6 +11752,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6ff73219cccec824e86579108fb5b7fa, type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6ff73219cccec824e86579108fb5b7fa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2239923240027722320, guid: 6ff73219cccec824e86579108fb5b7fa, type: 3}
       propertyPath: m_Layer
