@@ -2529,6 +2529,7 @@ GameObject:
   - component: {fileID: 404898771}
   - component: {fileID: 404898773}
   - component: {fileID: 404898772}
+  - component: {fileID: 404898775}
   - component: {fileID: 404898774}
   m_Layer: 5
   m_Name: DeathScreen
@@ -2693,6 +2694,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &404898775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404898770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ec7592f4365e74bb9bf89f7507268e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 1518488894}
+  overlayImage: {fileID: 1265461096}
+  inputHint: {fileID: 338433072}
 --- !u!1001 &461197528
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -54,8 +54,6 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timeLabel;
     [SerializeField]
-    private GameObject deathInputHint;
-    [SerializeField]
     private TextMeshProUGUI resetPrompt;
     [SerializeField]
     private GameObject pauseBorder;
@@ -97,7 +95,6 @@ public class InGameUI : MonoBehaviour
         thisScaler.uiScaleMode = XRSettings.enabled ? CanvasScaler.ScaleMode.ScaleWithScreenSize : CanvasScaler.ScaleMode.ConstantPixelSize;
 
         gunFirstPerson.SetActive(levelManager.PlayerManager.HasGun && !XRSettings.enabled);
-        deathInputHint.SetActive(!XRSettings.enabled);
         pauseBorder.SetActive(XRSettings.enabled);
 
         resetPrompt.text = XRSettings.enabled ? "PAUSED" : "Press 'y' to reset or 'n' to cancel";
