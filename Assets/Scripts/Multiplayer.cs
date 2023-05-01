@@ -9,6 +9,9 @@ public class Multiplayer
 {
     public bool IsCoop { get; private set; } = false;
 
+    public bool Initialised { get; private set; } = false;
+    public string LastErrorMessage { get; private set; } = "";
+
     public NetData.Player[] OtherPlayers { get; private set; } = Array.Empty<NetData.Player>();
     public byte HitsRemaining { get; private set; } = 1;
     public byte LastKillerSkin { get; private set; } = 0;
@@ -34,7 +37,7 @@ public class Multiplayer
 
     public void Initialise()
     {
-        bool quit = false;
+        bool failed = false;
 
         (byte[], int, bool)? joinResponse = null;
         try
@@ -51,32 +54,37 @@ public class Multiplayer
             }
             if (joinResponse is null)
             {
-                TitleUI.NewPopupTitle = "Connection error";
-                TitleUI.NewPopupContent = "Could not connect to server";
-                quit = true;
+                LastErrorMessage = "Could not connect to server";
+                failed = true;
             }
         }
         catch (Exception ex)
         {
             Debug.LogWarning(ex);
-            TitleUI.NewPopupTitle = "Connection error";
-            TitleUI.NewPopupContent = "Invalid server information provided";
-            quit = true;
+            LastErrorMessage = "Invalid server information provided";
+            failed = true;
         }
 
-        if (quit)
+        if (failed)
         {
-            Application.Quit();
+            
             return;
         }
 
         playerKey = joinResponse.Value.Item1;
         IsCoop = joinResponse.Value.Item3;
         levelManager.LoadLevel(joinResponse.Value.Item2);
+        Initialised = true;
     }
 
     public void Ping(Vector3 position)
     {
+        if (!Initialised)
+        {
+            throw new InvalidOperationException(
+                "The Initialise method must be called on this object before utilising it.");
+        }
+
         if (!IsCoop)
         {
             (byte, byte, ushort, ushort, NetData.Player[])? pingResponse = NetCode.PingServer(
@@ -130,6 +138,12 @@ public class Multiplayer
 
     public ShotResponse FireGun(Vector3 position, Vector3 direction)
     {
+        if (!Initialised)
+        {
+            throw new InvalidOperationException(
+                "The Initialise method must be called on this object before utilising it.");
+        }
+
         Vector2 direction2d = new Vector2(-direction.x, direction.z).normalized;
         ShotResponse? response = NetCode.FireGun(sock, addr, playerKey,
             position.ToMazePosition(levelManager.UnitSize), direction2d);
@@ -138,11 +152,23 @@ public class Multiplayer
 
     public void Respawn()
     {
+        if (!Initialised)
+        {
+            throw new InvalidOperationException(
+                "The Initialise method must be called on this object before utilising it.");
+        }
+
         NetCode.Respawn(sock, addr, playerKey);
     }
 
     public void LeaveServer()
     {
+        if (!Initialised)
+        {
+            throw new InvalidOperationException(
+                "The Initialise method must be called on this object before utilising it.");
+        }
+
         NetCode.LeaveServer(sock, addr, playerKey);
     }
 }

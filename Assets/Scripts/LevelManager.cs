@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 
 public class LevelManager : MonoBehaviour
@@ -81,6 +82,12 @@ public class LevelManager : MonoBehaviour
             MonsterManager, PlayerManager, PlayerWallManager, FlagManager
         };
         LoadLevelJson(Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
+        if (IsMulti && !MultiplayerManager.Initialised)
+        {
+            TitleUI.NewPopupTitle = "Connection error";
+            TitleUI.NewPopupContent = MultiplayerManager.LastErrorMessage;
+            SceneManager.LoadScene("Scenes/TitleScreen");
+        }
     }
 
     private void OnEnable()
