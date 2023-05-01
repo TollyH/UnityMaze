@@ -26,6 +26,14 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private Image statsPanel;
     [SerializeField]
+    private GameObject deathmatchPanel;
+    [SerializeField]
+    private TextMeshProUGUI remainingHitsText;
+    [SerializeField]
+    private TextMeshProUGUI killCountText;
+    [SerializeField]
+    private TextMeshProUGUI deathCountText;
+    [SerializeField]
     private Image controlsPanel;
     [SerializeField]
     private Image keySensorIndicator;
@@ -105,28 +113,39 @@ public class InGameUI : MonoBehaviour
         MonsterManager monster = levelManager.MonsterManager;
         int currentLevelIndex = levelManager.CurrentLevelIndex;
 
-        if (player.HasMovedThisLevel)
+        if (!levelManager.IsMulti || levelManager.MultiplayerManager.IsCoop)
         {
-            keysLabel.text = $"Keys: {keys.TotalLevelKeys - keys.KeysRemaining}/{keys.TotalLevelKeys}";
-            movesLabel.text = $"Moves: {player.LevelMoves:0.0}";
-            timeLabel.text = $"Time: {player.LevelTime:0.0}";
+            deathmatchPanel.SetActive(false);
+            if (player.HasMovedThisLevel)
+            {
+                keysLabel.text = $"Keys: {keys.TotalLevelKeys - keys.KeysRemaining}/{keys.TotalLevelKeys}";
+                movesLabel.text = $"Moves: {player.LevelMoves:0.0}";
+                timeLabel.text = $"Time: {player.LevelTime:0.0}";
+            }
+            else
+            {
+                // Show highscores if player hasn't moved yet
+                keysLabel.text = $"Keys: 0/{keys.TotalLevelKeys}";
+                movesLabel.text = $"Moves: {levelManager.Highscores[currentLevelIndex].Item2:0.0}";
+                timeLabel.text = $"Time: {levelManager.Highscores[currentLevelIndex].Item1:0.0}";
+            }
+
+            Color bgColor = monster.IsMonsterSpawned ? Color.red : Color.black;
+            bgColor.a = 0.5f;
+            statsPanel.color = bgColor;
+            controlsPanel.color = bgColor;
+            gunControlPanel.color = bgColor;
+            gunControlPanel.gameObject.SetActive(statsPanel.gameObject.activeSelf && player.HasGun);
+
+            keySensorIndicator.fillAmount = player.RemainingKeySensorTime / player.KeySensorTime;
         }
         else
         {
-            // Show highscores if player hasn't moved yet
-            keysLabel.text = $"Keys: 0/{keys.TotalLevelKeys}";
-            movesLabel.text = $"Moves: {levelManager.Highscores[currentLevelIndex].Item2:0.0}";
-            timeLabel.text = $"Time: {levelManager.Highscores[currentLevelIndex].Item1:0.0}";
+            statsPanel.gameObject.SetActive(false);
+            deathCountText.text = levelManager.MultiplayerManager.Deaths.ToString();
+            killCountText.text = levelManager.MultiplayerManager.Kills.ToString();
+            remainingHitsText.text = levelManager.MultiplayerManager.HitsRemaining.ToString();
         }
-
-        Color bgColor = monster.IsMonsterSpawned ? Color.red : Color.black;
-        bgColor.a = 0.5f;
-        statsPanel.color = bgColor;
-        controlsPanel.color = bgColor;
-        gunControlPanel.color = bgColor;
-        gunControlPanel.gameObject.SetActive(statsPanel.gameObject.activeSelf && player.HasGun);
-
-        keySensorIndicator.fillAmount = player.RemainingKeySensorTime / player.KeySensorTime;
 
         if (XRSettings.enabled || levelManager.IsMulti)
         {
@@ -319,9 +338,16 @@ public class InGameUI : MonoBehaviour
         {
             return;
         }
-        bool newState = !statsPanel.gameObject.activeSelf;
-        statsPanel.gameObject.SetActive(newState);
-        controlsPanel.gameObject.SetActive(newState);
+        if (!levelManager.IsMulti || levelManager.MultiplayerManager.IsCoop)
+        {
+            bool newState = !statsPanel.gameObject.activeSelf;
+            statsPanel.gameObject.SetActive(newState);
+            controlsPanel.gameObject.SetActive(newState);
+        }
+        else
+        {
+            // TODO: Leaderboard
+        }
     }
 
     private void OnToggleMap()
