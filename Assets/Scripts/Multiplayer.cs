@@ -12,6 +12,9 @@ public class Multiplayer
     public bool Initialised { get; private set; } = false;
     public string LastErrorMessage { get; private set; } = "";
 
+    public string MultiplayerServer { get; private set; }
+    public string MultiplayerName { get; private set; }
+
     public NetData.Player[] OtherPlayers { get; private set; } = Array.Empty<NetData.Player>();
     public byte HitsRemaining { get; private set; } = 1;
     public byte LastKillerSkin { get; private set; } = 0;
@@ -20,19 +23,16 @@ public class Multiplayer
 
     private readonly LevelManager levelManager;
 
-    private readonly string multiplayerServer;
-
     private UdpClient sock;
     private IPEndPoint addr;
-    private string multiplayerName;
 
     private byte[] playerKey;
 
     public Multiplayer(LevelManager levelManager, string multiplayerServer, string multiplayerName)
     {
         this.levelManager = levelManager;
-        this.multiplayerServer = multiplayerServer;
-        this.multiplayerName = multiplayerName;
+        MultiplayerServer = multiplayerServer;
+        MultiplayerName = multiplayerName;
     }
 
     public void Initialise()
@@ -43,12 +43,12 @@ public class Multiplayer
         try
         {
             sock = NetCode.CreateClientSocket();
-            addr = NetCode.GetHostPort(multiplayerServer!);
-            multiplayerName ??= "Unnamed";
+            addr = NetCode.GetHostPort(MultiplayerServer!);
+            MultiplayerName ??= "Unnamed";
             int retries = 0;
             while (joinResponse is null && retries < 10)
             {
-                joinResponse = NetCode.JoinServer(sock, addr, multiplayerName);
+                joinResponse = NetCode.JoinServer(sock, addr, MultiplayerName);
                 retries++;
                 Thread.Sleep(500);
             }

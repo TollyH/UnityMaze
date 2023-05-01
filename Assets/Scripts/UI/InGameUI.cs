@@ -34,6 +34,8 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI deathCountText;
     [SerializeField]
+    private GameObject leaderboard;
+    [SerializeField]
     private Image controlsPanel;
     [SerializeField]
     private Image keySensorIndicator;
@@ -346,7 +348,8 @@ public class InGameUI : MonoBehaviour
         }
         else
         {
-            // TODO: Leaderboard
+            bool newState = !leaderboard.activeSelf;
+            leaderboard.SetActive(newState);
         }
     }
 
