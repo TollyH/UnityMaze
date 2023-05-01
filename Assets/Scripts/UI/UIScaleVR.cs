@@ -9,6 +9,11 @@ public class UIScaleVR : MonoBehaviour
     private LevelManager levelManager;
 
     [SerializeField]
+    private GameObject leaderboard;
+    [SerializeField]
+    private GameObject statsPanel;
+
+    [SerializeField]
     private RectTransform[] rects;
 
     private void Start()
@@ -18,7 +23,9 @@ public class UIScaleVR : MonoBehaviour
 
     private void Update()
     {
-        if (!levelManager.IsPaused || !XRSettings.enabled)
+        if ((!levelManager.IsPaused && !leaderboard.activeSelf
+            && !(levelManager.IsMulti && levelManager.MultiplayerManager.IsCoop && statsPanel.activeSelf))
+            || !XRSettings.enabled)
         {
             return;
         }

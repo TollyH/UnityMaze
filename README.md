@@ -33,9 +33,9 @@ A Unity remake of PyMaze/CSMaze, with controller and VR support
 | Toggle Map | Space | West Button (Square on DualShock, X on XBox, Y on Nintendo) | Click Left Thumb Stick |
 | Toggle Monster Compass | `C` | North Button (Triangle on DualShock, Y on XBox, X on Nintendo) | Click Right Thumb Stick |
 | Toggle Statistics UI | `E` | South Button (Cross on DualShock, A on XBox, B on Nintendo) | Right Secondary Button (B on Oculus Touch) |
-| Rescale VR UI | N/A | N/A | Right Thumb Stick (While paused, up/down only) |
-| Reset VR Rotation and Position | N/A | N/A | Left Secondary Button (Y on Oculus Touch, while unpaused, have head in natural centre position while doing this) |
-| Reset VR Height | N/A | N/A | Left Secondary Button (Y on Oculus Touch, while paused, place one controller on the floor whilst doing this) |
+| Rescale VR UI | N/A | N/A | Right Thumb Stick (While paused (leaderboard open in deathmatch, stats open in coop), up/down only) |
+| Reset VR Rotation and Position | N/A | N/A | Left Secondary Button (Y on Oculus Touch, while unpaused (leaderboard closed in deathmatch, stats closed in coop), have head in natural centre position while doing this) |
+| Reset VR Height | N/A | N/A | Left Secondary Button (Y on Oculus Touch, while paused (leaderboard open in deathmatch, stats open in coop), place one controller on the floor whilst doing this) |
 
 ## Instructions
 

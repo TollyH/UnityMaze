@@ -3282,6 +3282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1518488894}
+  leaderboard: {fileID: 686298122}
+  statsPanel: {fileID: 584435704}
   rects:
   - {fileID: 1892113961}
   - {fileID: 518296379}
@@ -6268,6 +6270,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 1518488894}
+  leaderboard: {fileID: 686298122}
+  statsPanel: {fileID: 584435704}
   Hands:
   - {fileID: 351024519}
   - {fileID: 1936967794}

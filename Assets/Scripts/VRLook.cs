@@ -7,6 +7,11 @@ public class VRLook : MonoBehaviour
     [SerializeField]
     private LevelManager levelManager;
 
+    [SerializeField]
+    private GameObject leaderboard;
+    [SerializeField]
+    private GameObject statsPanel;
+
     private ControlMap inputActions;
     public Vector3 PosOffset { get; private set; } = new();
     public float YawOffset { get; private set; } = 0;
@@ -30,7 +35,8 @@ public class VRLook : MonoBehaviour
 
         if (inputActions.PlayerMovement.ResetVR.IsPressed())
         {
-            if (!levelManager.IsPaused)
+            if (!levelManager.IsPaused && !leaderboard.activeSelf
+                && !(levelManager.IsMulti && levelManager.MultiplayerManager.IsCoop && statsPanel.activeSelf))
             {
                 Vector3 rawHmdPos = inputActions.PlayerMovement.CameraMoveVR.ReadValue<Vector3>();
                 PosOffset = new Vector3(rawHmdPos.x, PosOffset.y, rawHmdPos.z);
