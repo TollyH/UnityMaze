@@ -128,7 +128,7 @@ public class InGameUI : MonoBehaviour
 
         keySensorIndicator.fillAmount = player.RemainingKeySensorTime / player.KeySensorTime;
 
-        if (XRSettings.enabled)
+        if (XRSettings.enabled || levelManager.IsMulti)
         {
             controlsPanel.gameObject.SetActive(false);
             gunControlPanel.gameObject.SetActive(false);

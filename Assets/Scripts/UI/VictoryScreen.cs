@@ -64,9 +64,10 @@ public class VictoryScreen : MonoBehaviour
             bestGameTimeScore.text = $"Best Game Time Score: {levelManager.Highscores.Sum(x => x.Item1):F1}";
             bestGameMoveScore.text = $"Best Game Move Score: {levelManager.Highscores.Sum(x => x.Item2):F1}";
         }
-        if (timeOnScreen >= 7.5 && levelManager.CurrentLevelIndex < levelManager.LoadedLevels.Length - 1
+        if (timeOnScreen >= 7.5 && (levelManager.CurrentLevelIndex < levelManager.LoadedLevels.Length - 1 || levelManager.IsMulti)
             && !XRSettings.enabled)
         {
+            nextLevelHint.text = levelManager.IsMulti ? "Restart the server to play another level" : "Press `]` to go to next level";
             nextLevelHint.gameObject.SetActive(true);
         }
     }
