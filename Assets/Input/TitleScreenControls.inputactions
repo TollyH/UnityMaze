@@ -68,28 +68,6 @@
                     "action": "ServerConnect",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f251c7ce-a968-4e79-b733-c6a0f1558032",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ServerConnect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d461c10f-3e24-4678-abd4-106a99f32a13",
-                    "path": "<XRController>{LeftHand}/secondaryButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ServerConnect",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

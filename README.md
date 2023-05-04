@@ -11,7 +11,7 @@ A Unity remake of PyMaze/CSMaze, with controller and VR support
 | Action | Keyboard/Mouse | Controller | VR |
 |--------|----------------|------------|----|
 | Play | Space/Click Play Button | South Button (Cross on DualShock, A on XBox, B on Nintendo) | Right Secondary Button (B on Oculus Touch) |
-| Connect to Multiplayer Server | Enter | East Button (Circle on DualShock, B on XBox, A on Nintendo) | Left Secondary Button (Y on Oculus Touch) |
+| Connect to Multiplayer Server | Enter | N/A (Keyboard required to input server info, controller can be used after connection) | N/A (Keyboard required to input server info, VR can be used after connection) |
 
 ### In-game
 
