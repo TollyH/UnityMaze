@@ -1650,7 +1650,7 @@ MonoBehaviour:
   wallSprite: {fileID: 0}
   flagSprite: {fileID: 0}
   gun: {fileID: 919132147890835669}
-  tracer: {fileID: 1728537841}
+  aimGuide: {fileID: 1728537841}
   gunAnimator: {fileID: 919132147890835670}
   mapContainer: {fileID: 1601196858}
 --- !u!212 &351024525
@@ -9378,7 +9378,7 @@ GameObject:
   - component: {fileID: 1728537844}
   - component: {fileID: 1728537843}
   m_Layer: 0
-  m_Name: Tracer
+  m_Name: AimGuide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9406,7 +9406,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1728537841}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -10716,7 +10716,7 @@ MonoBehaviour:
   wallSprite: {fileID: 21300000, guid: c00bd74c82703a8499115a49347de668, type: 3}
   flagSprite: {fileID: 21300000, guid: 67b53dfe805d7ea4cb19656fbad41991, type: 3}
   gun: {fileID: 0}
-  tracer: {fileID: 0}
+  aimGuide: {fileID: 0}
   gunAnimator: {fileID: 0}
   mapContainer: {fileID: 1601196858}
 --- !u!212 &1936967800

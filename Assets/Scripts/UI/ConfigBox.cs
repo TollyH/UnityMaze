@@ -22,6 +22,8 @@ public class ConfigBox : MonoBehaviour
     private TextMeshProUGUI fovLabel;
     [SerializeField]
     private Slider fovSlider;
+    [SerializeField]
+    private Toggle aimGuideToggle;
 
     private void Update()
     {
@@ -39,6 +41,7 @@ public class ConfigBox : MonoBehaviour
         roamSoundToggle.isOn = config.MonsterSoundOnRoam;
         fogToggle.isOn = config.DrawFog;
         fovSlider.value = config.FieldOfView;
+        aimGuideToggle.isOn = config.GunAimGuide;
     }
 
     public void OnConfigClose()
@@ -50,6 +53,7 @@ public class ConfigBox : MonoBehaviour
         config.MonsterSoundOnRoam = roamSoundToggle.isOn;
         config.DrawFog = fogToggle.isOn;
         config.FieldOfView = fovSlider.value;
+        config.GunAimGuide = aimGuideToggle.isOn;
         config.Save();
 
         gameObject.SetActive(false);

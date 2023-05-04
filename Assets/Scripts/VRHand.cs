@@ -32,7 +32,7 @@ public class VRHand : MonoBehaviour
     [SerializeField]
     private GameObject gun;
     [SerializeField]
-    private GameObject tracer;
+    private GameObject aimGuide;
     [SerializeField]
     private Animator gunAnimator;
 
@@ -67,7 +67,8 @@ public class VRHand : MonoBehaviour
                     gunAnimator.Play("Closed", 0);
                 }
             }
-            tracer.SetActive(XRSettings.enabled && levelManager.PlayerManager.HasGun && levelActive);
+            aimGuide.SetActive(XRSettings.enabled && levelManager.PlayerManager.HasGun && levelActive
+                && levelManager.GameConfig.GunAimGuide);
         }
         if (!thisRenderer.enabled)
         {
