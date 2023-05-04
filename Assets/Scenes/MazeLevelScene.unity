@@ -2609,7 +2609,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cd50768985c8e0344a04746bbb5b86e3, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -2709,6 +2709,7 @@ MonoBehaviour:
   levelManager: {fileID: 1518488894}
   overlayImage: {fileID: 1265461096}
   inputHint: {fileID: 338433072}
+  jumpscareSound: {fileID: 404898774}
 --- !u!1001 &461197528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8581,7 +8582,6 @@ MonoBehaviour:
   SpottedSoundTimeout: 10
   TimeBetweenRoamSounds: 7.5
   FieldOfViewRaycasts: 50
-  FieldOfView: 53
   TimeBetweenMoves: 0.5
   levelManager: {fileID: 1518488894}
   monsterOverlay: {fileID: 1863836795}

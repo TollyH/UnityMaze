@@ -12,6 +12,8 @@ public class DeathScreen : MonoBehaviour
     private Image overlayImage;
     [SerializeField]
     private TextMeshProUGUI inputHint;
+    [SerializeField]
+    private AudioSource jumpscareSound;
 
     private Sprite[] playerSprites;
     private Sprite deathMonster;
@@ -20,6 +22,14 @@ public class DeathScreen : MonoBehaviour
     {
         playerSprites = Resources.LoadAll<Sprite>("Textures/sprite/player");
         deathMonster = Resources.Load<Sprite>("Textures/death_monster");
+    }
+
+    private void OnEnable()
+    {
+        if (levelManager.GameConfig.MonsterSoundOnKill)
+        {
+            jumpscareSound.Play();
+        }
     }
 
     private void Update()

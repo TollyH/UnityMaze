@@ -23,6 +23,9 @@ public class TitleUI : MonoBehaviour
     private TextMeshProUGUI popupContent;
 
     [SerializeField]
+    private GameObject configBox;
+
+    [SerializeField]
     private GameObject inputBox;
     [SerializeField]
     private TextMeshProUGUI inputTitle;
@@ -124,5 +127,10 @@ public class TitleUI : MonoBehaviour
     public void OnPopupClose()
     {
         popupBox.SetActive(false);
+    }
+
+    public void OnConfigOpen()
+    {
+        configBox.SetActive(true);
     }
 }

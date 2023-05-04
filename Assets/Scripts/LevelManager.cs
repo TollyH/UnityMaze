@@ -38,6 +38,8 @@ public class LevelManager : MonoBehaviour
 
     public float MultiplayerPingInterval = 0.04f;
 
+    public Config GameConfig { get; private set; }
+
     public bool IsGameOver { get; private set; } = false;
     public bool IsPaused { get; private set; } = false;
 
@@ -97,6 +99,9 @@ public class LevelManager : MonoBehaviour
             KeysManager, DecorationsManager, WallsManager, PickupsManager, PointMarkerManager,
             MonsterManager, PlayerManager, PlayerWallManager, FlagManager
         };
+
+        GameConfig = new Config();
+
         LoadLevelJson(NewMazeLevelsJsonPath ?? Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
         NewMazeLevelsJsonPath = null;
 
@@ -145,6 +150,13 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
+        RenderSettings.fog = GameConfig.DrawFog;
+        MonsterManager.gameObject.SetActive(GameConfig.MonsterEnabled || IsMulti);
+        if (!XRSettings.enabled)
+        {
+            Camera.main.fieldOfView = GameConfig.FieldOfView;
+        }
+
         if (IsMulti)
         {
             timeSinceServerPing += Time.deltaTime;
@@ -259,6 +271,8 @@ public class LevelManager : MonoBehaviour
             Highscores[CurrentLevelIndex] = (Highscores[CurrentLevelIndex].Item1, PlayerManager.LevelMoves);
             PlayerPrefs.SetFloat($"{CurrentLevelIndex}-moves", PlayerManager.LevelMoves);
         }
+
+        PlayerPrefs.Save();
     }
 
     public void UpdateHighscores()

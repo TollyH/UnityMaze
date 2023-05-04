@@ -8,7 +8,6 @@ public class MonsterManager : LevelContentManager
     public float SpottedSoundTimeout = 10;
     public float TimeBetweenRoamSounds = 7.5f;
     public float FieldOfViewRaycasts = 50;
-    public float FieldOfView = 53;
 
     public Vector2? GridPosition { get; internal set; }
     public float? TimeToSpawn { get; private set; }
@@ -101,7 +100,7 @@ public class MonsterManager : LevelContentManager
             }
 
             timeToNextRoamSound -= Time.deltaTime;
-            if (timeToNextRoamSound <= 0)
+            if (timeToNextRoamSound <= 0 && levelManager.GameConfig.MonsterSoundOnRoam)
             {
                 timeToNextRoamSound = TimeBetweenRoamSounds;
                 roamingSound.clip = roamingSoundClips[Random.Range(0, roamingSoundClips.Length)];
@@ -232,8 +231,13 @@ public class MonsterManager : LevelContentManager
 
     private void ProcessSpotSound()
     {
-        float degreeIncrements = FieldOfView / (FieldOfViewRaycasts - 1);
-        float fovStartYaw = Camera.main.transform.eulerAngles.y - (FieldOfView / 2);
+        if (!levelManager.GameConfig.MonsterSoundOnSpot)
+        {
+            return;
+        }
+
+        float degreeIncrements = Camera.main.fieldOfView / (FieldOfViewRaycasts - 1);
+        float fovStartYaw = Camera.main.transform.eulerAngles.y - (Camera.main.fieldOfView / 2);
         for (int i = 0; i < FieldOfViewRaycasts; i++)
         {
             float yawDirection = fovStartYaw + (i * degreeIncrements);
@@ -253,6 +257,11 @@ public class MonsterManager : LevelContentManager
 
     private void ProcessLightFlicker()
     {
+        if (!levelManager.GameConfig.MonsterFlickerLights)
+        {
+            return;
+        }
+
         float distance = Mathf.Pow(Vector2.Distance(GridPosition!.Value, levelManager.PlayerManager.GridPosition), 2);
         // Flicker on every monster movement when close. Also don't divide by anything less than 1, it will have no more effect than just 1.
         distance = Mathf.Max(1, distance - 10);
