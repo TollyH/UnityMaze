@@ -21,6 +21,11 @@ public class LevelManager : MonoBehaviour
     /// make a multiplayer game. Automatically set back to null.
     /// </summary>
     public static string NewMultiplayerName = null;
+    /// <summary>
+    /// Set this before a LevelManager instance is created to
+    /// use a non-default maze level file. Automatically set back to null.
+    /// </summary>
+    public static string NewMazeLevelsJsonPath = null;
 
     public ControlMap InputActions { get; private set; }
 
@@ -92,7 +97,8 @@ public class LevelManager : MonoBehaviour
             KeysManager, DecorationsManager, WallsManager, PickupsManager, PointMarkerManager,
             MonsterManager, PlayerManager, PlayerWallManager, FlagManager
         };
-        LoadLevelJson(Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
+        LoadLevelJson(NewMazeLevelsJsonPath ?? Path.Join(Application.streamingAssetsPath, "maze_levels.json"));
+        NewMazeLevelsJsonPath = null;
 
         IsMulti = NewMultiplayerServer != null;
     }
@@ -129,7 +135,7 @@ public class LevelManager : MonoBehaviour
             if (!MultiplayerManager.Initialised)
             {
                 // Some error occurred preventing the connection from being established
-                TitleUI.NewPopupTitle = "Connection error";
+                TitleUI.NewPopupTitle = "Connection Error";
                 TitleUI.NewPopupContent = MultiplayerManager.LastErrorMessage;
                 SceneManager.LoadScene("Scenes/TitleScreen");
             }

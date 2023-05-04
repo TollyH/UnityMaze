@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ReturnToTitle
+public static class ReturnToTitle
 {
     [RuntimeInitializeOnLoadMethod]
     private static void RunOnStart()
