@@ -31,6 +31,9 @@ public class PlayerManager : LevelContentManager
     private CapsuleCollider capsuleCollider;
 
     [SerializeField]
+    private GameObject vrOrigin;
+
+    [SerializeField]
     private AudioSource ambience;
 
     [SerializeField]
@@ -63,6 +66,8 @@ public class PlayerManager : LevelContentManager
 
     private void Update()
     {
+        vrOrigin.SetActive(XRSettings.enabled);
+
         if (HasMovedThisLevel && !levelManager.IsGameOver
             && !levelManager.IsPaused)
         {
